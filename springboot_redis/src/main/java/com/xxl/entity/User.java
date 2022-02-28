@@ -1,0 +1,19 @@
+package com.xxl.entity;
+
+import lombok.Data;
+
+/**
+ * 用户实体
+ *
+ * @author xxl
+ * @date 2022/3/1 0:03
+ */
+@Data
+public class User {
+
+    private int id;
+    private String name;
+    private int age;
+    private double score;
+
+}
