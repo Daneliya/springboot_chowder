@@ -2,6 +2,8 @@ package com.xxl.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 用户实体
  *
@@ -9,7 +11,7 @@ import lombok.Data;
  * @date 2022/3/1 0:03
  */
 @Data
-public class User {
+public class User implements Serializable {
 
     private int id;
     private String name;

@@ -3,6 +3,7 @@ package com.xxl.service;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @author xxl
  * @date 2022/3/1 0:04
  */
+@Service
 public class RedisService {
 
     @Resource
