@@ -25,7 +25,7 @@ public class DataSourceConfigDao {
      * @return
      */
     public List<DataSourceConfig> getAll() {
-        String sql = "select * from t_datasource_config";
+        String sql = "select * from x_datasource_config";
         return this.jdbcTemplate.query(sql, resultMap());
     }
 
@@ -36,7 +36,7 @@ public class DataSourceConfigDao {
      * @return
      */
     public DataSourceConfig getByName(String name) {
-        String sql = "select * from t_datasource_config where _name = ?";
+        String sql = "select * from x_datasource_config where _name = ?";
         List<DataSourceConfig> list = this.jdbcTemplate.query(sql, resultMap(), name);
         return list.size() == 0 ? null : list.get(0);
     }
@@ -45,11 +45,11 @@ public class DataSourceConfigDao {
         return (rs, rowNum) -> {
             DataSourceConfig dataSourceConfig = new DataSourceConfig();
             dataSourceConfig.setId(rs.getLong("id"));
-            dataSourceConfig.setName(rs.getString("_name"));
-            dataSourceConfig.setPassword(rs.getString("_password"));
+            dataSourceConfig.setName(rs.getString("name"));
+            dataSourceConfig.setPassword(rs.getString("password"));
             dataSourceConfig.setUsername(rs.getString("username"));
             dataSourceConfig.setUrl(rs.getString("url"));
-            dataSourceConfig.setDriverClassName(rs.getString("driverclassname"));
+            dataSourceConfig.setDriverClassName(rs.getString("driver_class_name"));
             return dataSourceConfig;
         };
     }

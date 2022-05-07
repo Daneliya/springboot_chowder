@@ -14,10 +14,10 @@ public class UserDao extends BaseDao {
 
     public List<User> get() {
         //通过 baseDao 区分数据源（不再通过jdbc）
-        String sql = "select * from t_user";
+        String sql = "select * from x_user";
         return super.getJdbcTemplate().query(sql, (rs, rowNum) -> {
             User user = new User();
-            user.setId(rs.getInt("dbid"));
+            user.setId(rs.getInt("id"));
             user.setUname(rs.getString("uname"));
             user.setPwd(rs.getString("pwd"));
             user.setAge(rs.getInt("age"));

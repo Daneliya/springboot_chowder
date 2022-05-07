@@ -370,4 +370,13 @@ public class BaseDao {
 }
 ```
 #### 2.18 编译打包运行
+测试
+
+~~~shell
+mac：curl -X GET -H 'tenant:zhangsan' http://localhost:8080/get
+windows：curl -H @{'tenant'='zhangsan'} http://localhost:8080/get
+~~~
+
+
+
 ### 3. 应用场景

@@ -4,6 +4,7 @@ import com.xxl.config.dao.DataSourceConfigDao;
 import com.xxl.config.vo.DataSourceConfig;
 import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTenantConnectionProviderImpl;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import java.util.Map;
  * @author xxl
  * @date 2022/5/6 0:06
  */
+@Component
 public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDataSourceBasedMultiTenantConnectionProviderImpl {
 
     @Resource(name = "defaultDataSource") // DefaultDataSourceConfig 中的 Bean
