@@ -1,0 +1,20 @@
+package com.xxl.controller;
+
+import com.xxl.vo.User;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @author xxl
+ * @date 2022/5/8 18:57
+ */
+@RestController
+public class DemoController {
+
+    @RequestMapping("/test")
+    public User test(User user) {
+        user.setAge(18);
+        return user;
+    }
+
+}
