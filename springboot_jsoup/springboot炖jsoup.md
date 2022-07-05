@@ -41,10 +41,16 @@ Jsoup拥有十分方便的api来处理html文档，比如参考了DOM对象的�
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
+    <!--jsoup-->
     <dependency>
         <groupId>org.jsoup</groupId>
         <artifactId>jsoup</artifactId>
         <version>1.10.3</version>
+    </dependency>
+    <!--lombok-->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
     </dependency>
 </dependencies>
 ```
