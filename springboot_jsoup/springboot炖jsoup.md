@@ -82,13 +82,13 @@ public class Application {
 
 ```java
 public class HtmlParseUtil {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new HtmlParseUtil().parseJD("hello").forEach(System.out::println);
     }
 
     public List<Content> parseJD(String keywords) throws IOException {
         // 获取请求  https://search.jd.com/Search?keyword=java
-        // 前提，需要联网！  ajax需要模拟浏览器才能获取到！
+        // 前提，需要联网！  ajax需要模拟浏览器才能获取到！ 以京东搜索为例
 
         String url = "https://search.jd.com/Search?keyword=" + keywords;
         // 解析网页。（Jsoup返回Document就是浏览器Document对象）
