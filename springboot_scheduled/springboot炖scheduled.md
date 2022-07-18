@@ -1,4 +1,4 @@
-## springboot炖jsoup
+## springboot炖scheduled
 
 ### 1. 先睹为快
 
@@ -62,9 +62,6 @@ Scheduled 定时任务器：是 Spring 3.0 以后自带的一个定时任务器�
 #### 2.6 开发启动类
 
 ```java
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 @SpringBootApplication
 public class ScheduledApplication {
 
