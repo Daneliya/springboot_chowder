@@ -1,7 +1,5 @@
-package com.xxl.pool;
+package com.xxl.kuangshen.pool;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 /**

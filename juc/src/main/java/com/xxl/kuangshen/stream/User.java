@@ -1,4 +1,4 @@
-package com.xxl.stream;
+package com.xxl.kuangshen.stream;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

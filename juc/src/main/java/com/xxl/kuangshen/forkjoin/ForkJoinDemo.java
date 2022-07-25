@@ -1,4 +1,4 @@
-package com.xxl.forkjoin;
+package com.xxl.kuangshen.forkjoin;
 
 import java.util.concurrent.RecursiveTask;
 

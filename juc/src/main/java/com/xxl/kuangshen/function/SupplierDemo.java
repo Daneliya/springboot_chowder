@@ -1,4 +1,4 @@
-package com.xxl.function;
+package com.xxl.kuangshen.function;
 
 import java.util.function.Supplier;
 

@@ -1,4 +1,4 @@
-package com.xxl.stream;
+package com.xxl.kuangshen.stream;
 
 import java.util.Arrays;
 import java.util.List;

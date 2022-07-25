@@ -1,4 +1,4 @@
-package com.xxl.pool;
+package com.xxl.kuangshen.pool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
