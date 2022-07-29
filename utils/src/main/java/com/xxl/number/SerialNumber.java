@@ -1,4 +1,4 @@
-package com.xxl.Number;
+package com.xxl.number;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
