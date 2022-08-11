@@ -1,10 +1,10 @@
-package com.xxl.san;
+package com.xxl.sangeng;
 
 /**
  * @Author: xxl
  * @Date: 2022/08/11 9:34
  */
-public class LambdaTest {
+public class LambdaDemo {
 
 
     public static void main(String[] args) {

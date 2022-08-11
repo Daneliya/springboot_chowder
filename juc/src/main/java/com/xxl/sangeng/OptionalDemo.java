@@ -1,6 +1,6 @@
-package com.xxl.san;
+package com.xxl.sangeng;
 
-import com.xxl.san.entity.Author;
+import com.xxl.sangeng.entity.Author;
 
 import java.util.Optional;
 
@@ -8,7 +8,7 @@ import java.util.Optional;
  * @Author: xxl
  * @Date: 2022/08/11 10:47
  */
-public class OptionalTest {
+public class OptionalDemo {
 
     public static void main(String[] args) {
         Author author = new Author();

@@ -1,7 +1,7 @@
-package com.xxl.san;
+package com.xxl.sangeng;
 
-import com.xxl.san.entity.Author;
-import com.xxl.san.entity.Book;
+import com.xxl.sangeng.entity.Author;
+import com.xxl.sangeng.entity.Book;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.List;
  * @Author: xxl
  * @Date: 2022/08/11 10:30
  */
-public class StreamTest {
+public class StreamDemo {
 
 
     public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class StreamTest {
 
         // 终结操作
         // reduce
-//        test11();
+//        test11_reduce();
 //        test12();
         test13();
     }
