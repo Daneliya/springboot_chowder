@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>xxl-utils</name>
     <groupId>com.xxl</groupId>
     <artifactId>utils</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -14,6 +15,35 @@
     </properties>
 
     <dependencies>
+        <!-- http -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5</version>
+        </dependency>
+        <!-- hutool 工具 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>4.4.2</version>
+        </dependency>
+        <!-- lang3 工具包 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <!-- 为Java标准的 Collections API提供了相当好的补充，集合框架的扩展 -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2</version>
+        </dependency>
         <!--  json -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -28,4 +58,17 @@
         </dependency>
 
     </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>jdk-11</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <_graylogPort>12201</_graylogPort>
+            </properties>
+        </profile>
+    </profiles>
 </project>
