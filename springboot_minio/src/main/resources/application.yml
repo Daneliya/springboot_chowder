@@ -1,0 +1,5 @@
+minio:
+  accesskey: minioadmin
+  secretkey: minioadmin
+  url: http://ip:9000
+  bucketname: xxl-images
