@@ -1,6 +1,6 @@
 package com.xxl.poi;
 
-import com.xxl.poi.Excel.Excel;
+import com.xxl.poi.annotation.Excel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
