@@ -5,11 +5,13 @@ import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 
 /**
+ * 对 request 对象进行监听（创建、销毁）
+ *
  * @author xxl
  * @date 2022/7/28 23:37
  */
 @WebListener
-public class MyListener implements ServletRequestListener {
+public class MyServletRequestListener implements ServletRequestListener {
 
     @Override
     public void requestDestroyed(ServletRequestEvent servletRequestEvent) {

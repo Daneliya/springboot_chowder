@@ -90,7 +90,7 @@ import javax.servlet.ServletRequestListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
-public class MyListener implements ServletRequestListener {
+public class MyServletRequestListener implements ServletRequestListener {
 
     @Override
     public void requestDestroyed(ServletRequestEvent servletRequestEvent) {
@@ -112,3 +112,11 @@ public class MyListener implements ServletRequestListener {
 http://localhost:port/test?name=xxl
 
 ### 3. 应用场景
+
+参考资料
+
+[1]. Spring源码分析——AnnotationConfigApplicationContext组件注册流程 https://www.cnblogs.com/baiyuxuan/p/14953165.html
+[2]. ApplicationRunner和CommandLineRunner https://blog.csdn.net/yhahaha_/article/details/90696921
+[3]. ListenerJavaWeb核心技术之Listener监听器 https://blog.csdn.net/helpluozhao123/article/details/122628373
+https://blog.csdn.net/PpACf/article/details/124749344
+https://blog.csdn.net/Leon_Jinhai_Sun/article/details/108785191
