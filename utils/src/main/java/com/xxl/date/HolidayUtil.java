@@ -18,33 +18,37 @@ public class HolidayUtil {
 
     public static void main(String[] args) {
         System.out.println(getJjr(2021, 4));
+
         Map<String, Object> jjr = getJjr(2021, 4);
         Object holiday = jjr.get("holiday");
         String holidayStr = JSONObject.toJSONString(holiday);
 
         // 组装节假日（name，date）
-        List<Map<String, String>> resultList = new ArrayList<>();
+        List<Holiday> makeList = new ArrayList<>();
         Map<String, Object> holidayMap = JSONObject.parseObject(holidayStr, Map.class);
         for (String date : holidayMap.keySet()) {
             String holidayDate = holidayMap.get(date).toString();
-            JSONObject jsonObject = JSONObject.parseObject(holidayDate);
-
-            Map<String, String> map = new HashMap<>();
-            map.put("name", jsonObject.getString("name"));
-            map.put("date", jsonObject.getString("date"));
-            resultList.add(map);
+            Holiday holi = JSONObject.parseObject(holidayDate, Holiday.class);
+            makeList.add(holi);
         }
-//        resultList.stream().forEach(System.out::println);
-
-        // 补班
-        List<Map<String, String>> makeList = resultList.stream().filter(e -> e.get("name").contains("补班")).collect(Collectors.toList());
-        makeList.stream().forEach(System.out::println);
-
-
+        // 去掉补班
+        Map<String, List<Holiday>> name = makeList.stream()
+                .filter(e -> !e.getName().contains("补班"))
+                .map(e -> {
+                    if (e.getName().contains("初")) {
+                        e.setName("春节");
+                    }
+                    return e;
+                })
+                .collect(Collectors.groupingBy(Holiday::getName));
+        for (String s : name.keySet()) {
+            List<Holiday> holidays = name.get(s);
+            List<Holiday> collect = holidays.stream().sorted(Comparator.comparing(Holiday::getDate)).collect(Collectors.toList());
+            System.out.println(s + " : " + collect.get(0).getDate() + " - " + collect.get(collect.size() - 1).getDate());
+        }
 //        System.out.println(holidayDate);
 //        System.out.println(getMonthWekDay(2021, 4));
 //        System.out.println(JJR(2021, 4));
-
     }
 
     /**
