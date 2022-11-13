@@ -2,6 +2,7 @@ package com.xxl.aop;
 
 import com.xxl.util.ParametersUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -23,7 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class WebLogAspect {
 
-    @Pointcut("execution(public * com.xxl.controller..*.*(..))")
+//    @Pointcut("execution(public * com.xxl.controller..*.*(..))")
+    @Pointcut("execution(public * com.xxl.controller.DemoController.test2(..))")
     public void webLog() {
     }
 
