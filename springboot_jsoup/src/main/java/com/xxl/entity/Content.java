@@ -1,4 +1,4 @@
-package com.xxl.entity;
+package com.xxl.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

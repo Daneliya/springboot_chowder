@@ -2,7 +2,6 @@ package com.xxl.config.dao;
 
 import com.xxl.config.vo.DataSourceConfig;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 

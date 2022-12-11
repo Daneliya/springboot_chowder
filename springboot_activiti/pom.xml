@@ -90,11 +90,11 @@
                 <version>${activiti.version}</version>
             </dependency>
             <!-- bpmn 布局 -->
-            <dependency>
-                <groupId>org.activiti</groupId>
-                <artifactId>activiti-bpmn-layout</artifactId>
-                <version>${activiti.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.activiti</groupId>-->
+<!--                <artifactId>activiti-bpmn-layout</artifactId>-->
+<!--                <version>${activiti.version}</version>-->
+<!--            </dependency>-->
             <!-- activiti 云支持 -->
             <dependency>
                 <groupId>org.activiti.cloud</groupId>

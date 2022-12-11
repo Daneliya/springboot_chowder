@@ -1,7 +1,5 @@
 package com.xxl.config;
 
-import com.xxl.config.dao.DataSourceConfigDao;
-import com.xxl.config.vo.DataSourceConfig;
 import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTenantConnectionProviderImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
