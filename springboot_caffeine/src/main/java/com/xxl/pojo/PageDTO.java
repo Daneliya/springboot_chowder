@@ -1,4 +1,4 @@
-package com.xxl.caffeine.pojo;
+package com.xxl.pojo;
 
 import lombok.Data;
 

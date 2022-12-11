@@ -1,9 +1,9 @@
-package com.xxl.caffeine.config;
+package com.xxl.config;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.xxl.caffeine.pojo.Item;
-import com.xxl.caffeine.pojo.ItemStock;
+import com.xxl.pojo.Item;
+import com.xxl.pojo.ItemStock;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

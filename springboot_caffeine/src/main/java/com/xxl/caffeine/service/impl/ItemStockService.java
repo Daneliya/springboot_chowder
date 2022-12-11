@@ -2,7 +2,7 @@ package com.xxl.caffeine.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxl.caffeine.mapper.ItemStockMapper;
-import com.xxl.caffeine.pojo.ItemStock;
+import com.xxl.pojo.ItemStock;
 import com.xxl.caffeine.service.IItemStockService;
 import org.springframework.stereotype.Service;
 

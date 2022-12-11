@@ -1,7 +1,7 @@
 package com.xxl.caffeine.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xxl.caffeine.pojo.ItemStock;
+import com.xxl.pojo.ItemStock;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
