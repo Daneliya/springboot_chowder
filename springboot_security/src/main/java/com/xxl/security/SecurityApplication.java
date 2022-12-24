@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
  * @author xxl
  * @date 2022/12/17 0:26
  */
-@EnableWebSecurity
+//@EnableWebSecurity
 @MapperScan("com.xxl.security.mapper")
 @SpringBootApplication
 public class SecurityApplication {
