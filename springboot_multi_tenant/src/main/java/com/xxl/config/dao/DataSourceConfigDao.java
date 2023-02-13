@@ -35,7 +35,7 @@ public class DataSourceConfigDao {
      * @return
      */
     public DataSourceConfig getByName(String name) {
-        String sql = "select * from x_datasource_config where _name = ?";
+        String sql = "select * from x_datasource_config where name = ?";
         List<DataSourceConfig> list = this.jdbcTemplate.query(sql, resultMap(), name);
         return list.size() == 0 ? null : list.get(0);
     }

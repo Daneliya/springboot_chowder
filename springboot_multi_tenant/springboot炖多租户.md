@@ -380,3 +380,39 @@ windows：curl -H @{'tenant'='zhangsan'} http://localhost:8080/get
 
 
 ### 3. 应用场景
+
+
+
+
+
+### 补充：
+
+SQL创建
+
+~~~sql
+CREATE TABLE `x_datasource_config` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `x_user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `uname` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `pwd` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `springboot_chowder`.`x_datasource_config`(`id`, `name`, `url`, `username`, `password`, `driver_class_name`) VALUES (1, 'zhangsan', 'jdbc:mysql://127.0.0.1:3306/springboot_chowder?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC', 'root', 'xxl666', 'com.mysql.cj.jdbc.Driver');
+INSERT INTO `springboot_chowder`.`x_datasource_config`(`id`, `name`, `url`, `username`, `password`, `driver_class_name`) VALUES (2, 'lisi', 'jdbc:mysql://127.0.0.1:3306/multi_tenant_db1?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC', 'root', 'xxl666', 'com.mysql.cj.jdbc.Driver');
+
+INSERT INTO `springboot_chowder`.`x_user`(`id`, `uname`, `pwd`, `age`) VALUES (1, 'mysql', '123456', 12);
+
+INSERT INTO `multi_tenant_db1`.`x_user`(`id`, `uname`, `pwd`, `age`) VALUES (1, 'lisi', '123456', 12);
+~~~
+

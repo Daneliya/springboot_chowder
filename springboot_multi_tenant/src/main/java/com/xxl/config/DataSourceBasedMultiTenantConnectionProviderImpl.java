@@ -1,5 +1,7 @@
 package com.xxl.config;
 
+import com.xxl.config.dao.DataSourceConfigDao;
+import com.xxl.config.vo.DataSourceConfig;
 import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTenantConnectionProviderImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 多租户数据源选择适配器
+ *
  * @author xxl
  * @date 2022/5/6 0:06
  */
