@@ -7,9 +7,9 @@ package com.xxl.constant;
  * @Version: 1.0
  */
 public class DbConstants {
-    public static final String DEFAULT_DB1="1";
-    public static final String DEFAULT_DB2="2";
-    public static final String DEFAULT_DB3="3";
-    public static final String DEFAULT_DB4="4";
+    public static final String DEFAULT_DB1 = "1";
+    public static final String DEFAULT_DB2 = "2";
+    public static final String DEFAULT_DB3 = "3";
+    public static final String DEFAULT_DB4 = "4";
 
 }

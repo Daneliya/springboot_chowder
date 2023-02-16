@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.mapper.DatasourceConfigMapper">
+
+    <select id="getAllDatasource" resultType="com.xxl.pojo.DataSourceItem">
+        select *
+        from datasource_config
+    </select>
+
+    <select id="getOneDatasource" resultType="com.xxl.pojo.DataSourceItem" parameterType="java.lang.Integer">
+        select *
+        from datasource_config
+        where id = #{id}
+    </select>
+</mapper>
