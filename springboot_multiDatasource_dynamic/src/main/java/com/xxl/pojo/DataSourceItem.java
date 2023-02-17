@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DataSourceItem {
+    private String name;
     private String key;
     private String url;
     private String username;

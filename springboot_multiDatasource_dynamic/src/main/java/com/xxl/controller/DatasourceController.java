@@ -27,4 +27,9 @@ public class DatasourceController {
         return datasourceConfigService.getAllDatasource();
     }
 
+    @GetMapping("/getOne/{key}")
+    public DataSourceItem getOne(String key) {
+        return datasourceConfigService.getOneDatasource(key);
+    }
+
 }

@@ -24,9 +24,20 @@ public class DynamicDataSourceContext extends AbstractRoutingDataSource {
     /**
      * 设置默认数据源、全部数据源，及刷新
      */
+    public void freshDefaultDataSource(Map<Object, Object> targetDataSources) {
+        //默认数据源
+        super.setDefaultTargetDataSource(targetDataSources.get("0"));
+        super.setTargetDataSources(targetDataSources);
+        //刷新(即把targetDataSources刷到resolvedDataSources中去，resolvedDataSources才是我们真正存放数据源的map)
+        super.afterPropertiesSet();
+    }
+
+    /**
+     * 设置默认数据源、全部数据源，及刷新
+     */
     public void freshDataSource(Map<Object, Object> targetDataSources) {
         //默认数据源
-        super.setDefaultTargetDataSource(targetDataSources.get(DbConstants.DEFAULT_DB1));
+        super.setDefaultTargetDataSource(targetDataSources.get("0"));
         //设置全部数据源
         super.setTargetDataSources(targetDataSources);
         //刷新(即把targetDataSources刷到resolvedDataSources中去，resolvedDataSources才是我们真正存放数据源的map)

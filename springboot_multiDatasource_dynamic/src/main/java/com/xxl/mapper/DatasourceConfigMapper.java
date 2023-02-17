@@ -16,5 +16,5 @@ public interface DatasourceConfigMapper {
 
     List<DataSourceItem> getAllDatasource();
 
-    DataSourceItem getOneDatasource(Integer id);
+    DataSourceItem getOneDatasource(String key);
 }

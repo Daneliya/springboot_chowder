@@ -11,6 +11,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy(exposeProxy = true)
 @MapperScan("com.xxl.mapper")
 @SpringBootApplication
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DruidDataSourceAutoConfigure.class})
 public class MultiDatasourceDynamicApplication {
 
     public static void main(String[] args) {

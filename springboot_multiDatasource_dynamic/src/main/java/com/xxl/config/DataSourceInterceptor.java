@@ -1,8 +1,9 @@
 package com.xxl.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.xxl.constant.DbConstants;
 import com.xxl.pojo.DataSourceItem;
-import com.zaxxer.hikari.HikariDataSource;
+import com.xxl.service.DatasourceConfigService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,20 +29,28 @@ public class DataSourceInterceptor implements HandlerInterceptor {
     @Resource
     private DynamicDataSourceContext dynamicDataSourceContext;
 
+    private static DatasourceConfigService datasourceConfigService = (DatasourceConfigService) ApplicationContextUtils.getBean("DatasourceConfigService");
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //todo 获取instanceId 可以由网关带来
         String instanceId = request.getHeader("instanceId");
         String requestURI = request.getRequestURI();
         StringBuffer requestURL = request.getRequestURL();
-        String servletPath = request.getServletPath();
-        System.out.println(requestURI + " " + requestURL.toString() + " " + servletPath);
+        System.out.println(requestURI + " " + requestURL.toString());
         if (instanceId == null || instanceId.equals("")) {
-            return false;
+            // 租户为空，设置当前默认的数据库
+            dynamicDataSourceContext.setDataSource(DbConstants.DEFAULT_DB1);
+            System.out.println("当前数据源是:" + DynamicDataSourceContext.getDataSource());
+            return true;
         }
         //注意这里要用容器中那个，与dataSource()中创建的是同一个(之前自己new一个，就一直找不到错误原因)
         Map<Object, DataSource> resolvedDataSourcesMap = dynamicDataSourceContext.getResolvedDataSources();
         Set<Object> dynamicDataSourceSet = resolvedDataSourcesMap.keySet();
+        for (Object o : dynamicDataSourceSet) {
+            System.out.println("所有数据源：" + o);
+        }
         //这里的业务是判断现在租户的instanceId是否已纳入数据源,如果没有就去添加该租户的数据源
         // TODO 生产中可能会根据instanceId去查表，获取该租户的配置数据源信息(这里演示就自己写个数据源来添加)
         if (!dynamicDataSourceSet.contains(instanceId)) {
@@ -62,23 +71,29 @@ public class DataSourceInterceptor implements HandlerInterceptor {
     }
 
     private void buildDataSources(Map<Object, Object> map, String instanceId) {
+        System.out.println("新数据源" + instanceId);
         //TODO 远程获取数据源状态,如果是 启用状态则添加 否则不添加 如果已停用就删除
-        int flag = 1;
-        if (instanceId.equals("4") && flag == 1) {
-            DataSourceItem ds = DataSourceItem
-                    .builder()
-                    .key(DbConstants.DEFAULT_DB4)
-                    .poolName(DbConstants.DEFAULT_DB4)
-                    .url("jdbc:mysql://127.0.0.1:3306/multi_tenant_slave?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai")
-                    .username("root")
-                    .password("xxl666")
-                    .driverClassName("com.mysql.cj.jdbc.Driver")
-                    .build();
-
-            map.put(ds.getKey(), buildDataSource(ds));
-        } else {
-            //其他状态则认为数据源不可用-不添加
+        dynamicDataSourceContext.setDataSource(DbConstants.DEFAULT_DB1);
+        DataSourceItem oneDatasource = datasourceConfigService.getOneDatasource(instanceId);
+        if (oneDatasource != null) {
+            map.put(instanceId, buildDataSource(oneDatasource));
         }
+//        int flag = 1;
+//        if (instanceId.equals("4") && flag == 1) {
+//            DataSourceItem ds = DataSourceItem
+//                    .builder()
+//                    .key(DbConstants.DEFAULT_DB4)
+//                    .poolName(DbConstants.DEFAULT_DB4)
+//                    .url("jdbc:mysql://127.0.0.1:3306/multi_tenant_slave?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai")
+//                    .username("root")
+//                    .password("xxl666")
+//                    .driverClassName("com.mysql.cj.jdbc.Driver")
+//                    .build();
+//
+//            map.put(ds.getKey(), buildDataSource(ds));
+//        } else {
+//            //其他状态则认为数据源不可用-不添加
+//        }
     }
 
     @Override
@@ -92,8 +107,9 @@ public class DataSourceInterceptor implements HandlerInterceptor {
     }
 
     private static Object buildDataSource(DataSourceItem dataSourceItem) {
-        HikariDataSource dataSource = new HikariDataSource();
-        dataSource.setJdbcUrl(dataSourceItem.getUrl());
+        // HikariDataSource dataSource = new HikariDataSource();
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setUrl(dataSourceItem.getUrl());
         dataSource.setUsername(dataSourceItem.getUsername());
         dataSource.setPassword(dataSourceItem.getPassword());
         dataSource.setDriverClassName(dataSourceItem.getDriverClassName());
