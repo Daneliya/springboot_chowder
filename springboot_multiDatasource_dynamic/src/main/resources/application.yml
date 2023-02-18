@@ -2,26 +2,32 @@ spring:
   autoconfigure:
     # 排除 Druid 自动配置
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
-#  datasource:
-#    dynamic:
-#      # 设置默认的数据源或者数据源组,默认值即为master
-#      primary: master
-#      # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
-#      strict: false
-#      datasource:
-#        master:
-#          # 3.2.0开始支持SPI可省略此配置
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#          url: jdbc:mysql://127.0.0.1:3306/multi_tenant_master?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-#          username: root
-#          password: xxl666
-#          type: com.alibaba.druid.pool.DruidDataSource
-#        slave:
-#          driver-class-name: com.mysql.cj.jdbc.Driver
-#          url: jdbc:mysql://127.0.0.1:3306/multi_tenant_slave?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-#          username: root
-#          password: xxl666
-#          type: com.alibaba.druid.pool.DruidDataSource
+  datasource:
+    dynamic:
+      # 设置默认的数据源或者数据源组,默认值即为master
+      primary: master
+      # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      strict: false
+      datasource:
+        master:
+          # 3.2.0开始支持SPI可省略此配置
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/multi_tenant_master?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          username: root
+          password: xxl666
+          type: com.alibaba.druid.pool.DruidDataSource
+        slave1:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/multi_tenant_slave?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          username: root
+          password: xxl666
+          type: com.alibaba.druid.pool.DruidDataSource
+        slave2:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://127.0.0.1:3306/multi_tenant_slave?useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+          username: root
+          password: xxl666
+          type: com.alibaba.druid.pool.DruidDataSource
 #      # 指定使用 druid 数据源
 #      druid:
 #        # 连接池初始化大小

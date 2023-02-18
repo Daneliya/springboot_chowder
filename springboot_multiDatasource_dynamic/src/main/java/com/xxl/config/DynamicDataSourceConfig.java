@@ -93,7 +93,7 @@ public class DynamicDataSourceConfig {
             System.out.println("数据源：" + dataSourceItem.getKey() + " " + dataSourceItem);
             DynamicDataSourceContext.dataSourceMap.put(dataSourceItem.getKey(), buildDataSource(dataSourceItem));
         }
-        // FIXME-方式三：获取yml中的默认配置
+        // FIXME-方式三：通过@ConfigurationProperties，获取yml中的配置
 
         return map;
     }

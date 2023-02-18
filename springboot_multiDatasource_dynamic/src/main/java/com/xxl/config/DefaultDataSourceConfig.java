@@ -3,6 +3,9 @@ package com.xxl.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.xxl.constant.DbConstants;
 import com.xxl.pojo.DataSourceItem;
+import com.xxl.pojo.properties.DynamicDataSource;
+import com.xxl.pojo.properties.MasterDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -38,33 +41,39 @@ public class DefaultDataSourceConfig {
 //        return dynamicDataSourceContext;
 //    }
 
-//    @Autowired
-//    private MasterDataSource masterDataSource;
+    @Autowired
+    private MasterDataSource masterDataSource;
 
+    @Autowired
+    private DynamicDataSource dynamicDataSource;
 
 
     @Primary
     @Bean(name = "defaultDataSource")
     public DataSource defaultDataSource() {
-        DataSourceItem ds0 = DataSourceItem
-                .builder()
-                .key("0")
-                .poolName(DbConstants.DEFAULT_DB1)
-                .url("jdbc:mysql://127.0.0.1:3306/multi_tenant_master?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai")
-                .username("root")
-                .password("xxl666")
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .build();
-//        System.out.println(masterDataSource);
 //        DataSourceItem ds0 = DataSourceItem
 //                .builder()
 //                .key(DbConstants.DEFAULT_DB0)
 //                .poolName(DbConstants.DEFAULT_DB0)
-//                .url(masterDataSource.getUrl())
-//                .username(masterDataSource.getUsername())
-//                .password(masterDataSource.getPassword())
-//                .driverClassName(masterDataSource.getDriverClassName())
+//                .url("jdbc:mysql://127.0.0.1:3306/multi_tenant_master?useSSL=false&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai")
+//                .username("root")
+//                .password("xxl666")
+//                .driverClassName("com.mysql.cj.jdbc.Driver")
 //                .build();
+
+        System.out.println(masterDataSource);
+        System.out.println(dynamicDataSource);
+
+        DataSourceItem ds0 = DataSourceItem
+                .builder()
+                .key(DbConstants.DEFAULT_DB0)
+                .poolName(DbConstants.DEFAULT_DB0)
+                .url(masterDataSource.getUrl())
+                .username(masterDataSource.getUsername())
+                .password(masterDataSource.getPassword())
+                .driverClassName(masterDataSource.getDriverClassName())
+                .build();
+
         Map<Object, Object> map = new HashMap<>();
         map.put(ds0.getKey(), buildDataSource(ds0));
         DynamicDataSourceContext.dataSourceMap.put(ds0.getKey(), buildDataSource(ds0));
