@@ -22,7 +22,7 @@ public interface UserMapper {
      * @params [user]
      * @date 2021/3/10 17:14
      */
-    @Insert("insert into user(nickname,password,sex,birthday) values(#{nickname},#{password},#{sex},#{birthday})")
+    @Insert("insert into user(nickname,password,sex,birthday,db) values(#{nickname},#{password},#{sex},#{birthday},#{db})")
     void addUser(User user);
 
     /**

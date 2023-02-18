@@ -3,4 +3,4 @@ server:
 spring:
   # 环境 database|table
   profiles:
-    active: database
+    active: table
