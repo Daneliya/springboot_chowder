@@ -36,17 +36,16 @@ public class DataSourceInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //todo 获取instanceId 可以由网关带来
         String instanceId = request.getHeader("instanceId");
-        String requestURI = request.getRequestURI();
-        StringBuffer requestURL = request.getRequestURL();
-        System.out.println(requestURI + " " + requestURL.toString());
+        System.out.println("请求地址：" + request.getRequestURI() + " " + request.getRequestURL().toString());
         if (instanceId == null || instanceId.equals("")) {
             // 租户为空，设置当前默认的数据库
-            dynamicDataSourceContext.setDataSource(DbConstants.DEFAULT_DB1);
-            System.out.println("当前数据源是:" + DynamicDataSourceContext.getDataSource());
+            //dynamicDataSourceContext.setDataSource(DbConstants.DEFAULT_MAIN);
+            System.out.println("租户为空，使用默认数据源:" + DynamicDataSourceContext.getDataSource());
             return true;
         }
         //注意这里要用容器中那个，与dataSource()中创建的是同一个(之前自己new一个，就一直找不到错误原因)
         Map<Object, DataSource> resolvedDataSourcesMap = dynamicDataSourceContext.getResolvedDataSources();
+//        Map<Object, DataSource> resolvedDataSourcesMap = DynamicDataSourceContext.dataSourceMap;
         Set<Object> dynamicDataSourceSet = resolvedDataSourcesMap.keySet();
         for (Object o : dynamicDataSourceSet) {
             System.out.println("所有数据源：" + o);

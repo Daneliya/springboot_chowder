@@ -7,15 +7,18 @@
 @Transactional 和 @DSTransactional 混用可能会造成事务死锁
 ~~~
 
-dynamic 学习：
+dynamic **学习**：
 https://blog.csdn.net/qq877728715/article/details/115374991
 SpringBoot实现多数据源（六）【dynamic-datasource 多数据源组件】：https://blog.csdn.net/Wei_Naijia/article/details/128069866
 图灵视频：https://www.bilibili.com/video/BV1er4y1e7h2
 图灵视频文档：https://blog.csdn.net/guoguo0717/article/details/124795657
 
+
+
 dynamic-datasource官方文档：
 https://baomidou.com/pages/a61e1b/#dynamic-datasource
 https://www.kancloud.cn/tracy5546/dynamic-datasource/2264611
+
 dynamic 案例方案：
 https://blog.csdn.net/m0_37635053/article/details/126735438 (主要参考)
 https://blog.csdn.net/sinat_25519789/article/details/124265311
@@ -34,7 +37,13 @@ https://blog.csdn.net/weixin_42144707/article/details/112109491
 spring bean加载顺序：https://blog.csdn.net/weixin_33166692/article/details/112588201
 
 
-@Component将普通类实例化spring容器中，但注入service等失败
+
+
+
+### 问题：
+
+#### @Component将普通类实例化spring容器中，但注入service等失败
+
 方案一：把@Autowired注解放在方法上
 https://blog.csdn.net/Ber_Bai/article/details/128397794
 方案二：@PostConstruct
@@ -51,7 +60,10 @@ https://blog.csdn.net/gg4236131/article/details/114653322
 
 
 
-面试题
+
+
+
+### 面试题
 
 ~~~markdown
 为什么使用？

@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: 测试用户控制层（@DS 注解测试）
  * @Author: xxl
  * @Date: 2023/02/15 23:34
  * @Version: 1.0
  */
 @RestController
-@RequestMapping("people")
+@RequestMapping("/people")
 public class PeopleController {
 
     private final PeopleService peopleService;

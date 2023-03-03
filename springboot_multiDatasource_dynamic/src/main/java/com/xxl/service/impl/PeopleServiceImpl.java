@@ -1,7 +1,6 @@
 package com.xxl.service.impl;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
-import com.baomidou.dynamic.datasource.annotation.DSTransactional;
+import com.xxl.annotation.Dynamic;
 import com.xxl.mapper.PeopleMapper;
 import com.xxl.service.PeopleService;
 import com.xxl.pojo.People;
@@ -23,6 +22,9 @@ public class PeopleServiceImpl implements PeopleService {
     private final PeopleMapper peopleMapper;
 
     @Autowired
+    private People2ServiceImpl people2ServiceImpl;
+
+    @Autowired
     public PeopleServiceImpl(PeopleMapper peopleMapper) {
         this.peopleMapper = peopleMapper;
     }
@@ -32,13 +34,13 @@ public class PeopleServiceImpl implements PeopleService {
      */
 
     // 从库,如果按照下划线命名方式配置多个,可以指定前缀即可.如slave_1、slave_2、slave3...,只需要设置salve即可,默认使用负载均衡算法
-    @DS("slave")
+    @Dynamic("master")
     @Override
     public List<People> list() {
         return peopleMapper.list();
     }
 
-    @DS("master")
+    @Dynamic("master")
     @Override
     public boolean mSave(People people) {
         People masterPeople = new People();
@@ -47,7 +49,7 @@ public class PeopleServiceImpl implements PeopleService {
         return true;
     }
 
-    @DS("slave")
+    @Dynamic("slave")
     @Override
     public boolean sSave(People people) {
         People slavePeople = new People();
@@ -56,12 +58,13 @@ public class PeopleServiceImpl implements PeopleService {
         return true;
     }
 
-    @DSTransactional
+    //@DSTransactional
     @Override
     public boolean save(People people) {
         PeopleService peopleService = (PeopleService) AopContext.currentProxy();
-        peopleService.sSave(people);
         peopleService.mSave(people);
+        peopleService.sSave(people);
+        people2ServiceImpl.sSave(people);
         // 模拟事务回滚
 //        int a = 1 / 0;
         return true;

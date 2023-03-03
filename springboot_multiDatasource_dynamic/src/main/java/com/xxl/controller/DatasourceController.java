@@ -16,7 +16,7 @@ import java.util.List;
  * @Version: 1.0
  */
 @RestController
-@RequestMapping("datasource")
+@RequestMapping("/datasource")
 public class DatasourceController {
 
     @Autowired

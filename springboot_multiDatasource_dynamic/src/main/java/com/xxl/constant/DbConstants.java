@@ -7,6 +7,7 @@ package com.xxl.constant;
  * @Version: 1.0
  */
 public class DbConstants {
+    public static final String DEFAULT_MAIN = "master";
     public static final String DEFAULT_DB0 = "0";
     public static final String DEFAULT_DB1 = "1";
     public static final String DEFAULT_DB2 = "2";

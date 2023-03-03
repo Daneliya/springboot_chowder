@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import javax.annotation.Resource;
 
 /**
- * @Description: 配置加载拦截器
+ * @Description: 配置加载拦截器 注意：这种方式会屏蔽掉SpringBoot对SpringMVC的自动配置！
  * @Author: xxl
  * @Date: 2023/02/15 23:25
  * @Version: 1.0

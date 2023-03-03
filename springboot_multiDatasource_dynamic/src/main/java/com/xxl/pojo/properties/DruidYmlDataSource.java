@@ -7,17 +7,17 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @Description: 读取 application-dynamic.yml 配置
+ * @Description: 读取 application-druid.yml 配置
  * @Author: xxl
- * @Date: 2023/02/18 15:00
+ * @Date: 2023/02/28 10:12
  * @Version: 1.0
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "spring.datasource.dynamic")
-public class DynamicDataSource {
-    
-    private Map<String, Properties> datasource;
+@ConfigurationProperties(prefix = "spring.datasource.druid")
+public class DruidYmlDataSource {
+
+    private Map<String, DruidYmlDataSource.Properties> datasource;
 
     @Data
     public static class Properties {
