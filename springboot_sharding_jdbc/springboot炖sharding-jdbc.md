@@ -1,3 +1,5 @@
+
+
 分库分表（sharding3版本）：https://blog.csdn.net/zxp2624161989/article/details/107094560/
 
 不分库只分表（sharding3版本）：https://www.bilibili.com/video/BV1id4y1z7St、https://blog.csdn.net/zxp2624161989/article/details/107094560/
@@ -20,7 +22,8 @@
 
 
 狂神：https://www.bilibili.com/video/BV1ei4y1K7dn
-主从复制报错Fatal error:The slave I/O thread stops because master and slave have equal MySQL server UUIDs；\
+笔记：https://blog.csdn.net/qq_44866424/article/details/120009099
+配置主从复制报错Fatal error:The slave I/O thread stops because master and slave have equal MySQL server UUIDs；\
 https://blog.csdn.net/cnds123321/article/details/117925881
 win下配置主从复制
 https://blog.csdn.net/qq_27991253/article/details/128017412

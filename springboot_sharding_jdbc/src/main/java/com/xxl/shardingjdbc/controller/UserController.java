@@ -47,11 +47,12 @@ public class UserController {
      */
     @GetMapping("/onlyTableSave")
     public String onlyTableSave() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             User user = new User();
             user.setNickname("name_" + i);
             user.setPassword("1234567");
             user.setSex(i % 2 == 0 ? 1 : 2);
+            user.setDb(i < (20 / 2) ? 1 : 2);
             user.setBirthday("1988-12-03");
             userMapper.addUser(user);
         }

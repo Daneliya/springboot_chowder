@@ -16,8 +16,10 @@ public class User {
     private String nickname;
     // 密码
     private String password;
-    // 性
+    // 性别
     private Integer sex;
-    // 性
+    // 生日
     private String birthday;
+    // 分库字段
+    private Integer db;
 }
