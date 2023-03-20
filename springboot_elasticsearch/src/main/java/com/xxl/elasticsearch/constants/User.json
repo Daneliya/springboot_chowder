@@ -1,0 +1,18 @@
+{
+  "mappings": {
+    "properties": {
+      "userId": {
+        "type": "long",
+        "index": true
+      },
+      "mobile": {
+        "type": "long",
+        "index": true
+      },
+      "tenantId": {
+        "type": "integer",
+        "index": true
+      }
+    }
+  }
+}
