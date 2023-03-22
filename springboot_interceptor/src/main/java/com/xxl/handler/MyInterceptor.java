@@ -46,7 +46,6 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     // 原始方法调用后执行的内容
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-//        new BaseRequest().setHospitalId(320);
         System.out.println("postHandle...");
     }
 
