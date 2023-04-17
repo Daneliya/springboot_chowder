@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,7 +112,6 @@ public class DynamicDataSourceConfig {
         System.out.println("druidYmlDataSource " + druidYmlDataSource);
         Map<Object, Object> map = new HashMap<>();
         for (String name : druidYmlDataSource.getDatasource().keySet()) {
-            System.out.println("加载的配置中数据源：" + name);
             DruidYmlDataSource.Properties properties = druidYmlDataSource.getDatasource().get(name);
             DataSourceItem ds = DataSourceItem
                     .builder()
@@ -122,25 +122,47 @@ public class DynamicDataSourceConfig {
                     .password(properties.getPassword())
                     .driverClassName(properties.getDriverClassName())
                     .build();
-            map.put(ds.getKey(), buildDataSource(ds));
-            DynamicDataSourceContext.dataSourceMap.put(ds.getKey(), buildDataSource(ds));
+            try {
+                map.put(ds.getKey(), buildDataSource(ds, druidYmlDataSource));
+                DynamicDataSourceContext.dataSourceMap.put(ds.getKey(), buildDataSource(ds, druidYmlDataSource));
+            } catch (SQLException e) {
+                throw new RuntimeException("【组装DruidDataSource数据源错误】{}", e);
+            }
         }
         return map;
     }
 
     /**
-     * 把数据源对象组装成HikariDataSource
+     * 把数据源对象组装成DruidDataSource
      *
+     * @param druidYmlDataSource
      * @param dataSourceItem
      * @return
      */
-    private static DataSource buildDataSource(DataSourceItem dataSourceItem) {
+    private static DataSource buildDataSource(DataSourceItem dataSourceItem, DruidYmlDataSource druidYmlDataSource) throws SQLException {
+
         // HikariDataSource dataSource = new HikariDataSource();
+        // 必要信息
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setUrl(dataSourceItem.getUrl());
         dataSource.setUsername(dataSourceItem.getUsername());
         dataSource.setPassword(dataSourceItem.getPassword());
         dataSource.setDriverClassName(dataSourceItem.getDriverClassName());
+        // 其他配置信息
+        dataSource.setName(druidYmlDataSource.getName());
+        dataSource.setInitialSize(druidYmlDataSource.getInitialSize());
+        dataSource.setMinIdle(druidYmlDataSource.getMinIdle());
+        dataSource.setMaxActive(druidYmlDataSource.getMaxActive());
+        dataSource.setMaxWait(druidYmlDataSource.getMaxWait());
+        dataSource.setTimeBetweenEvictionRunsMillis(druidYmlDataSource.getTimeBetweenEvictionRunsMillis());
+        dataSource.setMinEvictableIdleTimeMillis(druidYmlDataSource.getMinEvictableIdleTimeMillis());
+        dataSource.setValidationQuery(druidYmlDataSource.getValidationQuery());
+        dataSource.setTestWhileIdle(druidYmlDataSource.getTestWhileIdle());
+        dataSource.setTestOnBorrow(druidYmlDataSource.getTestOnBorrow());
+        dataSource.setTestOnReturn(druidYmlDataSource.getTestOnReturn());
+        dataSource.setPoolPreparedStatements(druidYmlDataSource.getPoolPreparedStatements());
+        dataSource.setMaxPoolPreparedStatementPerConnectionSize(druidYmlDataSource.getMaxPoolPreparedStatementPerConnectionSize());
+        dataSource.setFilters(druidYmlDataSource.getFilters());
         return dataSource;
     }
 }

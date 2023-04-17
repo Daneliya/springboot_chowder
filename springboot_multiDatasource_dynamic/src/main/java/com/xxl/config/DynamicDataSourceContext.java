@@ -2,7 +2,6 @@ package com.xxl.config;
 
 import com.xxl.constant.DbConstants;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date: 2023/02/15 23:23
  * @Version: 1.0
  */
-@Component
+//@Component
 public class DynamicDataSourceContext extends AbstractRoutingDataSource {
 
     private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();
@@ -54,6 +53,17 @@ public class DynamicDataSourceContext extends AbstractRoutingDataSource {
         CONTEXT_HOLDER.set(dataSource);
     }
 
+    /**
+     * 可不可以不加 DynamicDataSourceContext.clearDataSource 这一步，不加会造成什么问题？
+     *
+     * 当您使用 DynamicDataSourceContext.setDataSource 切换数据源时，如果不清除数据源，可能会导致以下问题：
+     *
+     * 数据源泄漏：如果您不清除数据源，当前线程将继续使用该数据源，即使它已经不再需要。这可能会导致数据源泄漏，从而导致应用程序出现内存泄漏或连接池耗尽等问题。
+     *
+     * 数据源混淆：如果您不清除数据源，当前线程将继续使用该数据源，即使它已经不再需要。这可能会导致数据源混淆，从而导致应用程序出现意外行为或错误。
+     *
+     * 因此，建议在使用完数据源后调用 DynamicDataSourceContext.clearDataSource 来清除数据源。这将确保当前线程不再使用该数据源，并将其返回到连接池中，以便其他线程可以使用它。
+     */
     public static void clearDataSource() {
         CONTEXT_HOLDER.remove();
     }

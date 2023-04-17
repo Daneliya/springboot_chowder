@@ -19,6 +19,34 @@ public class DruidYmlDataSource {
 
     private Map<String, DruidYmlDataSource.Properties> datasource;
 
+    private String name;
+
+    private int initialSize;
+
+    private int minIdle;
+
+    private int maxActive;
+
+    private int maxWait;
+
+    private long timeBetweenEvictionRunsMillis;
+
+    private long minEvictableIdleTimeMillis;
+
+    private String validationQuery;
+
+    private Boolean testWhileIdle;
+
+    private Boolean testOnBorrow;
+
+    private Boolean testOnReturn;
+
+    private Boolean poolPreparedStatements;
+
+    private int maxPoolPreparedStatementPerConnectionSize;
+
+    private String filters;
+
     @Data
     public static class Properties {
         private String url;

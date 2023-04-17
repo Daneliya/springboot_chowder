@@ -3,6 +3,7 @@ package com.xxl.annotation;
 import com.xxl.config.DynamicDataSourceContext;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -10,7 +11,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 
 /**
@@ -42,7 +42,7 @@ public class DsAspect {
 //        }
 //    }
 
-    @Pointcut("@within(Dynamic)||@annotation(Dynamic)")
+    @Pointcut("within(com.xxl.service.*)||@annotation(Dynamic)")
 //    @Pointcut("within(com.xxl.service.impl.*)||@annotation(Dynamic)")
     public void ds() {
     }
@@ -95,5 +95,12 @@ public class DsAspect {
             return method.getAnnotation(Dynamic.class);
         }
         return null;
+    }
+
+    @After("@annotation(Dynamic)")
+    public void dynamicAfter() {
+        // 清空上下文信息
+        DynamicDataSourceContext.clearDataSource();
+
     }
 }

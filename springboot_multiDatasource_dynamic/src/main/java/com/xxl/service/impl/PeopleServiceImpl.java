@@ -2,6 +2,7 @@ package com.xxl.service.impl;
 
 import com.xxl.annotation.Dynamic;
 import com.xxl.mapper.PeopleMapper;
+import com.xxl.service.People2Service;
 import com.xxl.service.PeopleService;
 import com.xxl.pojo.People;
 import org.springframework.aop.framework.AopContext;
@@ -22,7 +23,7 @@ public class PeopleServiceImpl implements PeopleService {
     private final PeopleMapper peopleMapper;
 
     @Autowired
-    private People2ServiceImpl people2ServiceImpl;
+    private People2Service people2Service;
 
     @Autowired
     public PeopleServiceImpl(PeopleMapper peopleMapper) {
@@ -64,7 +65,8 @@ public class PeopleServiceImpl implements PeopleService {
         PeopleService peopleService = (PeopleService) AopContext.currentProxy();
         peopleService.mSave(people);
         peopleService.sSave(people);
-        people2ServiceImpl.sSave(people);
+        sSave(people);
+        people2Service.sSave(people);
         // 模拟事务回滚
 //        int a = 1 / 0;
         return true;

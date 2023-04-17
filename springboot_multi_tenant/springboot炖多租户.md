@@ -1,6 +1,11 @@
 # springboot炖多租户
 ### 1. 先睹为快
 ### 2. 实现原理
+
+先初始一个默认的数据源，去查询数据库中配置的所有数据源信息，保存到适配器（基于jpa的AbstractDataSourceBasedMultiTenantConnectionProviderImpl）中，每次请求动态获取jdbcTemplate。
+
+
+
 #### 2.1 新建项目
 #### 2.2 创建maven目录结构，以及pom.xml文件
 #### 2.3 pom.xml文件中加入依赖
