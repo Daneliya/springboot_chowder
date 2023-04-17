@@ -14,6 +14,8 @@ public class LiSiHandler2 extends AbstractHandler {
     @Override
     public void AAA(String name) {
         System.out.println(name + "完成了任务");
+        AbstractHandler handler = Factory2.getInvokeStrategy(name);
+        handler.AAA("111");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.xxl.itlaoge;
+package com.xxl;
 
 import com.xxl.itlaoge.handler.*;
 
@@ -51,10 +51,10 @@ public class FactoryAndHandlerApplicationTests {
         AbstractHandler strategy = Factory2.getInvokeStrategy(name);
         strategy.AAA(name);
 
-        String name2 = "张三";
-        AbstractHandler strategy2 = Factory2.getInvokeStrategy(name2);
-        System.out.println(strategy2.BBB(name2));
-        String str = strategy.BBB(name2);
-        System.out.println(str);
+//        String name2 = "张三";
+//        AbstractHandler strategy2 = Factory2.getInvokeStrategy(name2);
+//        System.out.println(strategy2.BBB(name2));
+//        String str = strategy.BBB(name2);
+//        System.out.println(str);
     }
 }
