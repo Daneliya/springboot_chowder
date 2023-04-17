@@ -1,6 +1,6 @@
 package com.xxl.controller;
 
-import com.xxl.pojo.User;
+import com.xxl.vo.User;
 import com.xxl.service.RedisService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
