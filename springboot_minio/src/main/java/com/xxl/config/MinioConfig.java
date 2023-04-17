@@ -1,6 +1,6 @@
 package com.xxl.config;
 
-import com.xxl.pojo.MinioProperties;
+import com.xxl.vo.MinioProperties;
 import io.minio.MinioClient;
 import io.minio.errors.InvalidEndpointException;
 import io.minio.errors.InvalidPortException;
