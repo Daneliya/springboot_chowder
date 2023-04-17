@@ -18,7 +18,7 @@ public class DemoController {
     }
 
     @RequestMapping("/test02")
-    public User test2(User user) {
+    public User test02(User user) {
         user.setAge(20);
         return user;
     }
