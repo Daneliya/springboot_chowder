@@ -2,7 +2,7 @@ package com.xxl.caffeine.canal;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.xxl.config.RedisHandler;
-import com.xxl.pojo.Item;
+import com.xxl.vo.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import top.javatool.canal.client.annotation.CanalTable;

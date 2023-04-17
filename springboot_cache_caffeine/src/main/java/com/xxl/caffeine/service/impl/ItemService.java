@@ -2,8 +2,8 @@ package com.xxl.caffeine.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxl.caffeine.mapper.ItemMapper;
-import com.xxl.pojo.Item;
-import com.xxl.pojo.ItemStock;
+import com.xxl.vo.Item;
+import com.xxl.vo.ItemStock;
 import com.xxl.caffeine.service.IItemService;
 import com.xxl.caffeine.service.IItemStockService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,9 +2,9 @@ package com.xxl.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.benmanes.caffeine.cache.Cache;
-import com.xxl.pojo.Item;
-import com.xxl.pojo.ItemStock;
-import com.xxl.pojo.PageDTO;
+import com.xxl.vo.Item;
+import com.xxl.vo.ItemStock;
+import com.xxl.vo.PageDTO;
 import com.xxl.caffeine.service.IItemService;
 import com.xxl.caffeine.service.IItemStockService;
 import org.springframework.beans.factory.annotation.Autowired;

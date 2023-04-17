@@ -1,7 +1,7 @@
 package com.xxl.caffeine.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xxl.pojo.ItemStock;
+import com.xxl.vo.ItemStock;
 
 /**
  * @author xxl

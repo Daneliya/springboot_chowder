@@ -2,8 +2,8 @@ package com.xxl.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xxl.pojo.Item;
-import com.xxl.pojo.ItemStock;
+import com.xxl.vo.Item;
+import com.xxl.vo.ItemStock;
 import com.xxl.caffeine.service.IItemService;
 import com.xxl.caffeine.service.IItemStockService;
 import org.springframework.beans.factory.InitializingBean;
