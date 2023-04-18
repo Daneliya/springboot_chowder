@@ -1,4 +1,4 @@
-package com.xxl;
+package com.xxl.mybatis_plus;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.jupiter.api.Test;
 
 /**
+ * 代码生成器
+ *
  * @Author: xxl
  * @Date: 2022/08/20 15:23
  */
