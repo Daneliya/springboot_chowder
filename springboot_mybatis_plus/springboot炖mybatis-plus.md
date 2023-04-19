@@ -590,7 +590,9 @@ spring:
     
 ~~~
 
+## 十、代码自动生成器
 
+> MybatisPlus看官方文档即可，这里讲一个Idea插件Easy Code代码生成器
 
 
 
