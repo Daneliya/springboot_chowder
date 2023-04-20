@@ -13,9 +13,13 @@ import java.util.Date;
  */
 @Data
 public class User {
+    //主键ID
     private Long id;
+    //姓名
     private String name;
+    //年龄
     private Integer age;
+    //邮箱
     private String email;
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

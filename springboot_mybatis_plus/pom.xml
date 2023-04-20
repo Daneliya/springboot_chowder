@@ -48,6 +48,12 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.0</version>
         </dependency>
+        <!-- 代码生成器 新版本未传递依赖 MP 包，需要单独引入 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.5.1</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
