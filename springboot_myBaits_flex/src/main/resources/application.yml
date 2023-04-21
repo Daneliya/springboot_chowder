@@ -1,1 +1,10 @@
-
+server:
+  port: 9001
+spring:
+  application:
+    name: springboot-mybatis-flex #指定服务名
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mybatis_plus?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=UTC
+    username: root
+    password: xxl666
