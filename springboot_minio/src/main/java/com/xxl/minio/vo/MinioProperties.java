@@ -1,14 +1,16 @@
-package com.xxl.vo;
+package com.xxl.minio.vo;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 /**
+ * minio属性类
+ *
  * @Author: xxl
  * @Date: 2022/09/14 16:52
  */
-@Component
+@Configuration
 @Data
 public class MinioProperties {
     /**

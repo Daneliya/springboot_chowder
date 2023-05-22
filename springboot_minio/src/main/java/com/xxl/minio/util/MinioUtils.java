@@ -1,34 +1,35 @@
-package com.xxl.controller;
+package com.xxl.minio.util;
 
 import io.minio.MinioClient;
 import io.minio.ObjectStat;
 import io.minio.Result;
 import io.minio.errors.*;
 import io.minio.messages.Item;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.xmlpull.v1.XmlPullParserException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.UUID;
 
 /**
+ * @Description: minio工具类
  * @Author: xxl
- * @Date: 2022/09/14 16:59
+ * @Date: 2023/05/20 9:16
+ * @Version: 1.0
  */
-public class MinioController {
+@Component
+public class MinioUtils {
 
-    @Autowired
+    @Resource
     private MinioClient minioClient;
 
-    @Value("${minio.bucketName}")
+    @Value("${minio.bucketname}")
     private String bucketName;
 
     /**
@@ -47,8 +48,7 @@ public class MinioController {
      * @throws InsufficientDataException
      * @throws ErrorResponseException
      */
-    @GetMapping(value = "/get/{bucketName}")
-    public void upload(MultipartFile file, @PathVariable("bucketName") String bucketName) throws IOException, XmlPullParserException, NoSuchAlgorithmException, InvalidKeyException, InvalidArgumentException, InvalidResponseException, InternalException, NoResponseException, InvalidBucketNameException, InsufficientDataException, ErrorResponseException {
+    public void upload(MultipartFile file) throws IOException, XmlPullParserException, NoSuchAlgorithmException, InvalidKeyException, InvalidArgumentException, InvalidResponseException, InternalException, NoResponseException, InvalidBucketNameException, InsufficientDataException, ErrorResponseException {
         if (file == null || file.getSize() == 0 || file.isEmpty()) {
             throw new RuntimeException("上传文件为空，请重新上传");
         }
@@ -56,7 +56,8 @@ public class MinioController {
         String filename = file.getOriginalFilename();
         assert filename != null;
         /* 像下面这样写最主要是为了用来做分割，同时也保证文件名是唯一的 */
-        String newFilename = UUID.randomUUID().toString() + "|" + filename + filename.substring(filename.lastIndexOf("."));
+        //String newFilename = UUID.randomUUID().toString() + "" + filename + filename.substring(filename.lastIndexOf("."));
+        String newFilename = filename + filename.substring(filename.lastIndexOf("."));
         minioClient.putObject(bucketName, newFilename, file.getInputStream(), file.getSize(), null, null, file.getContentType());
     }
 

@@ -1,20 +1,22 @@
-package com.xxl.config;
+package com.xxl.minio.config;
 
-import com.xxl.vo.MinioProperties;
+import com.xxl.minio.vo.MinioProperties;
 import io.minio.MinioClient;
 import io.minio.errors.InvalidEndpointException;
 import io.minio.errors.InvalidPortException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
 /**
+ * minio配置类
+ *
  * @Author: xxl
  * @Date: 2022/09/14 16:55
  */
-@Configuration
+@Component
 @Slf4j
 public class MinioConfig {
 

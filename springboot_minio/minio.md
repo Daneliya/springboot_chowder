@@ -34,6 +34,18 @@ Minio 是一个基于Go语言的对象存储服务。它实现了大部分亚马
 
 ## 2、Minio安装与启动
 
+
+
+### Windows安装
+
+
+
+### Linux安装（Centos7x）
+
+#### 普通安装
+
+
+
 首先，我们得先去找到下载地址
 
 - 下载地址：`https://dl.min.io/server/minio/release/linux-amd64/minio`
@@ -81,6 +93,71 @@ chmod +x minio
 ![在这里插入图片描述](minio.assets/2021091410262228.jpg)
 
 ![在这里插入图片描述](minio.assets/2021091410262329.jpg)
+
+
+
+#### docker安装
+
+一、查看docker环境是否正常
+
+在命令行使用
+
+~~~shell
+docker search minio
+~~~
+
+二、下载 minio 的镜像
+
+```Shell
+docker pull minio/minio
+```
+
+三、创建 minio 容器
+
+查看所有镜像
+
+```powershell
+docker images
+```
+
+创建并启动minIO容器
+
+~~~shell
+docker run -p 9000:9000 -p 9090:9090 \
+ --name minio \
+ -d --restart=always \
+ -e "MINIO_ACCESS_KEY=minioadmin" \
+ -e "MINIO_SECRET_KEY=minioadmin" \
+ -v /mydata/minio/data:/data \
+ minio/minio server \
+ /data --console-address ":9090" -address ":9000"
+~~~
+
+- 这里的 \ 指的是命令还没有输入完，还需要继续输入命令，先不要执行的意思。
+- 这里的9090端口指的是minio的客户端端口。虽然设置9090，但是我们在访问9000的时候，他也会自动跳到9090。
+- 9000端口是minio的服务端端口，我们程序在连接minio的时候，就是通过这个端口来连接的。
+- -v就是docker run当中的挂载，这里的/mydata/minio/data:/data意思就是将容器的/data目录和宿主机的/mydata/minio/data目录做映射，这样我们想要查看容器的文件的时候，就不需要看容器当中的文件了。
+  - 注意在执行命令的时候，他是会自动在宿主机当中创建目录的。我们不需要手动创建。
+    minio所上传的文件默认都是存储在容器的data目录下的！
+    假如删除容器了宿主机当中挂载的目录是不会删除的。假如没有使用-v挂载目录，那他在宿主机的存储位置的文件会直接删除的。
+    宿主机的挂载目录一定是根目录，如果是相对路径会有问题。还有容器当中的目录也是必须是绝对路径（根路径就是带/的）。
+    所谓的挂载其实就是将容器目录和宿主机目录进行绑定了，操作宿主机目录，容器目录也会变化，操作容器目录，宿主机目录也会变化。这样做的目的 可以间接理解为就是数据持久化，防止容器误删，导致数据丢失的情况。
+- MINIO_ACCESS_KEY:账号 MINIO_SECRET_KEY:密码 (正常账号应该不低于3位，密码不低于8位，不然容器会启动不成功)
+- --console-address 指定客户端端口
+- -d --restart=always 代表重启linux的时候容器自动启动
+- --name minio 容器名称
+
+四、执行之后，查看正在运行的容器
+
+~~~
+docker ps
+~~~
+
+
+
+如果运行容器之后客户端打不开，这时候可以通过`docker logs 容器id`查看日志。
+
+
 
 
 
@@ -280,8 +357,6 @@ public void deleteFile(String fileName){
 
 其实操作并不难，你如果发现了我的操作全都是使用的minioClient来实现的时候，你的重心就应该去放在这个类上面，里面所有的方法都有注释，看一遍就能学会。
 
-本篇文章就到这里了，希望能够给你带来帮助，也希望您能够多多关注脚本之家的更多内容！
-
 
 
 
@@ -289,3 +364,33 @@ public void deleteFile(String fileName){
 ## 参考资料
 
 [1]. [使用Java Minio搭建自己的文件系统详解](https://www.jb51.net/article/222851.htm)
+
+https://blog.csdn.net/u011174699/article/details/124903036
+
+https://blog.csdn.net/qq_51073233/article/details/127673489
+
+https://blog.csdn.net/Ever_Ardour/article/details/120838919
+
+http://www.cppcns.com/ruanjian/java/523491.html
+
+https://zhuanlan.zhihu.com/p/514794125
+
+[2]. Docker安装MinIO详细步骤介绍：
+
+https://blog.csdn.net/weixin_43888891/article/details/122021704、
+
+https://www.yingsoo.com/news/servers/49799.html
+
+[3]. 双机备份：https://blog.csdn.net/lwq657359703/article/details/120559944
+
+[4]. Minio集群：
+
+https://www.zhangshengrong.com/p/24Njoqr0XB/
+
+https://blog.csdn.net/qq_52497256/article/details/128239273
+
+https://blog.csdn.net/lifulian318/article/details/128490934
+
+
+
+

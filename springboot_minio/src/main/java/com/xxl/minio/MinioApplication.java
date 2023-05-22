@@ -1,7 +1,8 @@
-package com.xxl;
+package com.xxl.minio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * Minio 启动类
@@ -9,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Author: xxl
  * @Date: 2022/09/14 16:56
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class MinioApplication {
 
     public static void main(String[] args) {
