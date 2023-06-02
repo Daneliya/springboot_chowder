@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxl.encrypt_hutool.mapper.PersonMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xxl.encrypt_hutool.entity.Person">
+        <id column="id" property="id"/>
+        <result column="phone_number" property="phoneNumber"/>
+        <result column="user_name" property="userName"/>
+    </resultMap>
+
+    <select id="queryByPhoneEncrypt" resultType="com.xxl.encrypt_hutool.entity.Person" parameterType="map">
+        select *
+        from sys_person
+        where id in
+              (select person_id
+               from sys_person_phone_encrypt
+               where phone_key like concat('%', #{phoneNumber}, '%'))
+    </select>
+
+</mapper>
