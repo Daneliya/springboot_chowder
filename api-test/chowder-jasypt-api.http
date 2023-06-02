@@ -1,0 +1,29 @@
+
+###
+POST http://localhost/api/user/getUserInfoByPhone
+
+###
+GET http://localhost:8080/get
+
+### 单个保存
+POST {{springboot_jasypt_host}}/savePerson
+Content-Type: application/json
+
+{
+  "phoneNumber": "15510008021",
+  "userName": "海豹"
+}
+
+### 条件查询
+POST {{springboot_jasypt_host}}/findPerson
+Content-Type: application/json
+
+{
+  "phoneNumber": "1551"
+}
+
+### 获取列表信息
+GET http://localhost:8080/list
+
+### 根据id查询
+GET http://localhost:8080/get/1664208306383753216
