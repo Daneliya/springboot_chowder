@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: springboot-canal
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/springboot_chowder?useSSL=false
+    username: root
+    password: xxl666
+    driver-class-name: com.mysql.cj.jdbc.Driver
+canal:
+  destination: canal
+  server: 127.0.0.1:11111
