@@ -4,7 +4,7 @@ spring:
   application:
     name: caffeine-service
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/caffeine_database?useSSL=false
+    url: jdbc:mysql://192.168.233.130:3306/springboot_chowder?useSSL=false
     username: root
     password: xxl666
     driver-class-name: com.mysql.jdbc.Driver
