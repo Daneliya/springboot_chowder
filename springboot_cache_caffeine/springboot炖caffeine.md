@@ -113,6 +113,14 @@ public class User {
 
 #### 2.8 开发用户服务层
 
+主要基于Spring缓存注解@Cacheable、@CacheEvict、@CachePut的方式使用
+
+@Cacheable ：改注解修饰的方法，若不存在缓存，则执行方法并将结果写入缓存；若存在缓存，则不执行方法，直接返回缓存结果。
+@CachePut ：执行方法，更新缓存；该注解下的方法始终会被执行。
+@CacheEvict ：删除缓存
+@Caching 将多个缓存组合在一个方法上（该注解可以允许一个方法同时设置多个注解）
+@CacheConfig 在类级别设置一些缓存相关的共同配置（与其它缓存配合使用）
+
 ```
 import com.oven.vo.User;
 import org.springframework.cache.annotation.CacheEvict;
@@ -235,6 +243,18 @@ public class CaffeineConfig {
 
 
 
+## 参考资料
+
 
 
 [(64条消息) Caffeine （史上最全）_40岁资深老架构师尼恩的博客-CSDN博客](https://blog.csdn.net/crazymakercircle/article/details/113751575)
+
+https://blog.csdn.net/CSDN_WYL2016/article/details/128258565
+
+https://blog.csdn.net/Listening_Wind/article/details/110085228
+
+多级缓存优化
+
+[(64条消息) 项目理解（七）多级缓存优化性能_多级缓存事务性_lzw2019sun的博客-CSDN博客](https://blog.csdn.net/liuzewei2015/article/details/99706438)
+
+[数据量很大，分页查询很慢，怎么优化？ - 简书 (jianshu.com)](https://www.jianshu.com/p/864d0bd80115)

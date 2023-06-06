@@ -21,6 +21,11 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class CaffeineConfig {
 
+    /**
+     * 创建基于Caffeine的Cache Manager
+     *
+     * @return
+     */
     @Bean
     public CacheManager cacheManager() {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
