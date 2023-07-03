@@ -1,0 +1,7 @@
+### 查询
+POST {{springboot_caffeine_host}}/getById?id=1
+Content-Type: application/x-www-form-urlencoded
+
+### 删除
+POST {{springboot_caffeine_host}}/delete?id=1
+Content-Type: application/x-www-form-urlencoded
