@@ -1,6 +1,6 @@
 server:
   port: 8085
 spring:
-  # 环境 database|table
+  # 环境 database|table|copy|dataAndTab
   profiles:
     active: table

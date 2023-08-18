@@ -22,7 +22,7 @@ public class SpringRetryDemo {
      * @param param
      * @return
      */
-    @Retryable(value = {RemoteAccessException.class}, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 2))
+    @Retryable(value = {RemoteAccessException.class, NullPointerException.class}, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 2))
     public boolean call(String param) {
         return RetryDemoTask.retryTask(param);
     }

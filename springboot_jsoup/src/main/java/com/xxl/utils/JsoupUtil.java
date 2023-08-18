@@ -1,6 +1,6 @@
 package com.xxl.utils;
 
-import com.xxl.pojo.Content;
+import com.xxl.vo.Content;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

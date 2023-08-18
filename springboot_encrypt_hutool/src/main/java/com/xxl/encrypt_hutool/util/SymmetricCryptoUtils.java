@@ -42,4 +42,38 @@ public class SymmetricCryptoUtils {
         return encryptValue;
     }
 
+    /**
+     * 字符串按长度进行分词
+     *
+     * @param phone
+     * @return
+     */
+    public static String phoneKeywords(String phone) {
+        String keywords = keywords(phone, 4);
+        //System.out.println("加密后长度 " + keywords.length());
+        return keywords;
+    }
+
+    /**
+     * 分词组合加密
+     *
+     * @param word
+     * @param len
+     * @return
+     */
+    private static String keywords(String word, int len) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < word.length(); i++) {
+            int start = i;
+            int end = i + len;
+            String sub1 = word.substring(start, end);
+            //System.out.println("每次截取数据 " + sub1);
+            sb.append(SymmetricCryptoUtils.encrypt(sub1));
+            if (end == word.length()) {
+                break;
+            }
+        }
+        return sb.toString();
+    }
+
 }

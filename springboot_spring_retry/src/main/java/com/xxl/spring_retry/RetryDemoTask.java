@@ -5,15 +5,21 @@ import org.apache.commons.lang3.RandomUtils;
 import org.springframework.remoting.RemoteAccessException;
 
 /**
+ * 普通使用方式
+ *
  * @author xxl
  * @date 2022/12/26 22:53
  */
 @Slf4j
 public class RetryDemoTask {
 
+    public static void main(String[] args) {
+        retryTask("参数");
+    }
+
 
     /**
-     * 重试方法
+     * 重试方法：采用一个随机整数，根据不同的条件返回不同的值，或者抛出异常
      *
      * @return
      */

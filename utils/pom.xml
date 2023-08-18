@@ -85,23 +85,23 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>4.1.2</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.apache.xmlbeans</groupId>-->
-<!--                    <artifactId>xmlbeans</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>org.apache.xmlbeans</groupId>-->
+            <!--                    <artifactId>xmlbeans</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>4.1.2</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.apache.xmlbeans</groupId>-->
-<!--                    <artifactId>xmlbeans</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <!--            <exclusions>-->
+            <!--                <exclusion>-->
+            <!--                    <groupId>org.apache.xmlbeans</groupId>-->
+            <!--                    <artifactId>xmlbeans</artifactId>-->
+            <!--                </exclusion>-->
+            <!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
@@ -151,21 +151,47 @@
             <version>9.1.22</version>
         </dependency>
         <!--+++++++++++++++++++++++++++++++++++++ word ++++++++++++++++++++++++++++-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.xmlbeans</groupId>-->
-<!--            <artifactId>xmlbeans</artifactId>-->
-<!--            <version>2.6.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.poi</groupId>-->
-<!--            <artifactId>ooxml-schemas</artifactId>-->
-<!--            <version>1.1</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.poi</groupId>-->
-<!--            <artifactId>poi-ooxml-schemas</artifactId>-->
-<!--            <version>3.16</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.xmlbeans</groupId>-->
+        <!--            <artifactId>xmlbeans</artifactId>-->
+        <!--            <version>2.6.0</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.poi</groupId>-->
+        <!--            <artifactId>ooxml-schemas</artifactId>-->
+        <!--            <version>1.1</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.poi</groupId>-->
+        <!--            <artifactId>poi-ooxml-schemas</artifactId>-->
+        <!--            <version>3.16</version>-->
+        <!--        </dependency>-->
+
+        <!-- 拼音 -->
+        <dependency>
+            <groupId>io.github.biezhi</groupId>
+            <artifactId>TinyPinyin</artifactId>
+            <version>2.0.3.RELEASE</version>
+        </dependency>
+        <!-- 拼音 -->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <!-- 拼音 -->
+        <dependency>
+            <groupId>com.github.stuxuhai</groupId>
+            <artifactId>jpinyin</artifactId>
+            <version>1.1.8</version>
+        </dependency>
+
+        <!-- spire：word转换pdf -->
+        <dependency>
+            <groupId>org.typelevel</groupId>
+            <artifactId>spire_3</artifactId>
+            <version>0.18.0</version>
+        </dependency>
     </dependencies>
 
 

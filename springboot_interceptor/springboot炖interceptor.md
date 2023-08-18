@@ -2,6 +2,8 @@
 
 拦截器的介绍及使用：https://blog.csdn.net/m0_53123540/article/details/124924596
 
+SpringBoot 统一功能处理（登录验证，异常处理，统一返回格式，原理）：https://zhuanlan.zhihu.com/p/575615171
+
 拦截器实战：注解+拦截器，获取token中的用户信息保存到request中。https://blog.csdn.net/weixin_46273997/article/details/119720854，https://blog.csdn.net/qq_19636353/article/details/107031866
 
 拦截器实战：redis+ThreadLocal获取全局的登录用户信息。https://qushen.blog.csdn.net/article/details/111713290

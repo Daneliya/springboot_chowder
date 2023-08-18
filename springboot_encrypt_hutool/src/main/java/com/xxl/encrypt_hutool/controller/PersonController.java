@@ -1,6 +1,10 @@
 package com.xxl.encrypt_hutool.controller;
 
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
+import com.baomidou.mybatisplus.core.toolkit.AES;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xxl.encrypt_hutool.anno.NeedDecrypt;
 import com.xxl.encrypt_hutool.anno.NeedEncrypt;
@@ -18,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: 分词加密测试
  * @Author: xxl
  * @Date: 2023/05/31 13:54
  * @Version: 1.0
@@ -32,15 +36,45 @@ public class PersonController {
     @Autowired
     private PersonPhoneEncryptMapper personPhoneEncryptMapper;
 
+    /**
+     * 单个用户保存测试手机号加密
+     *
+     * @param person
+     * @return
+     */
     @RequestMapping(value = "/savePerson", method = RequestMethod.POST)
     public String savePerson(@RequestBody Person person) {
         person.setId(SnowIdUtils.getNextId());
         String encrypt = SymmetricCryptoUtils.encrypt(person.getPhoneNumber());
         person.setPhoneNumber(encrypt);
+        // 随机生成18为长度的字符串
+        String idCard = RandomUtil.randomNumbers(18);
+
+        // AES
+        String key = AES.generateRandomKey();
+        String encryptedIdCardNumber = AES.encrypt(idCard, key);
+        person.setIdCard(encryptedIdCardNumber);
+        person.setIdCardEncrypted(key);
+//        String decrypt = AES.decrypt(encryptedIdCardNumber, key);
+//        System.out.println(decrypt);
+
+        // RSA
+        // 使用公钥加密算法：可以使用RSA（Rivest-Shamir-Adleman）等公钥加密算法对身份证号进行加密。公钥加密算法使用公钥进行加密，私钥进行解密
+        String publicKey = "xxl-idCard"; // 公钥用于加密
+        String idCardNumber = idCard;
+        RSA rsa = SecureUtil.rsa(idCardNumber, publicKey);
+        person.setIdCard(rsa.getPublicKeyBase64());
+        person.setIdCardEncrypted(rsa.getPrivateKeyBase64());
         registe(person);
         return "保存成功";
     }
 
+    /**
+     * 批量初始化
+     *
+     * @param personList
+     * @return
+     */
     @RequestMapping(value = "/savePersonList", method = RequestMethod.POST)
     public String savePersonList(@RequestBody List<Person> personList) {
         // FIXME-1 循环导入
@@ -59,6 +93,20 @@ public class PersonController {
             e.setId(SnowIdUtils.getNextId());
             String encrypt = SymmetricCryptoUtils.encrypt(e.getPhoneNumber());
             e.setPhoneNumber(encrypt);
+            // 随机生成18为长度的字符串
+            String idCard = RandomUtil.randomNumbers(18);
+
+            // AES
+//            String key = AES.generateRandomKey();
+//            String encryptedIdCardNumber = AES.encrypt(idCard, key);
+//            e.setIdCard(encryptedIdCardNumber);
+//            e.setIdCardEncrypted(key);
+
+            // RSA
+            String publicKey = "xxl-idCard"; // 公钥用于加密
+            RSA rsa = SecureUtil.rsa(idCard, publicKey);
+            e.setIdCard(rsa.getPublicKeyBase64());
+            e.setIdCardEncrypted(rsa.getPrivateKeyBase64());
             registe(e);
         });
         long end2 = System.currentTimeMillis();
@@ -67,10 +115,19 @@ public class PersonController {
         return "保存成功";
     }
 
+    /**
+     * 保存分词数据
+     *
+     * @param person
+     * @return
+     */
     public Person registe(Person person) {
         personMapper.insert(person);
+
+        // 解密手机号
         String phone = SymmetricCryptoUtils.decrypt(person.getPhoneNumber());
-        String phoneKeywords = this.phoneKeywords(phone);
+        // 分词加密
+        String phoneKeywords = SymmetricCryptoUtils.phoneKeywords(phone);
 
         PersonPhoneEncrypt personPhoneEncrypt = new PersonPhoneEncrypt();
         personPhoneEncrypt.setPersonId(person.getId());
@@ -78,29 +135,6 @@ public class PersonController {
         personPhoneEncryptMapper.insert(personPhoneEncrypt);
         return person;
     }
-
-    private String phoneKeywords(String phone) {
-        String keywords = this.keywords(phone, 1);
-        //System.out.println("加密后长度 " + keywords.length());
-        return keywords;
-    }
-
-    //分词组合加密
-    private String keywords(String word, int len) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < word.length(); i++) {
-            int start = i;
-            int end = i + len;
-            String sub1 = word.substring(start, end);
-            //System.out.println("每次截取数据 " + sub1);
-            sb.append(SymmetricCryptoUtils.encrypt(sub1));
-            if (end == word.length()) {
-                break;
-            }
-        }
-        return sb.toString();
-    }
-
 
 
     public static void main(String[] args) {
@@ -120,10 +154,19 @@ public class PersonController {
         if (person.getPhoneNumber() != null && person.getPhoneNumber().length() < 4) {
             return new ArrayList<>();
         }
-        String phoneKeywords = this.phoneKeywords(person.getPhoneNumber());
+        String phoneKeywords = SymmetricCryptoUtils.phoneKeywords(person.getPhoneNumber());
 
         person.setPhoneNumber(phoneKeywords);
-        return personMapper.queryByPhoneEncrypt(person);
+
+
+        List<Person> personList = personMapper.queryByPhoneEncrypt(person);
+        for (Person peolpe : personList) {
+//            String decrypt = AES.decrypt(peolpe.getIdCard(), peolpe.getIdCardEncrypted());
+//            peolpe.setIdCard(decrypt);
+            String encryptBcd = SecureUtil.rsa(peolpe.getIdCard(), peolpe.getIdCardEncrypted()).encryptBcd("xxl-idCard", KeyType.PrivateKey);
+            peolpe.setIdCard(encryptBcd);
+        }
+        return personList;
     }
 
     /**

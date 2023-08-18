@@ -11,12 +11,15 @@ import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -163,22 +166,22 @@ public class ElasticsearchApplicationTests {
     @Test
     public void getDocumentByMobile() {
         // 1.准备Request
-        GetRequest request = new GetRequest(EsConstant.INDEX_LOGIN, "15510008022");
-        // 2.发送请求，得到响应
-        GetResponse response = client.get(request, RequestOptions.DEFAULT);
-        // 3.解析响应结果
-        String json = response.getSourceAsString();
-
-        LoginDoc hotelDoc = JSON.parseObject(json, LoginDoc.class);
-        System.out.println(hotelDoc);
-//        // 1.准备Request
-//        SearchRequest request = new SearchRequest(EsConstant.INDEX_LOGIN);
-//        // 2.准备DSL
-//        request.source().query(QueryBuilders.matchQuery("mobile", "15510008021"));
-//        // 3.发送请求
-//        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
-//        // 4.解析响应
-//        System.out.println(response);
+//        GetRequest request = new GetRequest(EsConstant.INDEX_LOGIN, "15510008022");
+//        // 2.发送请求，得到响应
+//        GetResponse response = client.get(request, RequestOptions.DEFAULT);
+//        // 3.解析响应结果
+//        String json = response.getSourceAsString();
+//
+//        LoginDoc hotelDoc = JSON.parseObject(json, LoginDoc.class);
+//        System.out.println(hotelDoc);
+        // 1.准备Request
+        SearchRequest request = new SearchRequest("logstash");
+        // 2.准备DSL
+        request.source().query(QueryBuilders.termQuery("mobile", "15510008021"));
+        // 3.发送请求
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        // 4.解析响应
+        System.out.println(response);
     }
 
 }

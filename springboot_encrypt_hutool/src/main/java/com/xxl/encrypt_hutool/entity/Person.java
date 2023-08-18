@@ -38,4 +38,16 @@ public class Person {
     @TableField("user_name")
     private String userName;
 
+    /**
+     * 身份证件号码
+     */
+    @TableField("id_card")
+    private String idCard;
+
+    /**
+     * 身份证件号码加密字段
+     */
+    @TableField("id_card_encrypted")
+    private String idCardEncrypted;
+
 }

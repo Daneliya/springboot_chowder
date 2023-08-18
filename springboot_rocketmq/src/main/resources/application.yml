@@ -1,5 +1,6 @@
 rocketmq:
-  namesrvAddr: 127.0.0.1:9876
+  #namesrvAddr: 127.0.0.1:9876
+  namesrvAddr: 192.168.1.109:9876
   producer:
     groupName: producer
   consumer:
