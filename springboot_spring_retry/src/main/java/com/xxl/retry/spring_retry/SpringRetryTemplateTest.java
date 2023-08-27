@@ -1,4 +1,4 @@
-package com.xxl.spring_retry;
+package com.xxl.retry.spring_retry;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

@@ -2,8 +2,11 @@
 ###
 POST http://localhost/api/user/getUserInfoByPhone
 
-###
+### JasyptController get接口
 GET http://localhost:8080/get
+
+### JasyptController jasypt接口
+GET http://localhost:8080/jasypt
 
 ### 单个保存
 POST {{springboot_jasypt_host}}/savePerson

@@ -1,6 +1,6 @@
-package com.xxl.springboot_retry;
+package com.xxl.test.springboot_retry;
 
-import com.xxl.spring_retry.RetryDemoTask;
+import com.xxl.retry.spring_retry.RetryDemoTask;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.remoting.RemoteAccessException;
 import org.springframework.retry.annotation.Backoff;

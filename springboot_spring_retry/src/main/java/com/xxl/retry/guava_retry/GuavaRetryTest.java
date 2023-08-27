@@ -1,4 +1,4 @@
-package com.xxl.guava_retry;
+package com.xxl.retry.guava_retry;
 
 import com.github.rholder.retry.Retryer;
 import com.github.rholder.retry.RetryerBuilder;
