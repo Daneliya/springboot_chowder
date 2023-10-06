@@ -16,11 +16,15 @@ public class PasswordTest {
     @Test
     public void test01() {
 //        String mobile = "13953991239";
-        String mobile = "18661800609";
+        String mobile = "18315897315";
         String salt = PasswordUtils.getSalt();
         //生成密码
         String password = PasswordUtils.encode(mobile.substring(5, 11), salt);
         System.out.println("salt: " + salt);
         System.out.println("password: " + password);
+
+        if (!PasswordUtils.matches(salt, password, "897315")) {
+            System.out.println("password: " + password);
+        }
     }
 }
