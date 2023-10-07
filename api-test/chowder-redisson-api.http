@@ -1,2 +1,5 @@
 ### 延迟消息测试接口
 GET http://localhost:3111/sendMessage
+
+### 延迟消息测试接口
+POST http://localhost:3111/addQueue
