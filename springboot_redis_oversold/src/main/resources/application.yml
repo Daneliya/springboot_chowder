@@ -1,0 +1,18 @@
+spring:
+  redis:
+    #连接url
+    host: 127.0.0.1
+    #端口号
+    port: 6379
+    #密码
+    password:
+    #默认库
+    database: 0
+    #超时时间
+    timeout: 2000
+    lettuce:
+      pool:
+        max-active: 100
+        max-wait: -1
+        max-idle: 100
+        min-idle: 0

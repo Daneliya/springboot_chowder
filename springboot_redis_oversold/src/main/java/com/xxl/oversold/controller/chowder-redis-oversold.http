@@ -1,0 +1,6 @@
+
+### 测试数据设置接口
+GET http://localhost:8080/setStock
+
+### 模拟商品超卖代码
+GET http://localhost:8080/deductStock
