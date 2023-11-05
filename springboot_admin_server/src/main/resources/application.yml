@@ -1,0 +1,18 @@
+server:
+  port: 13006
+#  servlet:
+#    context-path: /xxl-springboot-admin
+
+spring:
+  application:
+    name: xxl-admin # 应用名
+
+# 暴露端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  # 需要开放的端点。默认值只打开 health 和 info 两个端点。通过设置 *, 可以开放所有端点
+  endpoint:
+    health:
+      show-details: always
