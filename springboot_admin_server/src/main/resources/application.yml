@@ -6,6 +6,10 @@ server:
 spring:
   application:
     name: xxl-admin # 应用名
+  security:
+    user:
+      name: "admin"
+      password: "admin"
 
 # 暴露端点
 management:

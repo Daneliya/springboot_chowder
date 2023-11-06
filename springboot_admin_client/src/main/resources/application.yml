@@ -9,13 +9,22 @@ spring:
 #    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&useSSL=false&serverTimezone=UTC
 #    username: root
 #    password: xxl666
-#  boot:
-#    admin:
-#      client:
-#        url: http://localhost:13006
+  boot:
+    admin:
+      client:
+        url: http://localhost:13006
+        username: admin
+        password: admin
 
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: ALWAYS
+    # 日志记录
+    logfile:
+      external-file: ./logs/admin-order/debug.log
