@@ -246,5 +246,5 @@ ORDER BY
 
 ## 参考资料
 
-[1] [MyBatis-Plus 还手写 Join 联表查询？一个依赖轻松搞定，真香！](https://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247487551&idx=1&sn=18f64ba49f3f0f9d8be9d1fdef8857d9&chksm=fa496f8ecd3ee698f4954c00efb80fe955ec9198fff3ef4011e331aa37f55a6a17bc8c0335a8&scene=21&token=899450012&lang=zh_CN#wechat_redirect)
+[1]. 公众号-Java基基-MyBatis-Plus 还手写 Join 联表查询？一个依赖轻松搞定，真香！
 
