@@ -1,87 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" scanPeriod="60 seconds" debug="false">
-    <!-- 日志存放路径 -->
-    <property name="log.path" value="logs/test-log"/>
-    <!-- 日志输出格式 -->
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
+<configuration debug="false">
+    <!--提取配置文件中的服务名-->
+    <springProperty scope="context" name="springApplicationName" source="spring.application.name"/>
     <!-- 读取SpringBoot配置文件获取logstash的地址和端口 -->
     <springProperty scope="context" name="logstash-host" source="log.logstash-host"/>
-
-    <!-- 控制台输出 -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${log.pattern}</pattern>
+    <property name="LOG_HOME" value="logs/demo.log"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <!-- 系统日志输出 -->
-    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/info.log</file>
-        <!-- 循环政策：基于时间创建日志文件 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/info.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <!-- 日志最大的历史 7天 -->
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${log.pattern}</pattern>
-        </encoder>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <!-- 过滤的级别 -->
-            <level>INFO</level>
-            <!-- 匹配时的操作：接收（记录） -->
-            <onMatch>ACCEPT</onMatch>
-            <!-- 不匹配时的操作：拒绝（不记录） -->
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-
-    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/error.log</file>
-        <!-- 循环政策：基于时间创建日志文件 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <!-- 日志最大的历史 60天 -->
-            <maxHistory>60</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>${log.pattern}</pattern>
-        </encoder>
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <!-- 过滤的级别 -->
-            <level>ERROR</level>
-            <!-- 匹配时的操作：接收（记录） -->
-            <onMatch>ACCEPT</onMatch>
-            <!-- 不匹配时的操作：拒绝（不记录） -->
-            <onMismatch>DENY</onMismatch>
-        </filter>
-    </appender>
-
-    <!-- 将日志文件输出到Logstash -->
     <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <!-- 获取logstash地址作为输出的目的地 -->
         <destination>${logstash-host}</destination>
-        <encoder chatset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>
-        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>{"appName":"${appName}"}</customFields>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <!--定义appName的名字是服务名,多服务时,根据这个进行区分日志-->
+            <customFields>{"appName": "${springApplicationName}"}</customFields>
         </encoder>
     </appender>
 
-    <!-- 系统模块日志级别控制  -->
-    <logger name="com.greateme" level="info"/>
-    <!-- Spring日志级别控制  -->
-    <logger name="org.springframework" level="warn"/>
-
-    <root level="info">
-        <appender-ref ref="console"/>
-    </root>
-
-    <!--系统操作日志-->
-    <root level="info">
-        <appender-ref ref="file_info"/>
-        <appender-ref ref="file_error"/>
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="logstash"/>
     </root>
 </configuration>
