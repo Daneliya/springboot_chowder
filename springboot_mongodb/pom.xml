@@ -45,11 +45,23 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>4.0.5</version>
         </dependency>
-
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
+        </dependency>
+        <!-- 工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.7</version>
+        </dependency>
+        <!--javafaker数据生成-->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.17.2</version>
         </dependency>
     </dependencies>
 

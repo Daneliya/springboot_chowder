@@ -22,7 +22,7 @@ public class MongoTemplateController {
     @GetMapping(value = "/test001")
     public void test001() {
         List<SysUser> sysUserList = new ArrayList<>();
-        SysUser user = new SysUser();//
+        SysUser user = new SysUser();
         user.setUserName("admin");
         user.setAddress("地址");
         sysUserList.add(user);
