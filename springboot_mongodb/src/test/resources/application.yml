@@ -24,3 +24,6 @@ spring:
 #      min-heartbeat-frequency: 500
 #      heartbeat-frequency: 10000
 #      local-threshold: 15
+logging:
+  level:
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG

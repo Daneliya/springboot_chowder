@@ -30,6 +30,10 @@ public class SysUser {
     public SysUser() {
     }
 
+    public SysUser(String userName) {
+        this.userName = userName;
+    }
+
     public SysUser(String userName, String phoneNumber, String address, String idNumber, Date birthday) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
