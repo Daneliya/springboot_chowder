@@ -27,6 +27,8 @@ public class SysUser {
 
     private Date birthday;
 
+    private Integer money;
+
     public SysUser() {
     }
 
@@ -34,11 +36,12 @@ public class SysUser {
         this.userName = userName;
     }
 
-    public SysUser(String userName, String phoneNumber, String address, String idNumber, Date birthday) {
+    public SysUser(String userName, String phoneNumber, String address, String idNumber, Date birthday, Integer money) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.idNumber = idNumber;
         this.birthday = birthday;
+        this.money = money;
     }
 }
