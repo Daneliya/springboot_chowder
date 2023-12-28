@@ -39,6 +39,10 @@ public class CriteriaTest {
         sysUserRequest.setUserName("xxl");
         sysUserRequest.setPhoneNumber("15500000000");
         // 创建条件对象
+        // criteria可以用and连接条件也可以用where连接条件
+        //criteria.and("user_name").is(sysUserRequest.getUserName()).and("platformId").is(params.getPlatformId()).and("id").is(params.getId());
+        //Criteria.where("birthday").gte(sysUserRequest.getBeginTime()).lte(sysUserRequest.getEndTime());
+
         Criteria criteria = new Criteria();
         // 1. 全等于 (手机号全字匹配)
         if (StringUtils.isNotBlank(sysUserRequest.getPhoneNumber())) {
@@ -46,7 +50,7 @@ public class CriteriaTest {
         }
         // 2. 模糊查询 (名称模糊搜索)
         if (StringUtils.isNotBlank(sysUserRequest.getUserName())) {
-            criteria.and("name").regex(Pattern.compile("^.*" + sysUserRequest.getUserName() + ".*$", Pattern.CASE_INSENSITIVE));
+            criteria.and("user_name").regex(Pattern.compile("^.*" + sysUserRequest.getUserName() + ".*$", Pattern.CASE_INSENSITIVE));
         }
         // 3. 单个条件查询多个字段
         if (StringUtils.isNotEmpty(sysUserRequest.getUserName())) {

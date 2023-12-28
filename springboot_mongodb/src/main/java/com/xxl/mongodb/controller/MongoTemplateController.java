@@ -3,6 +3,8 @@ package com.xxl.mongodb.controller;
 import com.xxl.mongodb.result.SysUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +32,13 @@ public class MongoTemplateController {
         //  保存对象到mongodb
         mongoTemplate.save(user);
 //        mongoTemplate.insert(user);
+    }
+
+
+    @GetMapping(value = "/test002")
+    public void test002() {
+        Query query = Query.query(Criteria.where("userName").is("xxl"));
+        mongoTemplate.find(query, SysUser.class);
     }
 
 

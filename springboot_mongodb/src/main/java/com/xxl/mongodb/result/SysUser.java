@@ -2,6 +2,7 @@ package com.xxl.mongodb.result;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -14,6 +15,8 @@ import java.util.Date;
 @Document(collection = "sys_user")
 public class SysUser {
 
+    //创建索引
+//    @Indexed(unique = true)
     @Id
     private String id;
 
