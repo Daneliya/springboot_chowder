@@ -34,7 +34,7 @@ public class AggregationTest {
     public void query001() {
         int page = 1;
         int size = 10;
-        Date startTime = DateUtil.parse("1970-01-01 00:00:00");
+        Date startTime = DateUtil.parse("1900-01-01 00:00:00");
         Date endTime = new Date();
         String userName = "xxl";
 
