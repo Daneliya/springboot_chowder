@@ -53,4 +53,40 @@ public class AggregationTest {
         List<SysUser> results = mongoTemplate.aggregate(aggregation, "sys_user", SysUser.class).getMappedResults();
         System.out.println(results);
     }
+
+    @Test
+    public void projectTest() {
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.group(new String[]{"_id"})
+                        .sum("money").as("sum")
+                        .first("userName").as("userName")
+                        .first("phoneNumber").as("phoneNumber")
+                        .last("birthday").as("birthday"),
+                Aggregation.project("_id", "sum", "userName", "phoneNumber")
+                        .and("birthday").as("birth") // 重新命名字段
+        );
+        List<SysUser> results = mongoTemplate.aggregate(aggregation, "sys_user", SysUser.class).getMappedResults();
+        System.out.println(results);
+    }
+
+    @Test
+    public void unwindTest() {
+        Aggregation aggregation = Aggregation.newAggregation(
+                Aggregation.match(new Criteria().and("userName").is("xxl")),
+                Aggregation.unwind("tags", true)
+        );
+        List<SysUser> results = mongoTemplate.aggregate(aggregation, "sys_user", SysUser.class).getMappedResults();
+        System.out.println(results);
+    }
+
+
+    @Test
+    public void lookupTest() {
+        Aggregation aggregation = Aggregation.newAggregation(
+                //分别对应from, localField, foreignField, as
+                Aggregation.lookup("sys_user_label", "userName", "user_name", "label")
+        );
+        List<SysUser> results = mongoTemplate.aggregate(aggregation, "sys_user", SysUser.class).getMappedResults();
+        System.out.println(results);
+    }
 }
