@@ -1,7 +1,11 @@
 server:
-  port: 8083
+  port: 8081
+
+spring:
+  application:
+    name: springboot_elk
 
 log:
   # logstash 地址和端口，注意修改
-  logstash-host: 192.168.3.233:4560
+  logstashhost: 192.168.64.128:5044
 

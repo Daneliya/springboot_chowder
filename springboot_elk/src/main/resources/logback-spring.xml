@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果设置为WARN，则低于WARN的信息都不会输出 -->
-<!-- scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true -->
-<!-- scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
-<!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
-<configuration scan="true" scanPeriod="10 seconds">
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <!--  注意此处必须使用全小写命名，不可使用大写  -->
-    <property name="appName" value="ricefarm-common"/>
-    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="LOG_HOME" value="./logs"/>
-
-    <!-- 控制台输出 -->
+<configuration debug="false">
+    <!--提取配置文件中的服务名-->
+    <springProperty scope="context" name="springApplicationName" source="spring.application.name"/>
+    <!-- 读取SpringBoot配置文件获取logstash的地址和端口 -->
+    <springProperty scope="context" name="logstash-host" source="log.logstash-host"/>
+    <property name="LOG_HOME" value="logs/demo.log"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
-        </filter>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg %n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
         </encoder>
     </appender>
-    <!-- 日志输出级别 -->
-    <root level="info">
-    </root>
 
+    <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${logstash-host}</destination>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <!--定义appName的名字是服务名,多服务时,根据这个进行区分日志-->
+            <customFields>{"appName": "${springApplicationName}"}</customFields>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="logstash"/>
+    </root>
 </configuration>

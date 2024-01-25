@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 public enum RedisDelayQueueEnum {
 
     ORDER_PAYMENT_TIMEOUT("ORDER_PAYMENT_TIMEOUT", "订单支付超时，自动取消订单", "orderPaymentTimeout"),
-    ORDER_TIMEOUT_NOT_EVALUATED("ORDER_TIMEOUT_NOT_EVALUATED", "订单超时未评价，系统默认好评", "orderTimeoutNotEvaluated");
+    ORDER_TIMEOUT_NOT_EVALUATED("ORDER_TIMEOUT_NOT_EVALUATED", "订单超时未评价，系统默认好评", "orderTimeoutNotEvaluated"),
+    ORDER_LABEL("ORDER_LABEL", "商品浏览增加喜爱度", "orderLabel");
 
     /**
      * 延迟队列 Redis Key

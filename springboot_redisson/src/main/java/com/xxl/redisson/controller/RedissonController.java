@@ -40,6 +40,9 @@ public class RedissonController {
 
         // 订单超时未评价，系统默认好评。为了测试效果，延迟20秒钟
         redisDelayQueueUtil.addDelayQueue(map2, 20, TimeUnit.SECONDS, RedisDelayQueueEnum.ORDER_TIMEOUT_NOT_EVALUATED.getCode());
+
+        //
+        redisDelayQueueUtil.addDelayQueue(map2, 20, TimeUnit.SECONDS, RedisDelayQueueEnum.ORDER_LABEL.getCode());
     }
 
 
