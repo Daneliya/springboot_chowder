@@ -1,8 +1,8 @@
-package com.xxl.redisson.redisson.service;
+package com.xxl.redisson.service;
 
-import com.medical.hospital.common.constant.CommonErrorEnum;
-import com.medical.hospital.common.exception.MedicalHoPitalException;
-
+import com.xxl.redisson.constant.CommonErrorEnum;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
-
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
@@ -25,7 +22,7 @@ public class LockService {
         RLock lock = redissonClient.getLock(key);
         boolean lockSuccess = lock.tryLock(waitTime, unit);
         if (!lockSuccess) {
-            throw new MedicalHoPitalException(CommonErrorEnum.LOCK_LIMIT.getErrorMsg());
+            throw new Exception(CommonErrorEnum.LOCK_LIMIT.getErrorMsg());
         }
         try {
             return supplier.get();//执行锁内的代码逻辑

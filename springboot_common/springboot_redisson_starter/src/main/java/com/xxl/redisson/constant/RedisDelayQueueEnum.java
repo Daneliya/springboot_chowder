@@ -1,4 +1,4 @@
-package com.xxl.redisson.redisson.constant;
+package com.xxl.redisson.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,10 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum RedisDelayQueueEnum {
 
-    SMS_PARENT_TIMEOUT("SMS_PARENT_TIMEOUT", "短信发送失败，重新发送", "orderPaymentTimeout"),
-    LEAVE_BACK_SMS_TIMEOUT("LEAVE_BACK_SMS_TIMEOUT", "销假提醒短信发送", "leaveBackSmsTimeout"),
-    ACTIVITY_EXAM_TIMEOUT("ACTIVITY_EXAM_TIMEOUT", "理论考试短信提醒", "activityExamTimeout"),
-    ACTIVITY_SKILL_TIMEOUT("ACTIVITY_SKILL_TIMEOUT", "技能考核短信提醒", "activitySkillTimeout");
+    ORDER_PAYMENT_TIMEOUT("ORDER_PAYMENT_TIMEOUT", "订单支付超时，自动取消订单", "orderPaymentTimeout"),
+    ORDER_TIMEOUT_NOT_EVALUATED("ORDER_TIMEOUT_NOT_EVALUATED", "订单超时未评价，系统默认好评", "orderTimeoutNotEvaluated"),
+    ORDER_LABEL("ORDER_LABEL", "商品浏览增加喜爱度", "orderLabel");
 
     /**
      * 延迟队列 Redis Key

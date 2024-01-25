@@ -1,4 +1,4 @@
-package com.xxl.redisson.redisson.annotation;
+package com.xxl.redisson.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)//运行时生效
 @Target(ElementType.METHOD)//作用在方法上
 public @interface RedissonLock {
+
     /**
      * key的前缀,默认取方法全限定名，除非我们在不同方法上对同一个资源做分布式锁，就自己指定
      *

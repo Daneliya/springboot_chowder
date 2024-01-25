@@ -1,4 +1,4 @@
-package com.xxl.redisson.redisson.util;
+package com.xxl.redisson.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBlockingDeque;

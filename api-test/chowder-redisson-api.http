@@ -3,3 +3,6 @@ GET http://localhost:3111/sendMessage
 
 ### 延迟消息测试接口
 POST http://localhost:3111/addQueue
+
+### 延迟消息测试接口
+POST http://localhost:8083/redis/delay/addQueue

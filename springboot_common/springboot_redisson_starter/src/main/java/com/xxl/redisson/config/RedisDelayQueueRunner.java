@@ -2,9 +2,9 @@ package com.xxl.redisson.config;
 
 import cn.hutool.extra.spring.SpringUtil;
 
-import com.xxl.redisson.redisson.constant.RedisDelayQueueEnum;
-import com.xxl.redisson.redisson.handle.RedisDelayQueueHandle;
-import com.xxl.redisson.redisson.util.RedisDelayQueueUtil;
+import com.xxl.redisson.constant.RedisDelayQueueEnum;
+import com.xxl.redisson.handle.RedisDelayQueueHandle;
+import com.xxl.redisson.util.RedisDelayQueueUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

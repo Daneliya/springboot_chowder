@@ -1,4 +1,4 @@
-package com.xxl.redisson.redisson.config;
+package com.xxl.redisson.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -33,8 +33,8 @@ public class RedissonConfig {
         Config config = new Config();
         config.useSingleServer()
                 .setAddress("redis://" + host + ":" + port)
-                .setDatabase(database)
-                .setPassword(password);
+                .setDatabase(database);
+//                .setPassword(password);
         return Redisson.create(config);
     }
 
