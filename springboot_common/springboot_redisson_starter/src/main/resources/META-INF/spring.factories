@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.xxl.redisson.redisson.config.RedissonConfig,\
+  com.xxl.redisson.redisson.config.RedisDelayQueueRunner,\
+  com.xxl.redisson.redisson.util.RedisDelayQueueUtil
+
+  
