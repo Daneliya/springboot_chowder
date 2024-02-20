@@ -10,4 +10,8 @@ import lombok.Data;
  */
 @Data
 public class ResultVo {
+
+    private String userName;
+    private String mobile;
+
 }
