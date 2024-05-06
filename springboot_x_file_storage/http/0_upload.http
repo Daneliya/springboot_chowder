@@ -1,0 +1,18 @@
+### post 文件请求
+POST http://127.0.0.1:8081/upload
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+token: forever
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
+
+# name接口定义的参数名，filename 文件名（我们可以自己取名字）
+--WebAppBoundary--
+Content-Disposition: form-data; name="file"; filename="yuanJiHuoDongDaoChu20240430052317.xlsx"
+Content-Type: multipart/form-data
+
+#文件地址 （注意⚠️，这个地方上面一定要空一行，不然文件上传失败，文件大小为0）
+< C:\Users\ek\Downloads\yuanJiHuoDongDaoChu20240430052317.xlsx
+
+--WebAppBoundary--

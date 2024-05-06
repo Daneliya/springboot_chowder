@@ -1,0 +1,38 @@
+### 删除1
+
+POST http://127.0.0.1:8081/delete1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Type: application/x-www-form-urlencoded
+token: 410c188a281149a0a163cf78a46ae30e
+Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
+
+url = http://127.0.0.1:8080/file/local-plus/6637af3a128703c8f5cb87db.xlsx
+
+### 删除2
+
+POST http://127.0.0.1:8081/delete2
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Type: application/x-www-form-urlencoded
+token: 410c188a281149a0a163cf78a46ae30e
+Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
+
+url = http://127.0.0.1:8080/file/local-plus/6637af3a128703c8f5cb87db.xlsx
+
+### 删除3
+
+POST http://127.0.0.1:8081/delete3
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Type: application/x-www-form-urlencoded
+token: 410c188a281149a0a163cf78a46ae30e
+Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
+
+url = http://127.0.0.1:8080/file/local-plus/6637af3a128703c8f5cb87db.xlsx
+
+
+

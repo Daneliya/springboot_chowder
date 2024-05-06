@@ -1,0 +1,11 @@
+### post json 请求
+POST http://127.0.0.1:8081/download
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+Content-Type: application/x-www-form-urlencoded
+token: 410c188a281149a0a163cf78a46ae30e
+Content-Length: 26
+Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
+
+param = 1

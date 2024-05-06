@@ -2,6 +2,7 @@ package com.xxl.x_file_storage.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Dict;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -74,7 +75,11 @@ public class FileDetailServiceImpl extends ServiceImpl<FileDetailMapper, FileDet
     @SneakyThrows
     @Override
     public FileInfo getByUrl(String url) {
-        return toFileInfo(getOne(Wrappers.<FileDetail>lambdaQuery().eq(FileDetail::getUrl, url)));
+        FileDetail fileDetail = getOne(Wrappers.<FileDetail>lambdaQuery().eq(FileDetail::getUrl, url));
+        if (ObjectUtil.isEmpty(fileDetail)) {
+            return null;
+        }
+        return toFileInfo(fileDetail);
     }
 
     /**

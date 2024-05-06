@@ -9,8 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static org.jacoco.agent.rt.internal_43f5073.core.runtime.AgentOptions.OutputMode.file;
-
 /**
  * 上传
  *
@@ -18,10 +16,13 @@ import static org.jacoco.agent.rt.internal_43f5073.core.runtime.AgentOptions.Out
  * @Date: 2024/5/2 下午4:31
  */
 @RestController
-public class FileDetailController {
+public class _0FileDetailController {
 
+    /**
+     * 注入实列
+     */
     @Autowired
-    private FileStorageService fileStorageService;//注入实列
+    private FileStorageService fileStorageService;
 
     /**
      * 上传文件
