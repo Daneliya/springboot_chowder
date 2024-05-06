@@ -1,4 +1,6 @@
 -- 这里使用的是 mysql
+CREATE DATABASE IF NOT EXISTS x_file_storage CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;;
+
 CREATE TABLE IF NOT EXISTS `file_detail`
 (
     `id`                varchar(32)  NOT NULL COMMENT '文件id',
