@@ -3,4 +3,7 @@
     <chain name="chain1">
         THEN(a, b, c);
     </chain>
+    <chain name="userTransferChainSimple">
+        THEN(userTransfer, userTransferBill, userTransferSuccess);
+    </chain>
 </flow>

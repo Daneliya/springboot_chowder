@@ -7,3 +7,11 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 token: 410c188a281149a0a163cf78a46ae30e
 Content-Length: 26
 Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
+
+
+### 转账流程调用接口
+GET http://127.0.0.1:8082/userTransferChainSimple?payerId=1&payeeId=2&money=3
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
