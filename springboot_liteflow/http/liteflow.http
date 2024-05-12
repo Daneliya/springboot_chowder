@@ -10,7 +10,15 @@ Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777B
 
 
 ### 转账流程调用接口
-GET http://127.0.0.1:8082/userTransferChainSimple?payerId=1&payeeId=2&money=3
+GET http://127.0.0.1:8082/userTransferChainSimple?payerId=1&payeeId=2&money=1
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+Cookie: JSESSIONID=34264A80B64B0446FE522B0274F821F8; JSESSIONID=EC1DD4A3DC18777BE64FDC77496E0AD8
+
+
+### 主动刷新缓存
+GET http://127.0.0.1:8082/reloadLiteFlowConfigure
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
 Accept-Encoding: br,deflate,gzip,x-gzip

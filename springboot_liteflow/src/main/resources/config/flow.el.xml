@@ -3,7 +3,20 @@
     <chain name="chain1">
         THEN(a, b, c);
     </chain>
+    <!-- 简单的串行流程 -->
     <chain name="userTransferChainSimple">
         THEN(userTransfer, userTransferBill, userTransferSuccess);
+    </chain>
+    <!-- 涉及到条件选择(if)的流程 -->
+    <chain name="userTransferChainIfElse">
+        THEN(
+        IF(userCheck, THEN(userTransfer, userTransferBill, userTransferSuccess)).ELSE(userTransferFail)
+        );
+    </chain>
+    <!-- 涉及到异常处理的流程 -->
+    <chain name="userTransferChainCatchException">
+        CATCH(
+        THEN(userTransfer, userTransferBill, userTransferSuccess)
+        ).DO(userTransferFail);
     </chain>
 </flow>

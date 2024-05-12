@@ -32,7 +32,10 @@ public class UserTransferController {
 
         //2. 调用流程引擎，传入请求上下文和结果上下文，结果上下文用于组件在其中设置各种结果
         MyResponseContext responseContext = new MyResponseContext();
-        flowExecutor.execute2Resp("userTransferChainSimple", null, requestContext, responseContext);
+//        flowExecutor.execute2Resp("userTransferChainSimple", null, requestContext, responseContext);
+//        flowExecutor.execute2Resp("userTransferChainIfElse", null, requestContext, responseContext);
+//        flowExecutor.execute2Resp("userTransferChainCatchException", null, requestContext, responseContext);
+        flowExecutor.execute2Resp("userTransferChainFromDB", null, requestContext, responseContext);
 
         //3. 构造返回对象
         return buildResult(responseContext);
@@ -46,5 +49,13 @@ public class UserTransferController {
      */
     private String buildResult(MyResponseContext responseContext) {
         return "转账结果：" + responseContext.toString();
+    }
+
+    /**
+     * 主动刷新缓存
+     */
+    @GetMapping(path = "/reloadLiteFlowConfigure")
+    public void reloadLiteFlowConfigure() {
+        flowExecutor.reloadRule();
     }
 }
