@@ -9,13 +9,13 @@ spring:
     username: root
     password: xxl666
 liteflow:
-  rule-source: config/flow.el.xml
+  #  rule-source: config/flow.el.xml
   rule-source-ext-data-map:
-    #数据源基础配置
-    url: jdbc:mysql://127.0.0.1:3306/x_file_storage
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: xxl666
+    #数据源基础配置，项目中配置过spring.datasource无需再次配置
+    #    url: jdbc:mysql://127.0.0.1:3306/x_file_storage
+    #    driverClassName: com.mysql.cj.jdbc.Driver
+    #    username: root
+    #    password: xxl666
     applicationName: liteflowdemo
     #配置流程的表名
     chainTableName: LITE_FLOW_CHAIN
@@ -26,3 +26,7 @@ liteflow:
     chainNameField: chain_name
     #流程表达式
     elDataField: el_data
+    pollingEnabled: true
+    ##以下非必须，默认1分钟
+    pollingIntervalSeconds: 60
+    pollingStartSeconds: 60
