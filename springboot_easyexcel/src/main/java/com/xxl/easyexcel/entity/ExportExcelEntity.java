@@ -32,6 +32,9 @@ public class ExportExcelEntity {
     @ExcelProperty(value = "身份证", index = 3)
     private String idCard;
 
+    public ExportExcelEntity() {
+    }
+
     public ExportExcelEntity(String userName, String mobile, String place) {
         this.userName = userName;
         this.mobile = mobile;

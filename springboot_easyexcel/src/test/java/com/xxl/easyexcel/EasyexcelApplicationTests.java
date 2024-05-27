@@ -1,15 +1,12 @@
 package com.xxl.easyexcel;
 
 import com.alibaba.excel.EasyExcel;
-import com.github.javafaker.Faker;
 import com.xxl.easyexcel.entity.ExportExcelEntity;
+import com.xxl.easyexcel.utils.FakerUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @SpringBootTest
 class EasyexcelApplicationTests {
@@ -43,29 +40,9 @@ class EasyexcelApplicationTests {
 //            data.setPlace("lucy" + i);
 //            list.add(data);
 //        }
-        List<ExportExcelEntity> exportExcelEntities = listStudentList(500);
+        List<ExportExcelEntity> exportExcelEntities = FakerUtil.generateStudentList(500);
         return exportExcelEntities;
     }
 
-    /**
-     * faker 指定汉语，默认英语
-     */
-    private static Faker FAKER = new Faker(Locale.CHINA);
-
-    /**
-     * 随机生成一定数量学生
-     *
-     * @param number 数量
-     * @return 学生
-     */
-    public static List<ExportExcelEntity> listStudentList(final int number) {
-        return Stream.generate(() -> new ExportExcelEntity(
-                        FAKER.name().fullName(),
-                        FAKER.phoneNumber().cellPhone(),
-                        FAKER.address().city() + FAKER.address().streetAddress(),
-                        FAKER.idNumber().validSvSeSsn()))
-                .limit(number)
-                .collect(Collectors.toList());
-    }
 
 }
