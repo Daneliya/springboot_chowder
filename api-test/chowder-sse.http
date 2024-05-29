@@ -1,0 +1,6 @@
+### 创建连接
+GET http://localhost:8080/createSse?uid=110
+
+
+### 发送消息
+GET http://localhost:8080/sendMsg?uid=110
