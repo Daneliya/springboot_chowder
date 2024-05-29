@@ -20,7 +20,7 @@ public interface UserMapper {
      * @author xxl
      * @description 保存用户
      * @params [user]
-     * @date 2021/3/10 17:14
+     * @date 2023/02/10 17:24
      */
     @Insert("insert into user(nickname,password,sex,birthday,db) values(#{nickname},#{password},#{sex},#{birthday},#{db})")
     void addUser(User user);
@@ -29,7 +29,7 @@ public interface UserMapper {
      * @author xxl
      * @description 保存用户
      * @params [user]
-     * @date 2021/3/10 17:14
+     * @date 2023/02/10 17:24
      */
     @Select("select * from user")
     List<User> findUsers();
