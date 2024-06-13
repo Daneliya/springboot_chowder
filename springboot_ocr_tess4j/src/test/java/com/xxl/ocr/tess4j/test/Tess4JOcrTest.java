@@ -22,9 +22,9 @@ public class Tess4JOcrTest {
     @Test
     public void ocrLocalPng() {
         try {
-            InputStream inputStream = new FileInputStream("D://SoftWare//icon1705394747465.jpg");
+            InputStream inputStream = new FileInputStream("D://SoftWare//Snipaste_2024-06-13_14-51-18.jpg");
             String result = iOcrService.recognizeText(inputStream);
-            System.out.println(result);
+            System.out.println("结果：" + result);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
