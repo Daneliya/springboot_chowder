@@ -1,0 +1,26 @@
+server:
+  port:  8081
+spring:
+  servlet:
+    multipart:
+      # 最大上传单个文件大小：默认1M
+      max-file-size: 1024MB
+      # 最大置总上传的数据大小 ：默认10M
+      max-request-size: 1024MB
+  redis:
+    #连接url
+    host: 127.0.0.1
+    #端口号
+    port: 6379
+    #密码
+    password:
+    #默认库
+    database: 0
+    #超时时间
+    timeout: 2000
+    lettuce:
+      pool:
+        max-active: 100
+        max-wait: -1
+        max-idle: 100
+        min-idle: 0
