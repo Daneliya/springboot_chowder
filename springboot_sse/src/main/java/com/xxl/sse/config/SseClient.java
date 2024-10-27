@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class SseClient {
 
-
     private static final Map<String, SseEmitter> sseEmitterMap = new ConcurrentHashMap<>();
 
     /**

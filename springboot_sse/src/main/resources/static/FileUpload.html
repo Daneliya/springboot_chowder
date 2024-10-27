@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload with Progress Bar</title>
+    <style>
+        #progressBar {
+            width: 100%;
+            background-color: #f3f3f3;
+        }
+
+        #progress {
+            width: 0%;
+            height: 30px;
+            background-color: #4CAF50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>File Upload with Progress Bar</h1>
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">Upload</button>
+<div id="progressBar">
+    <div id="progress"></div>
+</div>
+
+<script>
+    function uploadFile() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:8080/upload', true);
+        xhr.responseType = 'text';
+
+        xhr.upload.onprogress = function (event) {
+            if (event.lengthComputable) {
+                const percentComplete = (event.loaded / event.total) * 100;
+                document.getElementById('progress').style.width = percentComplete + '%';
+                document.getElementById('progress').innerHTML = Math.round(percentComplete) + '%';
+            }
+        };
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                alert('File uploaded successfully!');
+            } else {
+                alert('File upload failed!');
+            }
+        };
+
+        xhr.send(formData);
+    }
+</script>
+</body>
+</html>
