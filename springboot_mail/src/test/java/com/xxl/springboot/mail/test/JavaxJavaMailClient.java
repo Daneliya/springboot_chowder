@@ -14,7 +14,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.*;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Properties;
@@ -38,32 +37,56 @@ public class JavaxJavaMailClient {
     private static final String emailAccount = "luckily126163@126.com"; // 这个是企业邮箱
     // 发件人邮箱授权码
     private static final String emailPassword = "HArk935Q9yEuCvnr";
+    // 收件人邮箱地址
+//    private static final String emailAddressee = "508686616@qq.com";
+    private static final String emailAddressee = "xuxiaolong@88.com";
+//    private static final String emailAddressee = "luckily126163@126.com";
 
     @Test
-    public void test() throws Exception {
+    public void testText() throws Exception {
         Set<String> set = new HashSet<>();
-        set.add("508686616@qq.com");
+        set.add(emailAddressee);
         // 发送普通文本
-//        System.out.println(sendEmail(set, "测试发送邮件的接口！", "您好！这是我发送的一封测试发送接口的邮件，看完请删除记录。"));
+        System.out.println(sendEmail(set, "测试发送邮件的接口！", "您好！这是我发送的一封测试发送接口的邮件，看完请删除记录。", null));
+    }
 
+    @Test
+    public void testHtml() throws Exception {
+        Set<String> set = new HashSet<>();
+        set.add(emailAddressee);
         // 发送html
-//        String htmlContent = "<h1>XXL祝大家工作顺利！</h1><font color=\"#FF0000\">万事顺心</font>";
-//        System.out.println(sendEmail(set, "测试发送邮件的接口！", htmlContent, null));
+        String htmlContent = "<h1>XXL祝大家工作顺利！</h1><font color=\"#FF0000\">万事顺心</font>";
+        System.out.println(sendEmail(set, "测试发送邮件的接口！", htmlContent, null));
+    }
 
+    @Test
+    public void testHtmlImage() throws Exception {
+        Set<String> set = new HashSet<>();
+        set.add(emailAddressee);
         // 发送html携带图片邮件格式
-//        MimeMultipart mimeMultipart = generateImage();
-//        System.out.println(sendEmail(set, "测试发送邮件的接口！", null, mimeMultipart));
+        MimeMultipart mimeMultipart = generateImage();
+        System.out.println(sendEmail(set, "测试发送邮件的接口！", null, mimeMultipart));
+    }
 
+    @Test
+    public void testHtmlFile() throws Exception {
+        Set<String> set = new HashSet<>();
+        set.add(emailAddressee);
         // 发送html携带附件
-//        MimeMultipart mimeMultipart = generateFile();
-//        System.out.println(sendEmail(set, "测试发送邮件的接口！", null, mimeMultipart));
+        MimeMultipart mimeMultipart = generateFile();
+        System.out.println(sendEmail(set, "测试发送邮件的接口！", null, mimeMultipart));
+    }
 
-
+    @Test
+    public void testHtmlTemplate() throws Exception {
+        Set<String> set = new HashSet<>();
+        set.add(emailAddressee);
+        // 发送html模板
         System.out.println(sendEmail(set, "测试发送邮件的接口！", htmlTemplate(), null));
     }
 
     private MimeMultipart generateFile() throws Exception {
-        //*****邮件内容携带 附件 + （HTML内容+图片）使用Content-Type:multipart/mixed ******//
+        // 邮件内容携带 附件 + （HTML内容+图片）使用Content-Type:multipart/mixed
         // 5：设置一个多资源混合的邮件块 设置此类型时可以同时存在 附件和邮件内容  mixed代表混合
         MimeMultipart mixed = new MimeMultipart("mixed");
 
@@ -77,7 +100,19 @@ public class JavaxJavaMailClient {
         //file_body.setFileName("拉拉.zip");   //设置中文附件名称（未处理编码）
         file_body.setFileName(MimeUtility.encodeText("论文.pdf"));   //设置中文附件名称
 
+        // 3：创建文本资源，文本资源并引用上面的图片ID（因为这两个资源我做了关联）
+        MimeBodyPart text_body = new MimeBodyPart();
+        text_body.setContent(htmlTemplate(), "text/html;charset=UTF-8");
+
+
+        // 9. 背景图部分
+        MimeBodyPart backgroundImagePart = new MimeBodyPart();
+        File backgroundImagePath = new File("D:\\msg.jpg");
+        backgroundImagePart.setDataHandler(new DataHandler(new FileDataSource(backgroundImagePath)));
+        backgroundImagePart.setContentID("backgroundImage");
+
         // 5.2：先把附件资源混合到 mixed多资源邮件模块里
+        mixed.addBodyPart(text_body);
         mixed.addBodyPart(file_body);
         return mixed;
         // 5.3：创建主体内容资源存储对象
@@ -171,7 +206,7 @@ public class JavaxJavaMailClient {
             // 3. 创建邮件
             MimeMessage message = new MimeMessage(session);
             // 4. From: 发件人（昵称有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改昵称）
-            message.setFrom(new InternetAddress(emailAccount, "改成你的发件人名称", "UTF-8"));
+            message.setFrom(new InternetAddress(emailAccount, "刘亦菲", "UTF-8"));
             // 5. To: 收件人（可以增加多个收件人、抄送、密送）
             // MimeMessage.RecipientType.TO: 发送 MimeMessage.RecipientType.CC：抄送 MimeMessage.RecipientType.BCC：密送
             int size = emails.size();
@@ -226,8 +261,14 @@ public class JavaxJavaMailClient {
                 "        body {\n" +
                 "            font-family: Arial, sans-serif;\n" +
                 "            line-height: 1.6;\n" +
+//                "            color: #F0F3FA;\n" +
                 "            color: #333;\n" +
                 "            background-color: #f9f9f9;\n" +
+//                "            background-image: url('cid:backgroundImage');\n" +
+//                "            background-image: url('D:\\msg.jpg);\n" +
+//                "            background-size: cover;\n" +
+//                "            background-repeat: no-repeat;\n" +
+//                "            background-position: center center;\n" +
                 "            padding: 20px;\n" +
                 "        }\n" +
                 "        .container {\n" +
@@ -263,9 +304,10 @@ public class JavaxJavaMailClient {
                 "<body>\n" +
                 "    <div class=\"container\">\n" +
                 "        <h1>尊敬的用户您好！</h1>\n" +
-                "        <p>感谢您使用我们的服务。以下是您请求的PDF文件。</p>\n" +
-                "        <p>请点击下方按钮下载文件：</p>\n" +
-                "        <a href=\"cid:pdfAttachment\" class=\"button\">下载PDF文件</a>\n" +
+                "        <p>感谢您使用我们的服务。附件是您请求的PDF文件。</p>\n" +
+//                "        <p>感谢您使用我们的服务。以下是您请求的PDF文件。</p>\n" +
+//                "        <p>请点击下方按钮下载文件：</p>\n" +
+//                "        <a href=\"cid:pdfAttachment\" class=\"button\">下载PDF文件</a>\n" +
                 "        <p>如有任何问题或建议，请随时联系我们。</p>\n" +
                 "        <p>祝您生活愉快！</p>\n" +
                 "    </div>\n" +
