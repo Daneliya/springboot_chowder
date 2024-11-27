@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style type="text/css">
+        body {
+            font-family: SimSun;
+        }
+
+        .content_wrap {
+            padding: 20px 45px;
+            background: white;
+            -webkit-print-color-adjust: exact;
+            border-radius: 4px;
+        }
+
+        ._header {
+            position: relative;
+            font-size: 18px;
+            line-height: 1;
+            color: black;
+        }
+
+        ._header::after {
+            position: absolute;
+            left: -15px;
+            top: -10%;
+            transform: translateY(-50%);
+            content: "";
+            display: block;
+            width: 5px;
+            height: 20px;
+            background-color: #00bba6;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .infos {
+            margin: 10px 0 30px 0;
+            padding: 20px 0px;
+        }
+
+        .infos span {
+            width: 33%;
+            margin-top: 20px;
+            margin-right: 10px;
+        }
+
+        ._info-label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #8E97A5;
+            line-height: 14px;
+            margin-right: 10px;
+        }
+
+        ._info-value {
+            font-size: 14px;
+            font-weight: 400;
+            color: #2A3245;
+            line-height: 14px;
+        }
+
+        ._table {
+            margin-top: 20px;
+            border: 1px solid #E1E6EC;
+            border-collapse: collapse;
+        }
+
+        ._table tr {
+            border-bottom: 1px solid #E1E6EC;
+            height: 48px;
+        }
+
+        ._table ._tr-val {
+            height: 60px;
+        }
+
+        td {
+            border-top: 0;
+            border-right: 1px #E1E6EC solid;
+            border-bottom: 1px #E1E6EC solid;
+            border-left: 0;
+            text-align: right;
+        }
+
+        table {
+            border-top: 1px #E1E6EC solid;
+            border-right: 0;
+            border-bottom: 0;
+            border-left: 1px #E1E6EC solid;
+        }
+
+        ._table td {
+            text-align: right;
+            padding-right: 10px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #2A3245;
+            border-right: 1px solid #E1E6EC;
+        }
+
+        ._table .t-tithle {
+            background: #F3F6F9;
+            -webkit-print-color-adjust: exact;
+        }
+
+
+        ._foot p {
+            margin-top: 20px;
+        }
+
+        ._foot ._label {
+            font-size: 14px;
+            font-weight: 400;
+            color: #5F677A;
+            line-height: 14px;
+            margin-right: 45px;
+        }
+
+        ._foot ._value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2A3245;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- 使用 utext 可以识别html标签-->
+<div class="detail-content content_wrap pl30" th:utext="${content}">
+
+</div>
+</body>
+</html>

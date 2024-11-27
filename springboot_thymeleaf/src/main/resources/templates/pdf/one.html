@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: SimSun;
+        }
+
+        h1.title.header {
+            padding: 30px;
+            text-align: center;
+            background-color: #4581ff;
+            color: #fff;
+        }
+        .main .code-container {
+            width: 33%;
+            text-align: center;
+            float: left;
+        }
+        .main .code-container .title{
+            height: 40px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .main .code-container img{
+            width: 180px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h1 class="header title" th:text="${title}"></h1>
+    <div class="main">
+        <div class="code-container" th:each="item : ${images}">
+            <div class="title" th:text="${item.title}">第一单元</div>
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>列标题1</th>
+            <th>列标题2</th>
+            <th>列标题3</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:text="${title}">
+            <td>行1，列1</td>
+            <td>行1，列2</td>
+            <td>行1，列3</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

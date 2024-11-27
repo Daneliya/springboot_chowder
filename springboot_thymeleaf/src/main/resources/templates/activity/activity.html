@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>9月份第三周教学查房</title>
+    <style>
+        body {
+            background-color: #F6F6F6;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #3c763d;
+            background-color: #337ab7;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            background-color: #3c763d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>9月份第三周教学查房 已结束</h1>
+    <table>
+        <thead>
+        <tr>
+<!--            <th colspan="2"><button type="button">生成基本信息表</button></th>-->
+            <th colspan="2">基本信息表</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><strong>主题:</strong></td>
+            <td th:text="${activityInfo.theme}"></td>
+        </tr>
+        <tr>
+            <td><strong>活动时间:</strong></td>
+            <td th:text="${activityInfo.activityTime}"></td>
+        </tr>
+        <tr>
+            <td><strong>到课率:</strong></td>
+            <td th:text="${activityInfo.attendanceRate}"></td>
+        </tr>
+        <tr>
+            <td><strong>教学计划:</strong></td>
+            <td th:text="${activityInfo.teachingPlan}">是</td>
+        </tr>
+        <tr>
+            <td><strong>教学督导:</strong></td>
+            <td th:text="${activityInfo.supervisionStatus}">已督导</td>
+        </tr>
+        <tr>
+            <td><strong>患者信息:</strong></td>
+            <td th:text="${activityInfo.patientInfo}"></td>
+        </tr>
+        <tr>
+            <td><strong>活动任务:</strong></td>
+            <td th:text="${activityInfo.task}"></td>
+        </tr>
+        <tr>
+            <td><strong>活动备注:</strong></td>
+            <td th:text="${activityInfo.note}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <table>
+        <thead>
+        <tr>
+            <th colspan="5">教学资料</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>文件主题</th>
+            <th>业务类型</th>
+            <th>文件格式</th>
+            <th>上传时间</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="teachingMaterial : ${teachingMaterialList}">
+            <td th:text="${teachingMaterial.fileName}">文件主题</td>
+            <td th:text="${teachingMaterial.type}">业务类型</td>
+            <td th:text="${teachingMaterial.format}">文件格式</td>
+            <td th:text="${teachingMaterial.uploadTime}">上传时间</td>
+<!--            <td><a href="#" th:href="@{'/download/' + ${teachingMaterial.id}}">下载</a></td>-->
+        </tr>
+<!--        <tr>-->
+<!--            <td th:text="${teachingMaterial.fileName}">9月份教学查房流程及疾病相关知识.pdf</td>-->
+<!--            <td th:text="${teachingMaterial.type}">教学教案</td>-->
+<!--            <td th:text="${teachingMaterial.format}">PDF</td>-->
+<!--            <td th:text="${teachingMaterial.uploadTime}">2024-03-12 08:00</td>-->
+<!--            <td><a href="#" th:href="@{'/download/' + ${teachingMaterial.id}}">下载</a></td>-->
+<!--        </tr>-->
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

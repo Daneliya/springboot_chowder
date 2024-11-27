@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>父页面</title>
+    <style>
+        @page {
+            size: A4;
+            @top-center {
+                content: element(header);
+            }
+            @bottom-center {
+                content: '自由行产品详情';
+                font-family: 'simsun', serif;
+            }
+        }
+
+        html, body {
+            font-family: 'simsun', serif;
+        }
+
+        table {
+            -fs-table-paginate: paginate;
+            border-collapse: collapse;
+        }
+
+        table, td, th {
+            border: 1px solid #555;
+            padding: 3px 5px;
+        }
+
+        th {
+            background-color: #eff3fa;
+        }
+
+        #page-header {
+            position: running(header);
+            border-bottom: 1px solid #555;
+            padding: 5px;
+        }
+
+        #page-header-text {
+            font-size: 16px;
+        }
+
+        #page-header-num:after {
+            float: right;
+            text-align: right;
+            content: counter(page) '/' counter(pages);
+        }
+    </style>
+</head>
+<body>
+<div id="page-header">
+    <span id="page-header-text">kindleboy</span>
+    <span id="page-header-num"></span>
+</div>
+<div th:include="${templateName}::body"></div>
+</body>
+</html>
