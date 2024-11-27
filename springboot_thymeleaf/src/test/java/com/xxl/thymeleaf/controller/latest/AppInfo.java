@@ -1,4 +1,4 @@
-package com.xxl.thymeleaf.controller;
+package com.xxl.thymeleaf.controller.latest;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

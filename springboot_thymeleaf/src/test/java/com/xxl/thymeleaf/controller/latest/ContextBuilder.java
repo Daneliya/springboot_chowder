@@ -1,4 +1,4 @@
-package com.xxl.thymeleaf.controller;
+package com.xxl.thymeleaf.controller.latest;
 
 import org.thymeleaf.context.Context;
 

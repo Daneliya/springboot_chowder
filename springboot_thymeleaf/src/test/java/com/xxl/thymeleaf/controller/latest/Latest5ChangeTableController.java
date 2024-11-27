@@ -1,4 +1,4 @@
-package com.xxl.thymeleaf.controller;
+package com.xxl.thymeleaf.controller.latest;
 
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
