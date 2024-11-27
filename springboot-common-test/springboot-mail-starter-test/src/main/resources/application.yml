@@ -1,0 +1,8 @@
+server:
+  port: 8056
+xxl:
+  mail:
+    emailProtocol: smtp
+    emailSMTPHost: smtp.126.com
+    emailAccount: luckily126163@126.com
+    emailPassword: HArk935Q9yEuCvnr

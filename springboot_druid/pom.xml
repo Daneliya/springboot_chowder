@@ -11,7 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.tcmp.druid</groupId>
+    <groupId>com.xxl.druid</groupId>
     <artifactId>springboot_druid</artifactId>
     <version>1.0.0</version>
 

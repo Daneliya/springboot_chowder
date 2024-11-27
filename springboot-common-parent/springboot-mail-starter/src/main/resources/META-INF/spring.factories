@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.xxl.common.mail.client.EmailService,\
+  com.xxl.common.mail.model.MailProperties,\
+  com.xxl.common.mail.handler.SendFileMailHandler,\
+  com.xxl.common.mail.handler.SendHtmlMailHandler,\
+  com.xxl.common.mail.handler.SendImageMailHandler,\
+  com.xxl.common.mail.handler.SendTextMailHandler
