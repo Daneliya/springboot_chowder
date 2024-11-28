@@ -79,9 +79,9 @@ public class EvaluateThreeController {
     }
 
     /**
-     * 将 appPriceInfoVO 中的数据渲染到 latest5ChangeTable 这个模板上
+     * 将 EvaluateThreeItem 中的数据渲染到 EvaluateThreeLevel 这个模板上
      *
-     * @param EvaluateThreeItem 包含信息的 AppPriceInfoVO
+     * @param EvaluateThreeItem 包含信息的 EvaluateThreeItem
      * @return 数据渲染成功后的 HTML 字符串
      */
     public String parseHtml(EvaluateThreeItem EvaluateThreeItem) {

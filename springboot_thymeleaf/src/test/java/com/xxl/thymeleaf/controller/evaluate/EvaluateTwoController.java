@@ -1,14 +1,6 @@
 package com.xxl.thymeleaf.controller.evaluate;
 
-import com.itextpdf.html2pdf.ConverterProperties;
-import com.itextpdf.html2pdf.HtmlConverter;
-import com.itextpdf.io.font.PdfEncodings;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.font.FontProvider;
+import com.xxl.thymeleaf.controller.util.PdfUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,8 +9,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +29,7 @@ public class EvaluateTwoController {
         List<EvaluateTwoContent> evaluateTwoContents = initData();
         // 转换成html
         EvaluateTwoItem build = EvaluateTwoItem.builder()
-                .tenantName("青 岛 大 学 附 属 医 院")
+                .tenantName("哈 佛 大 学 附 属 医 院")
                 .logo("https://ek02.oss-cn-qingdao.aliyuncs.com/微信图片_20240125105054.png")
                 .qrcode("https://oss.lcsxs.com/shandong/jinan/ykyxfstasrmyy/icon1732086712610.png")
                 .title("教师教学质量评价表")
@@ -53,54 +43,18 @@ public class EvaluateTwoController {
 
         System.out.println(html);
         // HTML 转换成 PDF
-        convertToPdf(html);
+        PdfUtils.convertToPdf(html);
     }
 
     /**
-     * HTML 转换成 PDF
+     * 将 EvaluateTwoItem 中的数据渲染到 EvaluateTwoLevelColor 这个模板上
      *
-     * @param html
-     * @throws Exception
-     */
-    public void convertToPdf(String html) throws Exception {
-        // 将 HTML 内容字符串转换为 PDF
-        String outPath = "D:\\activity.pdf";
-        OutputStream outputStream = new FileOutputStream(outPath);
-        PdfWriter pdfWriter = new PdfWriter(outputStream);
-        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-        pdfDocument.setDefaultPageSize(PageSize.A4);
-        HtmlConverter.convertToPdf(html, pdfDocument, initProperties());
-        // 关闭资源
-        pdfDocument.close();
-        outputStream.close();
-    }
-
-    /**
-     * 将 appPriceInfoVO 中的数据渲染到 latest5ChangeTable 这个模板上
-     *
-     * @param EvaluateTwoItem 包含信息的 AppPriceInfoVO
+     * @param EvaluateTwoItem 包含信息的 EvaluateTwoItem
      * @return 数据渲染成功后的 HTML 字符串
      */
     public String parseHtml(EvaluateTwoItem EvaluateTwoItem) {
         Context context = new ContextBuilder().set("evaluateTwoItem", EvaluateTwoItem).build();
-        return templateEngine.process("EvaluateTwoLevel.html", context);
-    }
-
-    /**
-     * pdf 特殊处理
-     *
-     * @return
-     * @throws Exception
-     */
-    private static ConverterProperties initProperties() throws Exception {
-        // 添加中文字体支持
-        ConverterProperties properties = new ConverterProperties();
-        FontProvider fontProvider = new FontProvider();
-        String fontPath = "C:/WINDOWS/Fonts/simsun.ttc,0";
-        PdfFont microsoft = PdfFontFactory.createFont(fontPath, PdfEncodings.IDENTITY_H);
-        fontProvider.addFont(microsoft.getFontProgram(), PdfEncodings.IDENTITY_H);
-        properties.setFontProvider(fontProvider);
-        return properties;
+        return templateEngine.process("EvaluateTwoLevelColor.html", context);
     }
 
     /**
