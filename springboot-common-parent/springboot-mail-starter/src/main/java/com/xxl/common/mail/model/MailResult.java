@@ -2,6 +2,8 @@ package com.xxl.common.mail.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 发送邮件结果实体
  *
@@ -20,6 +22,11 @@ public class MailResult {
      * 提示内容
      */
     private String msg;
+
+    /**
+     * 错误数据
+     */
+    private List<String> failData;
 
     public MailResult() {
     }
@@ -42,6 +49,14 @@ public class MailResult {
         MailResult r = new MailResult();
         r.setState(true);
         r.setMsg(msg);
+        return r;
+    }
+
+    public static MailResult error(String msg, List<String> failData) {
+        MailResult r = new MailResult();
+        r.setState(true);
+        r.setMsg(msg);
+        r.setFailData(failData);
         return r;
     }
 }

@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMultipart;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * 发送邮件工具
@@ -163,5 +164,18 @@ public class EmailUtil {
                 "    </div>\n" +
                 "</body>\n" +
                 "</html>";
+    }
+
+    /**
+     * 校验邮箱格式
+     *
+     * @param email 邮箱地址
+     * @return 返回结果 true：格式正确 false：格式不正确
+     */
+    public static boolean isValidEmail(String email) {
+        if ((email != null) && (!email.isEmpty())) {
+            return Pattern.matches("^(\\w+([-.][A-Za-z0-9]+)*){3,18}@\\w+([-.][A-Za-z0-9]+)*\\.\\w+([-.][A-Za-z0-9]+)*$", email);
+        }
+        return false;
     }
 }

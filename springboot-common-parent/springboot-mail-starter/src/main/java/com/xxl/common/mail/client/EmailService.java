@@ -6,6 +6,10 @@ import com.xxl.common.mail.factory.SendMailFactory;
 import com.xxl.common.mail.factory.SendMailHandler;
 import com.xxl.common.mail.model.MailResult;
 import com.xxl.common.mail.model.NotifyMailMessage;
+import com.xxl.common.mail.util.EmailUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 发送邮件
@@ -48,6 +52,16 @@ public class EmailService {
         }
         if (ObjectUtil.isEmpty(notifyMailMessage.getEmailAddressee())) {
             return MailResult.error("收件人不能为空");
+        }
+        List<String> errorEmailList = new ArrayList<>();
+        for (String email : notifyMailMessage.getEmailAddressee()) {
+            boolean validEmail = EmailUtil.isValidEmail(email);
+            if (!validEmail) {
+                errorEmailList.add(email);
+            }
+        }
+        if (!errorEmailList.isEmpty()) {
+            return MailResult.error("收件人不能为空", errorEmailList);
         }
         return MailResult.ok();
     }
