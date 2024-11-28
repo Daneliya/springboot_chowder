@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EvaluateContent {
+public class EvaluateTwoContent {
 
     /**
      * 一级项目
@@ -32,7 +34,17 @@ public class EvaluateContent {
     private String content;
 
     /**
-     * 分值
+     * 占分
+     */
+    private Double scorePoints;
+
+    /**
+     * 得分
      */
     private Double score;
+
+    /**
+     * 子集
+     */
+    private List<EvaluateTwoContent> children;
 }

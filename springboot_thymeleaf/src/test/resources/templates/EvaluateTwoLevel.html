@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--suppress HtmlUnknownTag -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="zh">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>二级评分表</title>
+    <style type="text/css">
+        .tabtop13 {
+            margin-top: 13px;
+        }
+
+        .tabtop13 td {
+            background-color: #FFFFFF;
+            height: 25px;
+            line-height: 150%;
+        }
+
+        .font-center {
+            text-align: center
+        }
+
+        .btbg {
+            background: #FFFFFF !important;
+        }
+
+        .btbg1 {
+            text-align: center;
+            background: #FFFFFF !important;
+        }
+
+        .btbg2 {
+            background: #FFFFFF !important;
+        }
+
+        .btbg3 {
+            background: #FFFFFF !important;
+            text-align: center
+        }
+
+        .btbg4 {
+            background: #FFFFFF !important;
+            text-align: center
+        }
+
+        .tenant {
+            font-family: 微软雅黑, serif;
+            font-size: 20px;
+            border-bottom: 1px dashed #CCCCCC;
+            color: #000000;
+        }
+
+        .biaoti {
+            font-family: 微软雅黑, serif;
+            font-size: 26px;
+            font-weight: bold;
+            border-bottom: 1px dashed #CCCCCC;
+            color: #000000;
+        }
+
+        .titfont {
+            font-family: 微软雅黑, serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000000;
+            background-color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 表头信息 colspan="3" 横向合并  rowspan="2" 纵向合并-->
+<!-- 边框线 border="0" 虚线 border="none" 不显示 -->
+<table width="100%" border="none" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td align="center" class="tenant" width="20%" height="60" rowspan="2">
+            <img width="100%" height="60" th:src="${evaluateTwoItem.logo}">
+        </td>
+        <td align="center" class="tenant" width="40%" height="60" th:text="${evaluateTwoItem.tenantName}"></td>
+        <td align="center" class="tenant" width="20%" height="60" rowspan="2">
+            <img th:src="${evaluateTwoItem.qrcode}">
+        </td>
+    </tr>
+    <tr>
+        <td align="center" class="biaoti" height="60" th:text="${evaluateTwoItem.title}"></td>
+    </tr>
+    <tr>
+        <td align="center" width="33%" height="25" th:text="${evaluateTwoItem.evaluateUserName}"></td>
+        <td align="center" width="33%" height="25" th:text="${evaluateTwoItem.jobTitleName}"></td>
+        <td align="center" width="33%" height="25" th:text="${evaluateTwoItem.deptName}"></td>
+    </tr>
+</table>
+
+<!-- 评分内容信息 -->
+<table width="100%" border="1" cellspacing="1" cellpadding="4" bgcolor="#cccccc" class="tabtop13" align="center">
+    <tr>
+        <td width="10%" class="btbg font-center titfont">项目</td>
+        <td width="10%" class="btbg font-center titfont">分值</td>
+        <td width="60%" class="btbg font-center titfont">评分标准</td>
+        <td width="10%" class="btbg font-center titfont">分值</td>
+        <td width="10%" class="btbg font-center titfont">得分</td>
+    </tr>
+
+    <div>
+        <th:block th:each="evaluateContent, contentStats : ${evaluateTwoItem.evaluateContentList}">
+            <tr>
+                <td th:text="${evaluateContent.twoItem}" th:rowspan="${evaluateContent.children.size()}"
+                    th:class="${contentStats.index % 2 == 0} ? 'btbg4':'btbg3'"></td>
+                <td th:text="${evaluateContent.twoScore}" th:rowspan="${evaluateContent.children.size()}"
+                    th:class="${contentStats.index % 2 == 0} ? 'btbg4':'btbg3'"></td>
+                <td th:class="${contentStats.index % 2 == 0} ? 'btbg4':'btbg3'"
+                    th:text="${evaluateContent.children.get(0).content}"></td>
+                <td th:class="${contentStats.index % 2 == 0} ? 'btbg4':'btbg3'"
+                    th:text="${evaluateContent.children.get(0).scorePoints}"></td>
+                <td th:class="${contentStats.index % 2 == 0} ? 'btbg4':'btbg3'"
+                    th:text="${evaluateContent.children.get(0).score}"></td>
+            </tr>
+            <tr th:each="child, childStats : ${evaluateContent.children}" th:if="${!childStats.first}">
+                <td th:class="${(contentStats.index + childStats.index) % 2 == 0} ? 'btbg4':'btbg3'"
+                    th:text="${child.content}"></td>
+                <td th:class="${(contentStats.index + childStats.index) % 2 == 0} ? 'btbg4':'btbg3'"
+                    th:text="${child.scorePoints}"></td>
+                <td th:class="${(contentStats.index + childStats.index) % 2 == 0} ? 'btbg4':'btbg3'"
+                    th:text="${child.score}"></td>
+            </tr>
+        </th:block>
+    </div>
+</table>
+<!-- 底部信息 -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td align="right" height="25" th:text="${evaluateTwoItem.time}"></td>
+    </tr>
+</table>
+</body>
+</html>

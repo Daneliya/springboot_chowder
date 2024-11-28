@@ -9,7 +9,6 @@ import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.font.FontProvider;
-import com.xxl.thymeleaf.controller.latest.AppPriceInfoVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +19,10 @@ import org.thymeleaf.context.Context;
 import javax.annotation.Resource;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +31,7 @@ import java.util.stream.Collectors;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EvaluateController {
+public class EvaluateThreeController {
 
     @Resource
     private TemplateEngine templateEngine;
@@ -37,21 +39,21 @@ public class EvaluateController {
     @Test
     public void test() throws Exception {
         // 
-        List<EvaluateContent> appInfoList1 = new ArrayList<>();
-        EvaluateContent build1 = EvaluateContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
-        EvaluateContent build2 = EvaluateContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
+        List<EvaluateThreeContent> appInfoList1 = new ArrayList<>();
+        EvaluateThreeContent build1 = EvaluateThreeContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
+        EvaluateThreeContent build2 = EvaluateThreeContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
         appInfoList1.add(build1);
         appInfoList1.add(build2);
-        List<EvaluateContent> appInfoList2 = new ArrayList<>();
-        EvaluateContent build3 = EvaluateContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
-        EvaluateContent build4 = EvaluateContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
+        List<EvaluateThreeContent> appInfoList2 = new ArrayList<>();
+        EvaluateThreeContent build3 = EvaluateThreeContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
+        EvaluateThreeContent build4 = EvaluateThreeContent.builder().content("标准内容标准内容标准内容标准内容标准内容").score(10.0).build();
         appInfoList2.add(build3);
         appInfoList2.add(build4);
-        Map<String, List<EvaluateContent>> evaluateContentMap = new HashMap<>();
-        evaluateContentMap.put("二级项目一", appInfoList1);
-        evaluateContentMap.put("二级项目二", appInfoList2);
+        Map<String, List<EvaluateThreeContent>> evaluateThreeContentMap = new HashMap<>();
+        evaluateThreeContentMap.put("二级项目一", appInfoList1);
+        evaluateThreeContentMap.put("二级项目二", appInfoList2);
 
-        EvaluateItem build = EvaluateItem.builder().title("某某某 评价教师信息表").oneItem("项目一").downNum(2).evaluateContentMap(evaluateContentMap).build();
+        EvaluateThreeItem build = EvaluateThreeItem.builder().title("某某某 评价教师信息表").oneItem("项目一").downNum(2).evaluateContentMap(evaluateThreeContentMap).build();
         String html = parseHtml(build);
 
 
@@ -79,13 +81,13 @@ public class EvaluateController {
     /**
      * 将 appPriceInfoVO 中的数据渲染到 latest5ChangeTable 这个模板上
      *
-     * @param evaluateItem 包含信息的 AppPriceInfoVO
+     * @param EvaluateThreeItem 包含信息的 AppPriceInfoVO
      * @return 数据渲染成功后的 HTML 字符串
      */
-    public String parseHtml(EvaluateItem evaluateItem) {
-        evaluateItem = this.getMaxOfLimit(evaluateItem, 5);
-        Context context = new ContextBuilder().set("evaluateItem", evaluateItem).build();
-        return templateEngine.process("latest5ChangeTable2.html", context);
+    public String parseHtml(EvaluateThreeItem EvaluateThreeItem) {
+        EvaluateThreeItem = this.getMaxOfLimit(EvaluateThreeItem, 5);
+        Context context = new ContextBuilder().set("EvaluateThreeItem", EvaluateThreeItem).build();
+        return templateEngine.process("EvaluateThreeLevel.html", context);
     }
 
     /**
@@ -96,15 +98,15 @@ public class EvaluateController {
      * @return 新的 AppPriceInfoVO
      */
     @SuppressWarnings("SameParameterValue")
-    private EvaluateItem getMaxOfLimit(EvaluateItem infoVO, int limit) {
-        Map<String, List<EvaluateContent>> evaluateContentMap = infoVO.getEvaluateContentMap();
-        Map<String, List<EvaluateContent>> upPriceMaxOfLimit = new HashMap<>(evaluateContentMap.size());
-        evaluateContentMap.forEach((appName, appInfoList) -> {
-            List<EvaluateContent> listMaxOfLimit = appInfoList.stream().limit(limit).collect(Collectors.toList());
+    private EvaluateThreeItem getMaxOfLimit(EvaluateThreeItem infoVO, int limit) {
+        Map<String, List<EvaluateThreeContent>> EvaluateThreeContentMap = infoVO.getEvaluateContentMap();
+        Map<String, List<EvaluateThreeContent>> upPriceMaxOfLimit = new HashMap<>(EvaluateThreeContentMap.size());
+        EvaluateThreeContentMap.forEach((appName, appInfoList) -> {
+            List<EvaluateThreeContent> listMaxOfLimit = appInfoList.stream().limit(limit).collect(Collectors.toList());
             upPriceMaxOfLimit.put(appName, listMaxOfLimit);
         });
         int upPriceNum = this.getAppNum(upPriceMaxOfLimit);
-        return EvaluateItem.builder().title(infoVO.getTitle()).oneItem(infoVO.getOneItem()).downNum(upPriceNum).evaluateContentMap(infoVO.getEvaluateContentMap()).build();
+        return EvaluateThreeItem.builder().title(infoVO.getTitle()).oneItem(infoVO.getOneItem()).downNum(upPriceNum).evaluateContentMap(infoVO.getEvaluateContentMap()).build();
     }
 
 
@@ -114,7 +116,7 @@ public class EvaluateController {
      * @param priceChangeMap 价格变化的App map
      * @return 对应的条目数
      */
-    private int getAppNum(Map<String, List<EvaluateContent>> priceChangeMap) {
+    private int getAppNum(Map<String, List<EvaluateThreeContent>> priceChangeMap) {
         return priceChangeMap.values().stream().map(List::size).reduce(Integer::sum).orElse(0);
     }
 

@@ -1,6 +1,5 @@
 package com.xxl.thymeleaf.controller.evaluate;
 
-import com.xxl.thymeleaf.controller.latest.AppInfo;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,7 +8,7 @@ import java.util.Map;
 
 @Data
 @Builder
-public class EvaluateItem {
+public class EvaluateThreeItem {
 
     /**
      * 标题
@@ -23,5 +22,5 @@ public class EvaluateItem {
 
     private Integer downNum;
 
-    private Map<String, List<EvaluateContent>> evaluateContentMap;
+    private Map<String, List<EvaluateThreeContent>> evaluateContentMap;
 }
