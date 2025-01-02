@@ -1,0 +1,24 @@
+server:
+  port: 80 # 设置运行服务所在端口
+  servlet:
+    context-path: /xxl # 定义ContextPath访问路径
+spring:
+  messages: # 定义配置文件，多个资源文件使用“,”分割
+    basename: i18n/Messages, i18n/Messages_zh_CN, i18n/Messages_en_US
+  profiles:
+    active: dev
+---
+spring:
+  profiles: dev
+server:
+  port: 7070
+---
+spring:
+  profiles: bate
+server:
+  port: 8080
+---
+spring:
+  profiles: product
+server:
+  port: 80
