@@ -99,4 +99,43 @@ public class RedisTest {
             System.out.println(objectMap);
         }
     }
+
+    @Test
+    public void test002() {
+//        Set<String> userIdSet = redisTemplate.opsForZSet().range("Activity_Sign:332:Activity_Sign_Record:1868893268847235072", 0, -1);
+//        System.out.println(userIdSet);
+
+//        Map entries = redisTemplate.opsForHash().entries("Activity_Sign:332:Activity_Sign_User:1868893268847235072");
+//        System.out.println(entries);
+//
+//        Set keys = redisTemplate.opsForHash().keys("Activity_Sign:332:Activity_Sign_User:1868893268847235072");
+//        System.out.println(keys);
+//
+//        List values = redisTemplate.opsForHash().values("Activity_Sign:332:Activity_Sign_User:1868893268847235072");
+//        System.out.println(values);
+//
+//        Set<ZSetOperations.TypedTuple<String>> range = redisTemplate.opsForZSet().reverseRangeWithScores("Activity_Sign:332:Activity_Sign_Record:1868893268847235072", 0, -1);
+//        for (ZSetOperations.TypedTuple<String> mapTypedTuple : range) {
+//            System.out.println(mapTypedTuple.getValue());
+//            System.out.println(mapTypedTuple.getScore());
+//        }
+//        List<String> UserIdList = range.stream().filter(e -> e.getScore() != null && e.getScore() >= 1.0).map(ZSetOperations.TypedTuple::getValue).collect(Collectors.toList());
+//        System.out.println(UserIdList);
+
+//        String key = "Activity_Sign:332:Activity_Sign_Record:1881870083861647360";
+////        String key = "Activity_Sign:332:Activity_Sign_Record:1881870083861647360";
+//        Integer userId = 120709;
+//        Double newScore = redisTemplate.opsForZSet().incrementScore(key, userId, 1);
+//        System.out.println(newScore);
+//        System.out.println(redisTemplate.opsForZSet().score(key, userId));
+
+//        Object object = redisTemplate.opsForHash().get("Activity_Sign:332:Activity_Sign_User:1882684694114471936", "125699");
+//        System.out.println(object);
+
+        Object object = redisTemplate.opsForHash().get("Activity_Config:332:Activity_Evaluate:4:Evaluate_Type:2", "stuType:2");
+        Object object = redisTemplate.opsForHash().get("Activity_Config:4:Activity_Evaluate:332:Evaluate_Type:2", "stuType:2");
+        System.out.println(object);
+    }
+
+
 }

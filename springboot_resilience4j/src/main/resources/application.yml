@@ -1,0 +1,44 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: spring_resilience4j # Spring Boot 应用程序名称
+  cache:
+    type: redis # 缓存类型，使用 Redis
+  data:
+    redis:
+      host: 192.168.100.105 # Redis 服务器主机地址
+      port: 6379 # Redis 服务器端口号
+      password: root0903
+      database: 2
+resilience4j:
+  timelimiter:
+    instances:
+      timeoutService:
+        timeoutDuration: 2s # 超时时间为2秒
+  circuitbreaker:
+    instances:
+      circuitbreakerService:
+        slidingWindowSize: 10 # 滑动窗口大小为10
+        failureRateThreshold: 50 # 失败率阈值为50%
+        waitDurationInOpenState: 10s # 打开状态等待时间为10秒
+  ratelimiter:
+    instances:
+      ratelimiterService:
+        limitForPeriod: 1 # 每个周期允许的最大请求数为1
+        limitRefreshPeriod: 10s # 速率限制刷新周期为10秒
+        timeoutDuration: 500ms # 等待许可的超时时间为500毫秒
+  retry:
+    instances:
+      retryService:
+        maxAttempts: 5 # 最大重试次数为5次
+        waitDuration: 1000ms # 重试间隔为1000毫秒（1秒）
+        enableExponentialBackoff: true # 启用指数回退
+        exponentialBackoffMultiplier: 1.5 # 指数回退倍数为1.5
+        retryExceptions:
+          - java.lang.RuntimeException # 需要重试的异常类型
+  bulkhead:
+    instances:
+      bulkheadService:
+        maxConcurrentCalls: 5 # 批隔离允许的最大并发调用数为5
+        maxWaitDuration: 1s # 等待许可的最大时间为1秒

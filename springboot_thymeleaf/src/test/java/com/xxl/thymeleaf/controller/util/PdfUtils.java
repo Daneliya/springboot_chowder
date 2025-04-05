@@ -27,7 +27,7 @@ public class PdfUtils {
      */
     public static void convertToPdf(String html) throws Exception {
         // 将 HTML 内容字符串转换为 PDF
-        String outPath = "D:\\activity.pdf";
+        String outPath = "D:\\activity2.pdf";
         OutputStream outputStream = new FileOutputStream(outPath);
         PdfWriter pdfWriter = new PdfWriter(outputStream);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
