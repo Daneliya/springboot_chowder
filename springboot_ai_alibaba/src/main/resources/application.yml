@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: alibaba-ai-demo
+
+  ai:
+    dashscope:
+      api-key: sk-e9add5896dd84ba49d0f142dab6383d9..   # api key
+      chat:
+        options:
+          model: deepseek-r1   # 模型名称
