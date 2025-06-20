@@ -27,7 +27,6 @@ public class TestController {
     @RequestMapping("delayMsg")
     public Object delayMsg(String msg, Integer delayTime) {
         log.info("当前时间：{},收到请求，msg:{},delayTime:{}", new Date(), msg, delayTime);
-//        sender.sendDelayMsg(msg, delayTime);
 
         // 准备消息
         for (int i = 1; i <= 10; i++) {
@@ -46,5 +45,4 @@ public class TestController {
             return a;
         });
     }
-
 }

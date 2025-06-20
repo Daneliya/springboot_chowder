@@ -32,6 +32,4 @@ public class Listener {
         Object object = JSON.parseObject(message.getBody(), Map.class);
         System.out.println("延时队列收到消息: " + object);
     }
-
-
 }

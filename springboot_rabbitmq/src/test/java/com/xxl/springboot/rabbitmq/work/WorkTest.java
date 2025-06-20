@@ -1,4 +1,4 @@
-package com.xxl.springboot.rabbitmq.simple;
+package com.xxl.springboot.rabbitmq.work;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,30 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.xxl.springboot.rabbitmq.simple.SimpleRabbitMQConfig.SIMPLE_QUEUE_NAME;
-
 /**
+ * 任务队列 测试
+ *
  * @Author: xxl
- * @Date: 2024/10/15 14:29
+ * @Date: 2025/6/20 17:34
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringAmqpTest {
+public class WorkTest {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
-
-    @Test
-    public void testSimpleQueue() {
-        // 队列名称
-//        String queueName = "simple.queue";
-        String queueName = SIMPLE_QUEUE_NAME;
-        // 消息
-        String message = "hello, spring amqp!";
-        // 发送消息
-        rabbitTemplate.convertAndSend(queueName, message);
-    }
-
 
     /**
      * workQueue
@@ -39,7 +27,7 @@ public class SpringAmqpTest {
     @Test
     public void testWorkQueue() throws InterruptedException {
         // 队列名称
-        String queueName = "simple.queue";
+        String queueName = WorkConstants.WORK_QUEUE;
         // 消息
         String message = "hello, message_";
         for (int i = 0; i < 50; i++) {

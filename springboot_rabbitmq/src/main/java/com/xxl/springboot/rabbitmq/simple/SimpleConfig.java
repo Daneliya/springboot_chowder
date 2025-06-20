@@ -5,18 +5,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 简单队列 配置类
  *
  * @Author: xxl
  * @Date: 2024/10/15 14:32
  */
 @Configuration
-public class SimpleRabbitMQConfig {
-
-    public static final String SIMPLE_QUEUE_NAME = "simple.queue";
+public class SimpleConfig {
 
     @Bean
-    public Queue immediateQueue() {
-        return new Queue(SIMPLE_QUEUE_NAME);
+    public Queue immediateSimpleQueue() {
+        return new Queue(SimpleConstants.SIMPLE_QUEUE);
     }
 
 }
