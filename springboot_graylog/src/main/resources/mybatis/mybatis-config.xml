@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--2.settings全局参数配置 -->
+    <settings>
+        <!-- 打开延时加载开关 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 将积极加载关闭，成为按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 开启二级缓存，默认是开启的，这里便于理解 -->
+        <!--<setting name="cacheEnabled" value="false" />-->
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+    <!-- <settings></settings> -->
+    <!-- 3.类型别名 （重点）针对parameterType和resultType指定的类型定义别名方便开发 -->
+    <typeAliases>
+        <!-- 针对单个别名的定义 <typeAlias type="com.ldg.mybatis.po.Users" alias="users"/> -->
+        <!--自动命名， 首字母大小写都可以 -->
+        <!--<package name="com.chargerlink.device.po"/>-->
+    </typeAliases>
+    <!--类型处理器 完成jdbc类和java类型直接的转换，通常mybatis自己提供的处理器就满足了日常需要，不需要自定义 -->
+    <typeHandlers></typeHandlers>
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- 4.0.0以后版本可以不设置该参数 -->
+            <property name="dialect" value="mysql"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+            <!-- 和startPage中的pageNummybatis-com.medical.hospital.auth.config.xml效果一样 -->
+            <property name="offsetAsPageNum" value="true"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+            <property name="rowBoundsWithCount" value="true"/>
+            <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+            <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型） -->
+            <property name="pageSizeZero" value="true"/>
+            <!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 -->
+            <!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+            <!-- 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 -->
+            <property name="reasonable" value="false"/>
+            <!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 -->
+            <!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 -->
+            <!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,orderBy,不配置映射的用默认值 -->
+            <!-- 不理解该含义的前提下，不要随便复制该配置 -->
+            <!-- <property name="params"
+                value="pageNum=pageHelperStart;pageSize=pageHelperRows;" /> -->
+            <property name="params" value="pageNum=start;pageSize=limit;"/>
+            <!-- pageNum=start;pageSize=limit; -->
+            <!-- 支持通过Mapper接口参数来传递分页参数 -->
+            <property name="supportMethodsArguments" value="false"/>
+            <!-- always总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page -->
+            <property name="returnPageInfo" value="none"/>
+        </plugin>
+    </plugins>
+</configuration>

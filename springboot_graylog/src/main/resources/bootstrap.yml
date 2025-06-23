@@ -1,0 +1,33 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: ${project.name}
+  datasource:
+    name: druidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/graylog_db?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: xxl666
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 100
+    minIdle: 20
+    maxActive: 500
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    validationQuery: SELECT 1 FROM DUAL
+    filters: stat
+mybatis-plus:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+graylog:
+  host: 192.168.100.106
+  port: 12201
+logging.config:
+  classpath: logback-spring.xml
