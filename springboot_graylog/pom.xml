@@ -6,6 +6,7 @@
 
     <groupId>com.xxl</groupId>
     <artifactId>springboot_graylog</artifactId>
+    <name>springboot_graylog</name>
     <version>1.0.0</version>
 
     <properties>
