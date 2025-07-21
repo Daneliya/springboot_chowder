@@ -1,5 +1,7 @@
 package com.xxl.string.loop;
 
+import lombok.Data;
+
 /**
  * 进度条
  *
@@ -70,9 +72,9 @@ public class ProgressBar {
         }
     }
 
-
-    @Getter
+    @Data
     private static class Style {
+
         private String leftStr;
         private String rightStr;
         private String leftEndStr;
@@ -83,5 +85,4 @@ public class ProgressBar {
             this.leftEndStr = leftEndStr;
         }
     }
-
 }
