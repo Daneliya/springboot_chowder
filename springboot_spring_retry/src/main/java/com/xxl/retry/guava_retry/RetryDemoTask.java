@@ -10,6 +10,7 @@ import org.springframework.remoting.RemoteAccessException;
  */
 @Slf4j
 public class RetryDemoTask {
+
     /**
      * 重试方法
      *

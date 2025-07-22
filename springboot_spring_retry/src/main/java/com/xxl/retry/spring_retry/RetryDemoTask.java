@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.springframework.remoting.RemoteAccessException;
 
 /**
- * 普通使用方式
+ * spring_retry 普通使用方式
  *
  * @author xxl
  * @date 2022/12/26 22:53
@@ -21,7 +21,7 @@ public class RetryDemoTask {
     /**
      * 重试方法：采用一个随机整数，根据不同的条件返回不同的值，或者抛出异常
      *
-     * @return
+     * @return 返回结果
      */
     public static boolean retryTask(String param) {
         log.info("收到请求参数:{}", param);

@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * spring_retry 测试类
+ *
  * @author xxl
  * @date 2022/12/26 22:58
  */
@@ -20,15 +22,17 @@ public class SpringRetryTemplateTest {
     /**
      * 重试间隔时间ms,默认1000ms
      */
-    private long fixedPeriodTime = 1000L;
+    private final static long fixedPeriodTime = 1000L;
+
     /**
      * 最大重试次数,默认为3
      */
-    private int maxRetryTimes = 3;
+    private final static int maxRetryTimes = 3;
+
     /**
      * 表示哪些异常需要重试,key表示异常的字节码,value为true表示需要重试
      */
-    private Map<Class<? extends Throwable>, Boolean> exceptionMap = new HashMap<>();
+    private final Map<Class<? extends Throwable>, Boolean> exceptionMap = new HashMap<>();
 
 
     @Test
