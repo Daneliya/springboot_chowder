@@ -25,7 +25,7 @@ Spring Retry 为 Spring 应用程序提供了声明性重试支持。它用于Sp
 
 
 
-
+参数详解：https://cloud.tencent.com/developer/article/1752086
 
 
 https://blog.csdn.net/aitangyong/article/details/53894997

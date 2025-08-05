@@ -4,9 +4,12 @@ spring:
   application:
     name: springboot-canal
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/springboot_chowder?useSSL=false
+#    url: jdbc:mysql://127.0.0.1:3306/springboot_chowder?useSSL=false
+#    username: root
+#    password: xxl666
+    url: jdbc:mysql://192.168.100.105:3306/ekclinic_user?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: xxl666
+    password: tcmp0901
     driver-class-name: com.mysql.cj.jdbc.Driver
 canal:
   destination: canal
