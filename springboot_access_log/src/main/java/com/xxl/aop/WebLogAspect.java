@@ -1,10 +1,7 @@
 package com.xxl.aop;
 
-import com.xxl.util.AsyncFactory;
-import com.xxl.util.AsyncManager;
 import com.xxl.util.ParametersUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -14,10 +11,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
 
 /**
- * 参数记录aop类
+ * 参数记录AOP类
  *
  * @author xxl
  * @date 2022/5/8 19:55
@@ -27,7 +23,7 @@ import java.time.LocalDateTime;
 @Component
 public class WebLogAspect {
 
-//    @Pointcut("execution(public * com.xxl.controller..*.*(..))")
+    //    @Pointcut("execution(public * com.xxl.controller..*.*(..))")
     @Pointcut("execution(public * com.xxl.controller.DemoController.test02(..))")
     public void webLog() {
     }
@@ -49,7 +45,6 @@ public class WebLogAspect {
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) {
-        AsyncManager.me().execute(AsyncFactory.recordLogininfor(null,null,null,null));
         log.info("返回结果：" + ret.toString());
     }
 
