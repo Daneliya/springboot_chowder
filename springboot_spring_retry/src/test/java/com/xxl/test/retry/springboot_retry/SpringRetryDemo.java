@@ -1,4 +1,4 @@
-package com.xxl.test.springboot_retry;
+package com.xxl.test.retry.springboot_retry;
 
 import com.xxl.retry.spring_retry.RetryDemoTask;
 import lombok.extern.slf4j.Slf4j;

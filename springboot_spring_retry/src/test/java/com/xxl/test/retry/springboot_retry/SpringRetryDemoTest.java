@@ -1,8 +1,9 @@
-package com.xxl.test.springboot_retry;
+package com.xxl.test.retry.springboot_retry;
 
+import com.xxl.retry.springboot_retry.SpringRetryDemo;
 import com.xxl.test.MyBaseTest;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

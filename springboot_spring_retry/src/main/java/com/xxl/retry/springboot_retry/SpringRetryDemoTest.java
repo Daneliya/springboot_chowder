@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * spring_retry 注解测试类
+ *
  * @author xxl
  * @date 2022/12/26 23:11
  */

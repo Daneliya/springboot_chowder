@@ -5,6 +5,8 @@ import org.apache.commons.lang3.RandomUtils;
 import org.springframework.remoting.RemoteAccessException;
 
 /**
+ * Guava-Retry 重试方法
+ *
  * @author xxl
  * @date 2022/12/26 23:20
  */

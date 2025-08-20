@@ -10,6 +10,8 @@ import org.springframework.remoting.RemoteAccessException;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Guava-Retry 重试测试类
+ *
  * @author xxl
  * @date 2022/12/26 23:23
  */

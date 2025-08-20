@@ -9,6 +9,8 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
 /**
+ * spring_retry 注解重试方法
+ *
  * @author xxl
  * @date 2022/12/26 23:12
  */
