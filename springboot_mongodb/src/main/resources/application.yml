@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  profiles:
+    active: dev
   data:
     mongodb:
       host: 127.0.0.1
@@ -26,6 +28,19 @@ spring:
 #      min-heartbeat-frequency: 500
 #      heartbeat-frequency: 10000
 #      local-threshold: 15
+
+# 日志
 logging:
+  # 全局日志级别（可选，避免其他日志干扰）
   level:
+    root: INFO
+    # 核心：MongoTemplate的DEBUG级别（必须精准配置）
     org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+    # 可选：打印MongoDB驱动的底层操作（如连接、命令发送，便于深度排查）
+    com.mongodb: DEBUG
+  # 关键：指定日志配置文件（若自定义了logback.xml，需指向正确路径）
+  config: classpath:logback-spring.xml
+  # 可选：控制台输出编码（避免乱码）
+  charset:
+    console: UTF-8
+    file: UTF-8
