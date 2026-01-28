@@ -1,0 +1,70 @@
+# Docker Compose配置文件
+# 使用版本3.8的Compose文件格式
+version: '3.8'
+
+# 定义服务
+services:
+  # MongoDB服务
+  db:
+    # 使用最新版本的MongoDB镜像
+    image: mongo:latest
+    # 映射端口：主机端口:容器端口
+    ports:
+      # - '27017:27017' # 固定端口映射方式
+      - '27017' # 左边不写固定端口，让Docker分配随机端口防止冲突
+    # 挂载卷，用于持久化数据
+    volumes:
+      - db:/data/db
+
+  # MySQL服务
+  mysql:
+    # 使用8.0版本的MySQL镜像
+    image: mysql:8.0
+    # 映射端口：只指定容器端口，让Docker分配随机主机端口防止冲突
+    ports:
+      # - '3306:3306'  # 固定端口映射方式
+      - '3306' # 左边不写固定端口，让Docker分配随机端口防止冲突
+    # 环境变量配置
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # MySQL root用户密码
+      MYSQL_DATABASE: test        # 默认创建的数据库名称
+      MYSQL_USER: test            # 创建的普通用户名称
+      MYSQL_PASSWORD: test        # 普通用户的密码
+    # 挂载卷
+    volumes:
+      - mysql-data:/var/lib/mysql           # 持久化MySQL数据
+      - mysql-init:/docker-entrypoint-initdb.d  # 初始化脚本目录
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"] # 检查MySQL是否健康
+      interval: 10s # 检查间隔时间
+      timeout: 5s # 超时时间
+      retries: 5 # 重试次数
+
+  # Redis服务
+  redis:
+    # 使用7.0版本的Redis镜像
+    image: redis:7.0
+    # 映射端口：主机端口:容器端口
+    ports:
+      # - '6379:6379'
+      - '6379' # 左边不写固定端口，让Docker分配随机端口防止冲突
+    # 挂载卷，用于持久化数据
+    # volumes:
+    #   - redis-data:/data
+    # 启动命令，启用AOF持久化
+    # command: redis-server --appendonly yes
+
+# 定义卷
+volumes:
+  # MongoDB数据卷
+  db:
+    driver: local
+  # MySQL数据卷
+  mysql-data:
+    driver: local
+  # MySQL初始化脚本卷
+  mysql-init:
+    driver: local
+  # Redis数据卷
+  redis-data:
+    driver: local

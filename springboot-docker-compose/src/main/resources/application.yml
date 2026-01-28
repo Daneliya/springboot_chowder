@@ -1,0 +1,48 @@
+# 服务器配置
+server:
+  port: 8080  # 应用监听端口
+
+# Spring配置
+spring:
+  # 指定 Docker Compose 文件的位置，默认项目根目录下
+#  docker:
+#    compose:
+#      enabled: true
+#      file: D:\Program Files (x86)\JetBrains\java_project\my_project\springboot_chowder\springboot-docker-compose\docker-compose.yaml
+#      file: src/main/resources/docker-compose.yaml
+  # 数据源配置（MySQL）
+  datasource:
+    # 数据库连接URL
+    # jdbc:mysql://主机:端口/数据库名?参数1&参数2&参数3
+    # useSSL=false: 禁用SSL连接
+    # serverTimezone=UTC: 设置时区为UTC
+    # allowPublicKeyRetrieval=true: 允许从服务器获取公钥
+    url: jdbc:mysql://localhost:3306/test?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    # 数据库用户名
+    username: test
+    # 数据库密码
+    password: test
+    # MySQL驱动类名
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  # Redis配置
+  redis:
+    # Redis服务器主机地址
+    host: localhost
+    # Redis服务器端口
+    port: 6379
+    # Redis密码（如果没有密码则为空）
+    password:
+    # Redis数据库索引（0-15）
+    database: 0
+    # Jedis连接池配置
+    jedis:
+      pool:
+        # 最大活跃连接数
+        max-active: 8
+        # 最大等待时间（毫秒），-1表示无限制
+        max-wait: -1
+        # 最大空闲连接数
+        max-idle: 8
+        # 最小空闲连接数
+        min-idle: 0
