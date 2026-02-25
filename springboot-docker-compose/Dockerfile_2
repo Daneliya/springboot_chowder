@@ -1,0 +1,24 @@
+# 第一步：使用极简Alpine作为基础镜像（替代官方OpenJDK镜像）
+FROM alpine:3.20
+
+# 安装Java运行必需的依赖（解决Alpine兼容性问题）
+RUN apk add --no-cache libc6-compat
+
+# 1. 在容器内创建JDK目录
+RUN mkdir -p /usr/local/jdk21
+
+# 2. 把本地完整的JDK目录复制到容器内（必须复制整个JDK，而非仅java文件）
+COPY /home/disk2/tools/jdk21/jdk-21.0.8 /usr/local/jdk21
+
+# 3. 复制你的jar包到容器内
+COPY target/springboot-docker-compose-1.0.0.jar /springboot-docker-compose.jar
+
+# 4. 配置环境变量（可选，让容器识别java命令）
+#ENV JAVA_HOME=/usr/local/jdk21
+#ENV PATH=$JAVA_HOME/bin:$PATH
+
+# 5. 暴露端口
+EXPOSE 18181
+
+# 6. 用容器内的本地JDK启动jar包（核心：路径是容器内的JDK路径）
+CMD ["/usr/local/jdk21/bin/java", "-jar", "/springboot-docker-compose.jar"]

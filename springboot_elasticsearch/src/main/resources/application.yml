@@ -1,6 +1,27 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: springboot-elasticsearch
+  datasource:
+    url: jdbc:mysql://localhost:3306/es_db?useSSL=false
+    username: root
+    password: xxl666
+    driver-class-name: com.mysql.jdbc.Driver
+logging:
+  level:
+    com.xxl: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.xxl.elasticsearch.pojo
 elasticsearch:
-  host: 192.168.1.109
+  host: 192.168.100.105
   port: 9200
   connTimeout: 3000
   socketTimeout: 5000
   connectionRequestTimeout: 500
+  ssl:
+    verification-mode: none # 关闭SSL验证（测试用）

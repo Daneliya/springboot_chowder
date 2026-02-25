@@ -1,4 +1,4 @@
-package com.xxl.elasticsearch.po;
+package com.xxl.elasticsearch.pojo;
 
 import lombok.Data;
 

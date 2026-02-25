@@ -1,6 +1,6 @@
 package com.xxl.elasticsearch.dto;
 
-import com.xxl.elasticsearch.po.Login;
+import com.xxl.elasticsearch.pojo.Login;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

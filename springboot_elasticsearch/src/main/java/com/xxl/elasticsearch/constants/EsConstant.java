@@ -13,4 +13,9 @@ public interface EsConstant {
      */
     String INDEX_LOGIN = "login";
 
+    /**
+     * 酒店索引库
+     */
+    String INDEX_HOTEL = "hotel";
+
 }

@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: springboot-easyes
+
+easy-es:
+  # ES地址，多个用逗号分隔
+  address: 192.168.100.106:9200
+  # 用户名（如无认证可注释）
+  #  username: elastic
+  #  password: elastic
+  # 连接超时时间
+  connect-timeout: 3000
+  # Socket超时时间
+  socket-timeout: 5000
+  # 请求超时时间
+  request-timeout: 500
+  # 是否开启日志打印
+  global-config:
+    print-dsl: true
