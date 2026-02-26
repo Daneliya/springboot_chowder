@@ -1,0 +1,151 @@
+### 1. 创建产品
+POST http://localhost:8082/api/products
+Content-Type: application/json
+
+{
+  "name": "Apple iPhone 15 Pro",
+  "description": "苹果 iPhone 15 Pro 智能手机，搭载 A17 Pro 芯片",
+  "price": 9999,
+  "stock": 100,
+  "category": "手机",
+  "brand": "Apple",
+  "tags": ["智能手机", "5G", "iOS"],
+  "isActive": true
+}
+
+
+### 2. 批量创建产品
+POST http://localhost:8082/api/products/batch
+Content-Type: application/json
+
+[
+  {
+    "name": "Samsung Galaxy S24 Ultra",
+    "description": "三星 Galaxy S24 Ultra 智能手机，搭载 Snapdragon 8 Gen 3 芯片",
+    "price": 8999,
+    "stock": 80,
+    "category": "手机",
+    "brand": "Samsung",
+    "tags": ["智能手机", "5G", "Android"],
+    "isActive": true
+  },
+  {
+    "name": "Huawei Mate 60 Pro",
+    "description": "华为 Mate 60 Pro 智能手机，搭载麒麟 9000S 芯片",
+    "price": 6999,
+    "stock": 50,
+    "category": "手机",
+    "brand": "Huawei",
+    "tags": ["智能手机", "5G", "HarmonyOS"],
+    "isActive": true
+  }
+]
+
+
+### 3. 根据ID获取产品
+GET http://localhost:8082/api/products/{id}
+
+
+### 4. 获取所有产品
+GET http://localhost:8082/api/products
+
+
+### 5. 分页获取产品
+GET http://localhost:8082/api/products/page?page=0&size=10&sortBy=createTime&direction=desc
+
+
+### 6. 更新产品
+PUT http://localhost:8082/api/products/{id}
+Content-Type: application/json
+
+{
+  "name": "Apple iPhone 15 Pro Max",
+  "description": "苹果 iPhone 15 Pro Max 智能手机，搭载 A17 Pro 芯片，更大屏幕",
+  "price": 10999,
+  "stock": 90,
+  "category": "手机",
+  "brand": "Apple",
+  "tags": ["智能手机", "5G", "iOS", "大屏幕"],
+  "isActive": true
+}
+
+
+### 7. 删除产品
+DELETE http://localhost:8082/api/products/{id}
+
+
+### 8. 根据名称搜索
+GET http://localhost:8082/api/products/search/name?name=iPhone
+
+
+### 9. 根据分类查询
+GET http://localhost:8082/api/products/search/category?category=手机
+
+
+### 10. 根据价格范围查询
+GET http://localhost:8082/api/products/search/price-range?minPrice=5000&maxPrice=10000
+
+
+### 11. 根据品牌查询
+GET http://localhost:8082/api/products/search/brand?brand=Apple
+
+
+### 12. 根据标签查询
+GET http://localhost:8082/api/products/search/tag?tag=5G
+
+
+### 13. 查询上架商品
+GET http://localhost:8082/api/products/active
+
+
+### 14. 复杂条件搜索
+GET http://localhost:8082/api/products/search/complex?keyword=手机&categories=手机&minPrice=6000&maxPrice=10000&brands=Apple&brands=Samsung&page=0&size=10
+
+
+### 15. 全文搜索
+GET http://localhost:8082/api/products/search/full-text?keyword=智能手机&page=0&size=10
+
+
+### 16. 按分类统计
+GET http://localhost:8082/api/products/stats/category
+
+
+### 17. 按品牌统计
+GET http://localhost:8082/api/products/stats/brand
+
+
+### 18. 价格分布统计
+GET http://localhost:8082/api/products/stats/price-distribution
+
+
+### 19. 批量更新库存
+POST http://localhost:8082/api/products/bulk/stock
+Content-Type: application/json
+
+{
+  "{id1}": 80,
+  "{id2}": 70
+}
+
+
+### 20. 批量更新价格
+POST http://localhost:8082/api/products/bulk/price
+Content-Type: application/json
+
+{
+  "{id1}": 9999,
+  "{id2}": 8999
+}
+
+
+### 环境变量
+// 可以在 http-client.env.json 文件中定义环境变量
+// {
+//   "dev": {
+//     "baseUrl": "http://localhost:8082",
+//     "productId": "your-product-id"
+//   }
+// }
+
+// 然后使用 {{baseUrl}} 代替具体的 URL
+// GET {{baseUrl}}/api/products/{{productId}}

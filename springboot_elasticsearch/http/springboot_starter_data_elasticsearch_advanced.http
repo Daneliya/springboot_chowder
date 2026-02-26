@@ -1,0 +1,22 @@
+### 1. 高级搜索
+GET http://localhost:8082/api/advanced/search?keyword=智能手机
+
+
+### 2. 获取索引统计
+GET http://localhost:8082/api/advanced/stats
+
+
+### 3. 聚合查询示例
+GET http://localhost:8082/api/advanced/aggregations
+
+
+### 环境变量
+// 可以在 http-client.env.json 文件中定义环境变量
+// {
+//   "dev": {
+//     "baseUrl": "http://localhost:8082"
+//   }
+// }
+
+// 然后使用 {{baseUrl}} 代替具体的 URL
+// GET {{baseUrl}}/api/advanced/search?keyword=智能手机

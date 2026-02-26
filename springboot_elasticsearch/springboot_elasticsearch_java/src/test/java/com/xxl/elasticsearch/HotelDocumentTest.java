@@ -41,7 +41,7 @@ import java.util.Map;
         "spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration," +
                 "org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchClientAutoConfiguration"
 })
-public class HotelDocumentClientTest {
+public class HotelDocumentTest {
 
     @Autowired
     private IHotelService hotelService;
@@ -219,50 +219,11 @@ public class HotelDocumentClientTest {
         });
     }
 
-//    /**
-//     * 分页搜索
-//     *
-//     * @throws IOException
-//     */
-//    @Test
-//    void testPageAndSort() throws IOException {
-//        // 页码，每页大小
-//        int page = 1, size = 5;
-//
-//        // 1.准备Request
-//        SearchRequest request = new SearchRequest("hotel");
-//        // 2.准备DSL
-//        // 2.1.query
-//        request.source().query(QueryBuilders.matchAllQuery());
-//        // 2.2.排序 sort
-//        request.source().sort("price", SortOrder.ASC);
-//        // 2.3.分页 from、size
-//        request.source().from((page - 1) * size).size(5);
-//        // 3.发送请求
-//        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
-//        // 4.解析响应
-//        handleResponse(response);
-//
-//    }
-//
-//    private void handleResponse(SearchResponse response) {
-//        // 4.解析响应
-//        SearchHits searchHits = response.getHits();
-//        // 4.1.获取总条数
-//        long total = searchHits.getTotalHits().value;
-//        System.out.println("共搜索到" + total + "条数据");
-//        // 4.2.文档数组
-//        SearchHit[] hits = searchHits.getHits();
-//        // 4.3.遍历
-//        for (SearchHit hit : hits) {
-//            // 获取文档source
-//            String json = hit.getSourceAsString();
-//            // 反序列化
-//            HotelDoc hotelDoc = JSON.parseObject(json, HotelDoc.class);
-//            System.out.println("hotelDoc = " + hotelDoc);
-//        }
-//    }
-
+    /**
+     * 分页搜索
+     *
+     * @throws IOException
+     */
     @Test
     void testPageAndSort() throws IOException {
         // 页码，每页大小

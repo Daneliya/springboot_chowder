@@ -3,108 +3,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.xxl</groupId>
+    <artifactId>springboot_elasticsearch</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>springboot_elasticsearch</name>
+    <description>springboot_elasticsearch</description>
+
+    <modules>
+        <!-- elasticsearch_java -->
+        <module>springboot_elasticsearch_java</module>
+        <!-- spring-boot-starter-data-elasticsearch -->
+        <module>springboot_starter_data_elasticsearch</module>
+        <!-- easyes -->
+        <module>springboot_easyes</module>
+    </modules>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.5</version>
         <relativePath/>
     </parent>
-
-    <groupId>com.xxl</groupId>
-    <artifactId>springboot_elasticsearch</artifactId>
-    <version>1.0.0</version>
-    <name>springboot_elasticsearch</name>
-    <description>springboot_elasticsearch</description>
-
-    <properties>
-        <java.version>21</java.version>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <elasticsearch.version>8.15.0</elasticsearch.version>
-        <lombok.version>1.18.36</lombok.version>
-        <fastjson.version>1.2.72</fastjson.version>
-    </properties>
-
-    <dependencies>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.elasticsearch.client</groupId>-->
-<!--                    <artifactId>elasticsearch-rest-high-level-client</artifactId>-->
-<!--                </exclusion>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.elasticsearch</groupId>-->
-<!--                    <artifactId>elasticsearch</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- mybatis-plus -->
-<!--        <dependency>-->
-<!--            <groupId>com.baomidou</groupId>-->
-<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--            <version>3.5.3</version>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-            <version>3.5.5</version>
-        </dependency>
-        <!-- mysql -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-        <!-- elasticsearch 官方新 Java Client (兼容 Spring Boot 3.x / ES 8.x) -->
-        <dependency>
-            <groupId>co.elastic.clients</groupId>
-            <artifactId>elasticsearch-java</artifactId>
-            <version>${elasticsearch.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <!-- elasticsearch 旧版 RestHighLevelClient (用于兼容旧代码) -->
-<!--        <dependency>-->
-<!--            <groupId>org.elasticsearch.client</groupId>-->
-<!--            <artifactId>elasticsearch-rest-high-level-client</artifactId>-->
-<!--            <version>${elasticsearch.version}</version>-->
-<!--        </dependency>-->
-        <!-- lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-        <!-- json -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
-        <!--  -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
