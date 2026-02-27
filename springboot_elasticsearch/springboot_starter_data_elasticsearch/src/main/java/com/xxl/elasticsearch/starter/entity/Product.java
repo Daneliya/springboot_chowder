@@ -1,5 +1,6 @@
 package com.xxl.elasticsearch.starter.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +26,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true) // 告诉 Jackson 忽略未知的 _class 字段
 @Document(indexName = "products", createIndex = true)
 public class Product {
 
@@ -93,13 +96,13 @@ public class Product {
      * 创建时间 - 日期类型
      */
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
-    private LocalDateTime createTime;
+    private Date createTime;
 
     /**
      * 更新时间 - 日期类型
      */
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
     /**
      * 是否上架

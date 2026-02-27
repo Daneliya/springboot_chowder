@@ -24,3 +24,9 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
   type-aliases-package: com.xxl.elasticsearch.pojo
+# elasticsearch-java 配置
+elasticsearch:
+  index:
+    product: products
+    user: users
+  enable-ssl: false  # 是否启用SSL

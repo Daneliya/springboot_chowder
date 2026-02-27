@@ -57,6 +57,8 @@ public class IndexInitializer {
                     log.info("创建用户索引...");
                     elasticsearchClient.indices().create(CreateIndexRequest.of(c -> c.index("users")));
                     log.info("用户索引创建完成");
+                } else {
+                    log.info("用户索引已存在");
                 }
 
             } catch (Exception e) {

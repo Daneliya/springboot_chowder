@@ -15,7 +15,6 @@ import co.elastic.clients.elasticsearch.core.search.Highlight;
 import co.elastic.clients.elasticsearch.core.search.HighlightField;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.core.search.SourceConfig;
-import co.elastic.clients.json.JsonData;
 import com.xxl.elasticsearch.starter.entity.BrandStats;
 import com.xxl.elasticsearch.starter.entity.PriceRangeStats;
 import com.xxl.elasticsearch.starter.entity.Product;
@@ -75,7 +74,7 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
                 boolQueryBuilder.filter(
                         Query.of(q -> q
                                 .terms(t -> t
-                                        .field("category")
+                                        .field("category.keyword")
                                         .terms(t2 -> t2.value(categories.stream()
                                                 .map(FieldValue::of)
                                                 .toList()))
@@ -84,29 +83,41 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
                 );
             }
 
-            // 价格范围过滤
-            if (minPrice != null || maxPrice != null) {
-                RangeQuery.Builder rangeQueryBuilder = new RangeQuery.Builder()
-                        .field("price");
-
-                if (minPrice != null) {
-                    rangeQueryBuilder.gte(JsonData.of(minPrice.doubleValue()));
-                }
-                if (maxPrice != null) {
-                    rangeQueryBuilder.lte(JsonData.of(maxPrice.doubleValue()));
-                }
-
-                boolQueryBuilder.filter(
-                        Query.of(q -> q.range(rangeQueryBuilder.build()))
-                );
-            }
+            // 价格范围过滤 elasticsearch-java 8.10 以下写法
+//            if (minPrice != null || maxPrice != null) {
+//                RangeQuery.Builder rangeQueryBuilder = new RangeQuery.Builder()
+//                        .field("price");
+//
+//                if (minPrice != null) {
+//                    rangeQueryBuilder.gte(JsonData.of(minPrice.doubleValue()));
+//                }
+//                if (maxPrice != null) {
+//                    rangeQueryBuilder.lte(JsonData.of(maxPrice.doubleValue()));
+//                }
+//
+//                boolQueryBuilder.filter(
+//                        Query.of(q -> q.range(rangeQueryBuilder.build()))
+//                );
+//            }
+            // elasticsearch-java 8.15 写法
+//            if (minPrice != null || maxPrice != null) {
+//                // 直接在 Query.of 的 lambda 中构建 range query
+//                Query rangeQueryBuilder = RangeQuery.of(r -> r
+//                        .number(n -> n
+//                                .field("price")
+//                                .gte(minPrice != null ? minPrice.doubleValue() : null)
+//                                .lte(maxPrice != null ? maxPrice.doubleValue() : null)
+//                        )
+//                )._toQuery();
+//                boolQueryBuilder.filter(rangeQueryBuilder);
+//            }
 
             // 品牌过滤
             if (brands != null && !brands.isEmpty()) {
                 boolQueryBuilder.filter(
                         Query.of(q -> q
                                 .terms(t -> t
-                                        .field("brand")
+                                        .field("brand.keyword")
                                         .terms(t2 -> t2.value(brands.stream()
                                                 .map(FieldValue::of)
                                                 .toList()))
@@ -229,14 +240,14 @@ public class CustomProductRepositoryImpl implements CustomProductRepository {
                             .size(0) // 不需要返回文档
                             .aggregations("brand_stats", a -> a
                                     .terms(t -> t
-                                            .field("brand")
+                                            .field("brand.keyword")
                                             .size(20)
                                     )
                                     .aggregations("avg_price", a2 -> a2
                                             .avg(av -> av.field("price"))
                                     )
                                     .aggregations("count", a2 -> a2
-                                            .valueCount(vc -> vc.field("brand"))
+                                            .valueCount(vc -> vc.field("brand.keyword"))
                                     )
                             ),
                     Void.class

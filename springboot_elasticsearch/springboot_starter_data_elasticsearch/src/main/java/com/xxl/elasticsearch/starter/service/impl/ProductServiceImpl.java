@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -35,16 +36,19 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Product save(Product product) {
         if (product.getId() == null) {
-            product.setCreateTime(LocalDateTime.now());
+//            product.setCreateTime(LocalDateTime.now());
+            product.setCreateTime(new Date());
         }
-        product.setUpdateTime(LocalDateTime.now());
+//        product.setUpdateTime(LocalDateTime.now());
+        product.setUpdateTime(new Date());
         return productRepository.save(product);
     }
 
     @Override
     @Transactional
     public List<Product> saveAll(List<Product> products) {
-        LocalDateTime now = LocalDateTime.now();
+//        LocalDateTime now = LocalDateTime.now();
+        Date now = new Date();
         products.forEach(product -> {
             if (product.getId() == null) {
                 product.setCreateTime(now);
@@ -163,7 +167,8 @@ public class ProductServiceImpl implements ProductService {
             productOpt.ifPresent(product -> {
                 int newStock = product.getStock() + stockDelta;
                 product.setStock(newStock);
-                product.setUpdateTime(LocalDateTime.now());
+//                product.setUpdateTime(LocalDateTime.now());
+                product.setUpdateTime(new Date());
                 productRepository.save(product);
             });
         });
@@ -176,7 +181,8 @@ public class ProductServiceImpl implements ProductService {
             Optional<Product> productOpt = productRepository.findById(productId);
             productOpt.ifPresent(product -> {
                 product.setPrice(newPrice);
-                product.setUpdateTime(LocalDateTime.now());
+//                product.setUpdateTime(LocalDateTime.now());
+                product.setUpdateTime(new Date());
                 productRepository.save(product);
             });
         });

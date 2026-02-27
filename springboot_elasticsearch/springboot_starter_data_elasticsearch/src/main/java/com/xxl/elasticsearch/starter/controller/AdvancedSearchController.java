@@ -63,7 +63,7 @@ public class AdvancedSearchController {
                             .index("products")
                             .size(0)
                             .aggregations("category_agg", a -> a
-                                    .terms(t -> t.field("category"))
+                                    .terms(t -> t.field("category.keyword"))
                             )
                             .aggregations("price_stats", a -> a
                                     .stats(st -> st.field("price"))
@@ -75,7 +75,7 @@ public class AdvancedSearchController {
 
         } catch (IOException e) {
             log.error("聚合查询失败", e);
-            return ResponseEntity.internalServerError().body("聚合查询失败");
+            return ResponseEntity.internalServerError().body("聚合查询失败: " + e.getMessage());
         }
     }
 }

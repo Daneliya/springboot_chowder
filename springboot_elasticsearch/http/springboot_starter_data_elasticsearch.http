@@ -38,6 +38,56 @@ Content-Type: application/json
     "brand": "Huawei",
     "tags": ["智能手机", "5G", "HarmonyOS"],
     "isActive": true
+  },
+  {
+    "name": "iPhone 14 Pro",
+    "description": "A16仿生芯片，4800万像素主摄，灵动岛设计",
+    "price": 7999,
+    "stock": 100,
+    "category": "手机",
+    "brand": "Apple",
+    "tags": ["苹果", "智能手机", "旗舰"],
+    "isActive": true
+  },
+  {
+    "name": "小米13 Ultra",
+    "description": "徕卡四摄，2K AMOLED屏幕，骁龙8 Gen 2处理器",
+    "price": 5999,
+    "stock": 80,
+    "category": "手机",
+    "brand": "小米",
+    "tags": ["小米", "徕卡", "影像旗舰"],
+    "isActive": true
+  },
+  {
+    "name": "华为MateBook 14",
+    "description": "2K全面屏，第11代酷睿处理器，多屏协同",
+    "price": 6999,
+    "stock": 50,
+    "category": "笔记本电脑",
+    "brand": "华为",
+    "tags": ["笔记本", "轻薄本", "办公"],
+    "isActive": true
+  },
+  {
+    "name": "联想拯救者Y9000P",
+    "description": "RTX 4060显卡，i9处理器，2.5K 165Hz屏幕",
+    "price": 9999,
+    "stock": 30,
+    "category": "游戏本",
+    "brand": "联想",
+    "tags": ["游戏本", "电竞", "高性能"],
+    "isActive": true
+  },
+  {
+    "name": "索尼PS5",
+    "description": "8K游戏支持，光线追踪，超高速SSD",
+    "price": 3899,
+    "stock": 20,
+    "category": "游戏主机",
+    "brand": "索尼",
+    "tags": ["游戏机", "主机", "PS5"],
+    "isActive": true
   }
 ]
 
