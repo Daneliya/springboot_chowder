@@ -1,5 +1,7 @@
 package com.xxl.elasticsearch.starter.service;
 
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
 import com.xxl.elasticsearch.starter.entity.Product;
 
 import java.util.List;
@@ -32,4 +34,14 @@ public interface ProductAdvancedService {
      * 获取索引统计信息
      */
     Map<String, Object> getIndexStats();
+
+    /**
+     * 聚合查询示例
+     */
+    Map<String, Aggregate> getAggregations();
+
+    /**
+     * 高亮查询示例
+     */
+    List<Product> testHighlight(String keyword);
 }

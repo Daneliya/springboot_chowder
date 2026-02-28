@@ -15,7 +15,7 @@
         <java.version>21</java.version>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <elasticsearch.version>8.15.0</elasticsearch.version>
+        <elasticsearch.version>8.11.0</elasticsearch.version>
         <lombok.version>1.18.36</lombok.version>
         <fastjson.version>1.2.72</fastjson.version>
     </properties>

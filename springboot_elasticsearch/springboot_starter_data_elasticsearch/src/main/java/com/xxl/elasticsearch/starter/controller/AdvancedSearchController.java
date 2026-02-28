@@ -1,7 +1,7 @@
 package com.xxl.elasticsearch.starter.controller;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
 import com.xxl.elasticsearch.starter.entity.Product;
 import com.xxl.elasticsearch.starter.service.ProductAdvancedService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -57,25 +56,18 @@ public class AdvancedSearchController {
      */
     @GetMapping("/aggregations")
     public ResponseEntity<?> getAggregations() {
-        try {
-            SearchResponse<Void> response = elasticsearchClient.search(
-                    s -> s
-                            .index("products")
-                            .size(0)
-                            .aggregations("category_agg", a -> a
-                                    .terms(t -> t.field("category.keyword"))
-                            )
-                            .aggregations("price_stats", a -> a
-                                    .stats(st -> st.field("price"))
-                            ),
-                    Void.class
-            );
+        log.info("聚合查询示例");
+        Map<String, Aggregate> stats = productAdvancedService.getAggregations();
+        return ResponseEntity.ok(stats);
+    }
 
-            return ResponseEntity.ok(response.aggregations());
-
-        } catch (IOException e) {
-            log.error("聚合查询失败", e);
-            return ResponseEntity.internalServerError().body("聚合查询失败: " + e.getMessage());
-        }
+    /**
+     * 高亮查询示例
+     */
+    @GetMapping("/highlight")
+    public ResponseEntity<?> testHighlight(@RequestParam String keyword) {
+        log.info("高亮查询示例");
+        List<Product> products = productAdvancedService.testHighlight(keyword);
+        return ResponseEntity.ok(products);
     }
 }

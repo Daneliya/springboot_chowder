@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @MapperScan("com.xxl.elasticsearch.mapper")
 @SpringBootApplication
-public class ElasticsearchApplication {
+public class ElasticsearchJavaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ElasticsearchApplication.class, args);
+        SpringApplication.run(ElasticsearchJavaApplication.class, args);
     }
 }

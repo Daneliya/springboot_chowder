@@ -9,6 +9,9 @@ GET http://localhost:8082/api/advanced/stats
 ### 3. 聚合查询示例
 GET http://localhost:8082/api/advanced/aggregations
 
+### 4. 高亮查询示例
+GET http://localhost:8082/api/advanced/highlight?keyword=13
+
 
 ### 环境变量
 // 可以在 http-client.env.json 文件中定义环境变量
