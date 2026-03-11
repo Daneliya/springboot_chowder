@@ -16,10 +16,28 @@ import java.util.Map;
  */
 public interface IHotelService extends IService<Hotel> {
 
+    /**
+     * 全局搜索
+     *
+     * @param params 请求参数
+     * @return 返回结果
+     */
     PageResult search(RequestParams params);
 
+    /**
+     * 分组筛选项
+     *
+     * @param params 请求参数
+     * @return 返回结果
+     */
     Map<String, List<String>> getFilters(RequestParams params);
 
+    /**
+     * 搜索建议
+     *
+     * @param key 请求参数
+     * @return 返回结果
+     */
     List<String> getSuggestion(String key);
 
     void deleteById(Long hotelId);

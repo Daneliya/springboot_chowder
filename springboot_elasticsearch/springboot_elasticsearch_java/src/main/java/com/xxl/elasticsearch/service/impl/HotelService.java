@@ -1,14 +1,15 @@
 package com.xxl.elasticsearch.service.impl;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch._types.FieldValue;
 import co.elastic.clients.elasticsearch._types.SortOrder;
-import co.elastic.clients.elasticsearch._types.query_dsl.*;
-import co.elastic.clients.elasticsearch._types.query_dsl.FunctionScore;
-import co.elastic.clients.elasticsearch.core.*;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.FunctionScoreQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.core.search.TotalHits;
-import com.alibaba.fastjson.JSON;
+import co.elastic.clients.json.JsonData;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xxl.elasticsearch.dto.HotelDoc;
 import com.xxl.elasticsearch.mapper.HotelMapper;
@@ -46,27 +47,38 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
             // 1.准备请求参数
             int page = params.getPage() != null ? params.getPage() : 1;
             int size = params.getSize() != null ? params.getSize() : 20;
-            
+
             // 2.构建查询
-            SearchResponse<HotelDoc> response = elasticsearchClient.search(s -> s
-                    .index("hotel")
-                    .query(buildBasicQuery(params))
-                    .from((page - 1) * size)
-                    .size(size)
-                    .sort(sort -> {
+            SearchResponse<HotelDoc> response = elasticsearchClient.search(s -> {
+                        // 基础查询配置
+                        s.index("hotel")
+                                .query(buildBasicQuery(params))
+                                .from((page - 1) * size)
+                                .size(size);
+                        // 仅当location不为空时，才添加地理距离排序
                         String location = params.getLocation();
                         if (StringUtils.isNotBlank(location)) {
-                            return sort.geoDistance(g -> g
+
+                            // 解析经纬度（建议添加格式校验，避免数组越界/格式错误）
+                            String[] latLonArr = location.split(",");
+                            if (latLonArr.length != 2) {
+                                throw new IllegalArgumentException("位置参数格式错误，应为：纬度,经度");
+                            }
+                            double lat = Double.parseDouble(latLonArr[0].trim());
+                            double lon = Double.parseDouble(latLonArr[1].trim());
+                            // 添加地理距离排序
+                            s.sort(sort -> sort.geoDistance(g -> g
                                     .field("location")
                                     .distanceType(co.elastic.clients.elasticsearch._types.GeoDistanceType.Arc)
                                     .location(l -> l.latlon(ll -> ll
-                                            .lat(Double.parseDouble(location.split(",")[0].trim()))
-                                            .lon(Double.parseDouble(location.split(",")[1].trim()))))
+                                            .lat(lat)
+                                            .lon(lon)))
                                     .order(SortOrder.Asc)
-                                    .unit(co.elastic.clients.elasticsearch._types.DistanceUnit.Kilometers));
+                                    .unit(co.elastic.clients.elasticsearch._types.DistanceUnit.Kilometers)
+                            ));
                         }
-                        return sort;
-                    }),
+                        return s;
+                    },
                     HotelDoc.class
             );
 
@@ -82,15 +94,15 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
         try {
             // 1.准备聚合查询
             SearchResponse<HotelDoc> response = elasticsearchClient.search(s -> s
-                    .index("hotel")
-                    .query(buildBasicQuery(params))
-                    .size(0)
-                    .aggregations("brandAgg", a -> a
-                            .terms(t -> t.field("brand").size(100)))
-                    .aggregations("cityAgg", a -> a
-                            .terms(t -> t.field("city").size(100)))
-                    .aggregations("starAgg", a -> a
-                            .terms(t -> t.field("starName").size(100))),
+                            .index("hotel")
+                            .query(buildBasicQuery(params))
+                            .size(0)
+                            .aggregations("brandAgg", a -> a
+                                    .terms(t -> t.field("brand").size(100)))
+                            .aggregations("cityAgg", a -> a
+                                    .terms(t -> t.field("city").size(100)))
+                            .aggregations("starAgg", a -> a
+                                    .terms(t -> t.field("starName").size(100))),
                     HotelDoc.class
             );
 
@@ -111,25 +123,27 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
         try {
             // 1.准备建议查询
             SearchResponse<HotelDoc> response = elasticsearchClient.search(s -> s
-                    .index("hotel")
-                    .suggest(sug -> sug
-                            .suggesters("hotelSuggest", sugg -> sugg
-                                    .completion(c -> c
-                                            .field("suggestion")
-                                            .size(10)
-                                            .skipDuplicates(true)
-                                            .prefix(key)))),
+                            .index("hotel")
+                            .suggest(sug -> sug
+                                    .suggesters("hotelSuggest", sugg -> sugg
+                                            .prefix(key)
+                                            .completion(c -> c
+                                                    .field("suggestion")
+                                                    .size(10)
+                                                    .skipDuplicates(true)
+                                            )
+                                    )),
                     HotelDoc.class
             );
 
             // 2.解析建议结果
             List<String> suggestions = new ArrayList<>();
             if (response.suggest() != null && response.suggest().get("hotelSuggest") != null) {
-                response.suggest().get("hotelSuggest").forEach(suggestion -> 
-                    suggestion.completion().options().forEach(option -> 
-                        suggestions.add(option.text())));
+                response.suggest().get("hotelSuggest").forEach(suggestion ->
+                        suggestion.completion().options().forEach(option ->
+                                suggestions.add(option.text())));
             }
-            
+
             return suggestions;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -166,15 +180,28 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
         }
     }
 
+    /**
+     * 解析聚合结果
+     *
+     * @param response 结果集
+     * @param aggName  字段名
+     * @return 返回结果
+     */
     private List<String> getAggregationValues(SearchResponse<HotelDoc> response, String aggName) {
         List<String> values = new ArrayList<>();
         if (response.aggregations() != null && response.aggregations().get(aggName) != null) {
-            response.aggregations().get(aggName).sterms().buckets().array().forEach(bucket -> 
-                values.add(bucket.key().stringValue()));
+            response.aggregations().get(aggName).sterms().buckets().array().forEach(bucket ->
+                    values.add(bucket.key().stringValue()));
         }
         return values;
     }
 
+    /**
+     * 基础查询配置
+     *
+     * @param params 参数
+     * @return 返回结果
+     */
     private Query buildBasicQuery(RequestParams params) {
         // 1.准备Boolean查询
         BoolQuery.Builder boolQueryBuilder = new BoolQuery.Builder();
@@ -198,7 +225,7 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
                             .field("brand")
                             .value(brand)));
         }
-        
+
         // 1.3.城市过滤
         String city = params.getCity();
         if (StringUtils.isNotBlank(city)) {
@@ -207,7 +234,7 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
                             .field("city")
                             .value(city)));
         }
-        
+
         // 1.4.星级过滤
         String starName = params.getStarName();
         if (StringUtils.isNotBlank(starName)) {
@@ -216,27 +243,27 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
                             .field("starName")
                             .value(starName)));
         }
-        
+
         // 1.5.价格范围过滤
         Integer minPrice = params.getMinPrice();
         Integer maxPrice = params.getMaxPrice();
         if (minPrice != null || maxPrice != null) {
             RangeQuery.Builder rangeQueryBuilder = new RangeQuery.Builder()
                     .field("price");
-            
+
             if (minPrice != null) {
                 rangeQueryBuilder.gte(JsonData.of(minPrice));
             }
             if (maxPrice != null && maxPrice > 0) {
                 rangeQueryBuilder.lte(JsonData.of(maxPrice));
             }
-            
+
             boolQueryBuilder.filter(f -> f.range(rangeQueryBuilder.build()));
         }
 
         // 2.添加算分函数
         FunctionScoreQuery.Builder functionScoreBuilder = new FunctionScoreQuery.Builder()
-                .query(boolQueryBuilder.build())
+                .query(boolQueryBuilder.build()._toQuery())
                 .functions(func -> func
                         .filter(f -> f
                                 .term(t -> t
@@ -249,11 +276,17 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
                 .build();
     }
 
+    /**
+     * 解析响应
+     *
+     * @param response 结果集
+     * @return 返回结果
+     */
     private PageResult handleResponse(SearchResponse<HotelDoc> response) {
         // 1.获取总条数
         TotalHits totalHits = response.hits().total();
         long total = totalHits != null ? totalHits.value() : 0;
-        
+
         // 2.获取文档数组
         List<HotelDoc> hotels = new ArrayList<>();
         for (Hit<HotelDoc> hit : response.hits().hits()) {
@@ -266,7 +299,7 @@ public class HotelService extends ServiceImpl<HotelMapper, Hotel> implements IHo
                 hotels.add(hotelDoc);
             }
         }
-        
+
         return new PageResult(total, hotels);
     }
 }
