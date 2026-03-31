@@ -58,8 +58,15 @@ public class Product {
 
     /**
      * 产品描述 - 大文本字段
+     * 支持拼音分词搜索
      */
-    @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart")
+    @MultiField(
+            mainField = @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart"),
+            otherFields = {
+                    @InnerField(suffix = "keyword", type = FieldType.Keyword),
+                    @InnerField(suffix = "pinyin", type = FieldType.Text, analyzer = "pinyin")
+            }
+    )
     private String description;
 
     /**
