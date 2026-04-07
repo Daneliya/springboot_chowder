@@ -28,6 +28,7 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true) // 告诉 Jackson 忽略未知的 _class 字段
 @Document(indexName = "products", createIndex = true)
+@Setting(settingPath = "elasticsearch/settings/ngram-setting.json")
 public class Product {
 
     /**
@@ -40,12 +41,15 @@ public class Product {
      * 产品名称 - 支持全文搜索
      * FieldType.Text 类型会被分词
      * fields 定义多字段映射
+     * - ik_max_word: 用于正常的语义搜索（搜"活动"）
+     * - ngram: 用于数字或模糊匹配（搜"20"）
      */
     @MultiField(
             mainField = @Field(type = FieldType.Text, analyzer = "ik_max_word", searchAnalyzer = "ik_smart"),
             otherFields = {
                     @InnerField(suffix = "keyword", type = FieldType.Keyword),
-                    @InnerField(suffix = "pinyin", type = FieldType.Text, analyzer = "pinyin")
+                    @InnerField(suffix = "pinyin", type = FieldType.Text, analyzer = "pinyin"),
+                    @InnerField(suffix = "ngram", type = FieldType.Text, analyzer = "ngram")
             }
     )
     private String name;
